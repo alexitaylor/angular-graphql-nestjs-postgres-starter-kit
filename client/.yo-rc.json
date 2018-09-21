@@ -1,0 +1,22 @@
+{
+  "generator-ngx-rocket": {
+    "version": "5.0.1",
+    "props": {
+      "location": "path",
+      "appName": "fullstack-apollo-angular-express-starter-kit",
+      "target": [
+        "web"
+      ],
+      "pwa": true,
+      "ui": "bootstrap",
+      "auth": true,
+      "lazy": true,
+      "angulartics": true,
+      "analyticsProvider": "ga",
+      "googleAnalyticsAccount": "",
+      "projectName": "fullstack-apollo-angular-express-starter-kit",
+      "packageManager": "npm",
+      "mobile": []
+    }
+  }
+}
