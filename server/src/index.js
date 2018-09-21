@@ -16,6 +16,18 @@ app.use(cors());
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
+  formatError: error => {
+    // remove the internal sequelize error message
+    // leave only the important validation error
+    const message = error.message
+      .replace('SequelizeValidationError: ', '')
+      .replace('Validation error: ', '');
+
+    return {
+      ...error,
+      message,
+    };
+  },
   // context fn: returns the context object rather than an object for the context in Apollo Server.
   // the async / await fn is invoked on every request hitting the GraphQlL API
   // So that the me user is retrieved from the db with every request
