@@ -1,12 +1,38 @@
-export default {
-  1: {
-    id: '1',
-    name: 'Alexi Taylor',
-    messageIds: [1, 3],
-  },
-  2: {
-    id: '2',
-    name: 'Dave Davids',
-    messageIds: [1, 2],
-  },
+const user = (sequelize, DataTypes) => {
+  const User = sequelize.define('user', {
+    firstName: {
+      type: DataTypes.STRING,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+    },
+    username: {
+      type: DataTypes.STRING,
+    },
+    email: {
+      type: DataTypes.STRING,
+    }
+  });
+
+  User.associate = models => {
+    User.hasMany(models.Message, { onDelete: 'CASCADE' });
+  };
+
+  User.findByLogin = async (login) => {
+    let user = await User.findOne({
+      where: { username: login },
+    });
+
+    if (!user) {
+      user = await User.findOne({
+        where: { email: login },
+      });
+    }
+
+    return user;
+  };
+
+  return User;
 };
+
+export default user;

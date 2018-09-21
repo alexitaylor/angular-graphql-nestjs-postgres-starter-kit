@@ -5,7 +5,7 @@ import { ApolloServer } from 'apollo-server-express';
 
 import schema from './schema';
 import resolvers from './resolvers';
-import models from './models';
+import models, { sequelize } from './models';
 
 const app = express();
 
@@ -16,15 +16,65 @@ app.use(cors());
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
-  context: {
+  // context fn: returns the context object rather than an object for the context in Apollo Server.
+  // the async / await fn is invoked on every request hitting the GraphQlL API
+  // So that the me user is retrieved from the db with every request
+  context: async () => ({
     models,
-    me: models.users[1],
-  }
+    me: await models.User.findByLogin('ataylor'),
+  }),
 });
 
 // Add Express middleware and specify the path for your GraphQL API endpoint
 server.applyMiddleware({ app, path: '/graphql' });
 
-app.listen({ port: 8000 }, () => {
-  console.log('🚀🚀🚀 Apollo Server on http://localhost:8000/graphql');
+const port = process.env.PORT || 8000;
+// TODO remove later on
+const eraseDatabaseOnSync = true;
+
+// TODO remove force flag (seeds the database on every application startup
+sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
+  if (eraseDatabaseOnSync) {
+    createUsersWithMessages();
+  }
+  app.listen({ port }, () => {
+    console.log('🚀  🚀   🚀 Apollo Server on http://localhost:8000/graphql');
+  });
 });
+
+const createUsersWithMessages = async () => {
+  await models.User.create(
+    {
+      firstName: 'Alexi',
+      lastName: 'Taylor',
+      username: 'ataylor',
+      messages: [
+        {
+          text: 'Hello World',
+        },
+      ],
+    },
+    {
+      include: [models.Message],
+    },
+  );
+
+  await models.User.create(
+    {
+      firstName: 'Dave',
+      lastName: 'Davids',
+      username: 'ddavids',
+      messages: [
+        {
+          text: 'Hello World!',
+        },
+        {
+          text: 'Good bye...',
+        },
+      ],
+    },
+    {
+      include: [models.Message],
+    },
+  );
+};

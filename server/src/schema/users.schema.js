@@ -9,7 +9,8 @@ export default gql`
   
   type User {
     id: ID!
-    name: String!
+    firstName: String!
+    lastName: String!
     username: String
     messages: [Message!]
   }

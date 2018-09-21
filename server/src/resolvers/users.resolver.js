@@ -1,22 +1,28 @@
+// Resolvers do not need async / await as they would be waiting for the actual result.
+// However it is better to be explicit, especially when adding more business logic.
 export default {
   Query: {
-    users: (parent, args, { models }) => {
-      return Object.values(models.users);
+    users: async (parent, args, { models }) => {
+      return await models.User.findAll();
     },
-    user: (parent, { id }, { models }) => {
-      return models.users[id];
+    user: async (parent, { id }, { models }) => {
+      return await models.User.findById(id);
     },
-    me: (parent, args, { me }) => me,
+    me: async (parent, args, { models, me }) => {
+      return await models.User.findById(me.id);
+    },
   },
 
   User: {
     username: (user) => {
-      return `@${user.name.split(' ')[0][0]}${user.name.split(' ')[1]}`;
+      return `@${user.firstName[0]}${user.lastName}`;
     },
-    messages: (user, args, { models }) => {
-      return Object.values(models.messages).filter(
-        message => message.userId === user.id,
-      );
+    messages: async (user, args, { models }) => {
+      return await models.Message.findAll({
+        where: {
+          userId: user.id,
+        }
+      })
     },
   },
 };

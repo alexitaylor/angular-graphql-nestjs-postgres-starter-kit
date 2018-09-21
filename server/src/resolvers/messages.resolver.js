@@ -1,44 +1,27 @@
-import uuidv4 from "uuid/v4";
-
+// Resolvers do not need async / await as they would be waiting for the actual result.
+// However it is better to be explicit, especially when adding more business logic.
 export default {
   Query: {
-    messages: (parent, args, { models }) => Object.values(models.messages),
-    message: (parent, { id }, { models }) => models.messages[id],
+    messages: async (parent, args, { models }) => await models.Message.findAll(),
+    message: async (parent, { id }, { models }) => await models.Message.findById(id),
   },
 
   Mutation: {
-    createMessage: (parent, { text }, { me, models }) => {
-      const id = uuidv4();
-      const message = {
-        id,
+    createMessage: async (parent, { text }, { me, models }) => {
+      return await models.Message.create({
         text,
         userId: me.id,
-      };
-
-      models.messages[id] = message;
-      models.users[me.id].messageIds.push(id);
-
-      return message;
+      })
     },
-    deleteMessage: (parent, { id }, { models }) => {
-      const { [id]: message, ...otherMessages } = models.messages;
-
-      if (!message) {
-        return false;
-      }
-
-      models.messages = otherMessages;
-
-      return true;
+    deleteMessage: async (parent, { id }, { models }) => {
+      return await models.Message.destroy({ where: { id }})
     },
-    updateMessage: (parent, { id, text }, { models }) => {
-      models.messages[id].text = text;
-
-      return models.messages[id];
+    updateMessage: async (parent, { id, text }, { models }) => {
+      return await models.Message.update({ text, where: { id }})
     }
   },
 
   Message: {
-    user: (message, args, { models }) => models.users[message.userId],
+    user: async (message, args, { models }) => await models.User.findById(message.userId),
   },
 };
