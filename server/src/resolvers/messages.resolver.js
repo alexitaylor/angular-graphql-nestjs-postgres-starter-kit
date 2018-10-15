@@ -1,3 +1,6 @@
+import { combineResolvers } from 'graphql-resolvers';
+import { isAuthenticated, isMessageOwner } from './authorization';
+
 // Resolvers do not need async / await as they would be waiting for the actual result.
 // However it is better to be explicit, especially when adding more business logic.
 export default {
@@ -7,22 +10,31 @@ export default {
   },
 
   Mutation: {
-    createMessage: async (parent, { text }, { me, models }) => {
-      try {
+    // isAuthenticated runs before the actual resolver
+    // that creates the message associated with the authenticated user in the db
+    createMessage: combineResolvers(
+      isAuthenticated,
+      async (parent, { text }, { models, me }) => {
         return await models.Message.create({
           text,
           userId: me.id,
         });
-      } catch(error) {
-        throw new Error(error);
-      }
-    },
-    deleteMessage: async (parent, { id }, { models }) => {
-      return await models.Message.destroy({ where: { id }})
-    },
+      },
+    ),
+
+    // Can stack protecting resolver (resolver guards) on top of each other.
+    deleteMessage: combineResolvers(
+      isAuthenticated,
+      isMessageOwner,
+      async (parent, { id }, { models }) => {
+        return await models.Message.destroy({ where: { id } });
+      },
+    ),
+
     updateMessage: async (parent, { id, text }, { models }) => {
       return await models.Message.update({ text, where: { id }})
-    }
+    },
+
   },
 
   Message: {

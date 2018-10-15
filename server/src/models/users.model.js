@@ -33,6 +33,9 @@ const user = (sequelize, DataTypes) => {
         len: [7, 42],
       },
     },
+    role: {
+      type: DataTypes.STRING,
+    },
   });
 
   User.beforeCreate(async user => {
@@ -41,7 +44,7 @@ const user = (sequelize, DataTypes) => {
 
   // Possible to execute on each user instance and have the user
   // available within the method as this.
-  User .prototype.generatePasswordHash = async function () {
+  User.prototype.generatePasswordHash = async function () {
     const salt = bcrypt.genSaltSync(10);
     return await bcrypt.hashSync(this.password, salt);
   };
