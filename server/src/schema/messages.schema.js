@@ -1,8 +1,10 @@
 import { gql } from 'apollo-server-express';
 
+// PageInfo type is an intermediate layer which holds meta info;
+// here we introduce endCursor (createdAt of the last message in the list).
 export default gql`
   extend type Query {
-    messages: [Message!]!
+    messages(cursor: String, limit: Int): MessageConnection!
     message(id: ID!): Message!
   }
   
@@ -12,9 +14,20 @@ export default gql`
     updateMessage(id: ID!, text: String!): Message!
   }
   
+  type MessageConnection {
+    edges: [Message!]!
+    pageInfo: PageInfo!
+  }
+  
+  type PageInfo {
+    hasNextPage: Boolean!
+    endCursor: String!
+  }
+  
   type Message {
     id: ID!
     text: String!
+    createdAt: String!
     user: User! 
   }
 `;

@@ -72,14 +72,14 @@ const eraseDatabaseOnSync = true;
 // TODO remove force flag (seeds the database on every application startup
 sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
   if (eraseDatabaseOnSync) {
-    createUsersWithMessages();
+    createUsersWithMessages(new Date());
   }
   app.listen({ port }, () => {
     console.log('🚀  🚀   🚀 Apollo Server on http://localhost:8000/graphql');
   });
 });
 
-const createUsersWithMessages = async () => {
+const createUsersWithMessages = async date => {
   await models.User.create(
     {
       firstName: 'Alexi',
@@ -91,6 +91,7 @@ const createUsersWithMessages = async () => {
       messages: [
         {
           text: 'Hello World',
+          createdAt: date.setSeconds(date.getSeconds() + 1),
         },
       ],
     },
@@ -110,9 +111,11 @@ const createUsersWithMessages = async () => {
       messages: [
         {
           text: 'Hello World!',
+          createdAt: date.setSeconds(date.getSeconds() + 1),
         },
         {
           text: 'Good bye...',
+          createdAt: date.setSeconds(date.getSeconds() + 1),
         },
       ],
     },
