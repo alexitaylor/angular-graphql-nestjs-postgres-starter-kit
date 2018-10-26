@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
+import http from 'http';
 
 import schema from './schema';
 import resolvers from './resolvers';
@@ -48,22 +49,38 @@ const server = new ApolloServer({
   // context fn: returns the context object rather than an object for the context in Apollo Server.
   // the async / await fn is invoked on every request hitting the GraphQlL API
   // So that the me user is retrieved from the db with every request
-  context: async ({ req }) => {
-    // Injecting the me user, which is the authenticated user from the token,
-    // with every request to your Apollo Server’s context.
-    // The me user is the user which you encode in the token in your createToken() fn.
-    const me = await getMe(req);
+  context: async ({ req, connection }) => {
+    // Distinguish between Subscription
+    // Subscription comes with a connection object
+    if (connection) {
+      return {
+        models,
+      };
+    }
 
-    return {
-      models,
-      me,
-      secret: process.env.SECRET,
-    };
+    // Or HTTP requests (GraphQL mutations and queries)
+    // HTTP requests come with a req and res object
+    if (req) {
+      // Injecting the me user, which is the authenticated user from the token,
+      // with every request to your Apollo Server’s context.
+      // The me user is the user which you encode in the token in your createToken() fn.
+      const me = await getMe(req);
+
+      return {
+        models,
+        me,
+        secret: process.env.SECRET,
+      };
+    }
   },
 });
 
 // Add Express middleware and specify the path for your GraphQL API endpoint
 server.applyMiddleware({ app, path: '/graphql' });
+
+// Server Subscription Setup
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
 
 const port = process.env.PORT || 8000;
 // TODO remove later on
@@ -74,7 +91,8 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
   if (eraseDatabaseOnSync) {
     createUsersWithMessages(new Date());
   }
-  app.listen({ port }, () => {
+
+  httpServer.listen({ port }, () => {
     console.log('🚀  🚀   🚀 Apollo Server on http://localhost:8000/graphql');
   });
 });
