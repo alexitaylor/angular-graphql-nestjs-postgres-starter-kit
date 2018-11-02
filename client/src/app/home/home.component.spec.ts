@@ -14,17 +14,10 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule,
-          Angulartics2Module.forRoot([]),
-          CoreModule,
-          SharedModule,
-          HttpClientTestingModule
-        ],
-        declarations: [HomeComponent],
-        providers: [QuoteService]
-      })
-      .compileComponents();
+      imports: [RouterTestingModule, Angulartics2Module.forRoot([]), CoreModule, SharedModule, HttpClientTestingModule],
+      declarations: [HomeComponent],
+      providers: [QuoteService]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

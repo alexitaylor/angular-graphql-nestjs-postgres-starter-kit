@@ -12,20 +12,17 @@ describe('ApiPrefixInterceptor', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [{
-        provide: HTTP_INTERCEPTORS,
-        useClass: ApiPrefixInterceptor,
-        multi: true
-      }]
+      providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: ApiPrefixInterceptor,
+          multi: true
+        }
+      ]
     });
   });
 
-  beforeEach(inject([
-    HttpClient,
-    HttpTestingController
-  ], (_http: HttpClient,
-      _httpMock: HttpTestingController) => {
-
+  beforeEach(inject([HttpClient, HttpTestingController], (_http: HttpClient, _httpMock: HttpTestingController) => {
     http = _http;
     httpMock = _httpMock;
   }));
@@ -40,5 +37,13 @@ describe('ApiPrefixInterceptor', () => {
 
     // Assert
     httpMock.expectOne({ url: environment.serverUrl + '/toto' });
+  });
+
+  it('should not prepend environment.serverUrl to request url', () => {
+    // Act
+    http.get('hTtPs://domain.com/toto').subscribe();
+
+    // Assert
+    httpMock.expectOne({ url: 'hTtPs://domain.com/toto' });
   });
 });

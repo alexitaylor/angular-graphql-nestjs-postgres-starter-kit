@@ -14,8 +14,7 @@ export interface RandomQuoteContext {
 
 @Injectable()
 export class QuoteService {
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getRandomQuote(context: RandomQuoteContext): Observable<string> {
     return this.httpClient
@@ -26,5 +25,4 @@ export class QuoteService {
         catchError(() => of('Error, could not load joke :-('))
       );
   }
-
 }

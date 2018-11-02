@@ -1,7 +1,7 @@
-# fullstack-apollo-angular-express-starter-kit
+# client
 
 This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
-version 5.0.1
+version 5.3.0
 
 # Getting started
 
@@ -50,18 +50,19 @@ Task                            | Description
 --------------------------------|--------------------------------------------------------------------------------------
 `npm start`                     | Run development server on `http://localhost:4200/`
 `npm run serve:sw`              | Run test server on `http://localhost:4200/` with service worker enabled
-`npm run build [-- --env=prod]` | Lint code and build web app for production (with [AOT](https://angular.io/guide/aot-compiler)) in `dist/` folder
+`npm run build [-- --configuration=production]` | Lint code and build web app for production (with [AOT](https://angular.io/guide/aot-compiler)) in `dist/` folder
 `npm test`                      | Run unit tests via [Karma](https://karma-runner.github.io) in watch mode
 `npm run test:ci`               | Lint code and run unit tests once for continuous integration
 `npm run e2e`                   | Run e2e tests using [Protractor](http://www.protractortest.org)
 `npm run lint`                  | Lint code
 `npm run translations:extract`  | Extract strings from code and templates to `src/app/translations/template.json`
 `npm run docs`                  | Display project documentation
+`npm run prettier`              | Automatically format all `.ts`, `.js` & `.scss` files
 
-When building the application, you can specify the target environment using the additional flag `--env <name>` (do not
-forget to prepend `--` to pass arguments to npm scripts).
+When building the application, you can specify the target configuration using the additional flag
+`--configuration <name>` (do not forget to prepend `--` to pass arguments to npm scripts).
 
-The default build environment is `prod`.
+The default build configuration is `prod`.
 
 ## Development server
 
@@ -81,6 +82,16 @@ you can also use the command `ng generate` directly.
 
 Tasks are mostly based on the `angular-cli` tool. Use `ng help` to get more help or go check out the
 [Angular-CLI README](https://github.com/angular/angular-cli).
+
+## Code formatting
+
+All `.ts`, `.js` & `.scss` files in this project are formatted automatically using [Prettier](https://prettier.io),
+and enforced via the `test:ci` script.
+
+A pre-commit git hook has been configured on this project to automatically format staged files, using
+(pretty-quick)[https://github.com/azz/pretty-quick], so you don't have to care for it.
+
+You can also force code formatting by running the command `npm run prettier`.
 
 # What's in the box
 
@@ -102,6 +113,7 @@ Development, build and quality processes are based on [angular-cli](https://gith
 - Static code analysis: [TSLint](https://github.com/palantir/tslint), [Codelyzer](https://github.com/mgechev/codelyzer),
   [Stylelint](http://stylelint.io) and [HTMLHint](http://htmlhint.com/)
 - Local knowledgebase server using [Hads](https://github.com/sinedied/hads)
+- Automatic code formatting with [Prettier](https://prettier.io)
 
 #### Libraries
 

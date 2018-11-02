@@ -1,6 +1,6 @@
 import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 
-import { AuthenticationService, Credentials} from './authentication.service';
+import { AuthenticationService, Credentials } from './authentication.service';
 
 const credentialsKey = 'credentials';
 
@@ -13,9 +13,7 @@ describe('AuthenticationService', () => {
     });
   });
 
-  beforeEach(inject([
-    AuthenticationService
-  ], (_authenticationService: AuthenticationService) => {
+  beforeEach(inject([AuthenticationService], (_authenticationService: AuthenticationService) => {
     authenticationService = _authenticationService;
   }));
 

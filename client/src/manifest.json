@@ -1,6 +1,6 @@
 {
-  "name": "fullstack-apollo-angular-express-starter-kit",
-  "short_name": "fullstack-apollo-angular-express-starter-kit",
+  "name": "client",
+  "short_name": "client",
   "theme_color": "#488aff",
   "background_color": "#488aff",
   "scope": "/",

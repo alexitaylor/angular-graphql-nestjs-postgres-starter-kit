@@ -17,20 +17,17 @@ describe('ErrorHandlerInterceptor', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [{
-        provide: HTTP_INTERCEPTORS,
-        useFactory: createInterceptor,
-        multi: true
-      }]
+      providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          useFactory: createInterceptor,
+          multi: true
+        }
+      ]
     });
   });
 
-  beforeEach(inject([
-    HttpClient,
-    HttpTestingController
-  ], (_http: HttpClient,
-      _httpMock: HttpTestingController) => {
-
+  beforeEach(inject([HttpClient, HttpTestingController], (_http: HttpClient, _httpMock: HttpTestingController) => {
     http = _http;
     httpMock = _httpMock;
   }));
@@ -46,10 +43,13 @@ describe('ErrorHandlerInterceptor', () => {
     spyOn(ErrorHandlerInterceptor.prototype as any, 'errorHandler').and.callThrough();
 
     // Act
-    http.get('/toto').subscribe(() => fail('should error'), () => {
-      // Assert
-      expect(ErrorHandlerInterceptor.prototype['errorHandler']).toHaveBeenCalled();
-    });
+    http.get('/toto').subscribe(
+      () => fail('should error'),
+      () => {
+        // Assert
+        expect(ErrorHandlerInterceptor.prototype['errorHandler']).toHaveBeenCalled();
+      }
+    );
 
     httpMock.expectOne({}).flush(null, {
       status: 404,

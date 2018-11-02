@@ -16,14 +16,23 @@ A full-stack starter kit with Apollo and Express server, Postgres database and A
 * `git clone git@https://github.com/alexitaylor/fullstack-apollo-angular-express-starter-kit.git`
 * `cd fullstack-apollo-angular-express-starter-kit`
 
-### Client
+# Client
 
 * `cd client`
 * `npm install`
 * `npm start`
 * visit `http://localhost:4200`
 
-### Server
+### Get started with these tasks:
+- $ npm start: start dev server with live reload on http://localhost:4200
+- $ npm run build: build web app for production
+- $ npm test: run unit tests in watch mode for TDD
+- $ npm run test:ci: lint code and run units tests with coverage
+- $ npm run e2e: launch e2e tests
+- $ npm run docs: show docs and coding guides
+- $ npm run prettier: format your code automatically
+
+# Server
 
 * `cd server`
 * `npm install`

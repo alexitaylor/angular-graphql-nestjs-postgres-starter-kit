@@ -1,4 +1,4 @@
-# fullstack-apollo-angular-express-starter-kit
+# client
 
 Welcome to the project documentation!
 
