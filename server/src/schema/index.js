@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express';
 
 import userSchema from './users.schema';
 import messageSchema from './messages.schema';
-import roleSchema from './roles.model';
+import roleSchema from './roles.schema';
 
 
 // Both schemas are merged together with the help of a utility linkSchema.

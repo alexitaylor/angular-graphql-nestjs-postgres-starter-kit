@@ -9,8 +9,8 @@ import { isAdmin } from './authorization';
 // In order to secure toke, pass in secret which is only available
 // between you and your server.
 // Token only valid for 30min
-const createToken = async (user, secret, expiresIn, role) => {
-  const { id, email, username } = user;
+const createToken = async (user, secret, expiresIn) => {
+  const { id, email, username, role } = user;
   return await jwt.sign({ id, email, username, role }, secret, {
     expiresIn,
   });
@@ -56,7 +56,9 @@ export default {
       const user = await models.User.findByLogin(login);
 
       if (!user) {
-        throw new UserInputError('No user found with this login credentials.');
+        throw new UserInputError(
+          'No user found with this login credentials.',
+        );
       }
 
       const isValid = await user.validatePassword(password);

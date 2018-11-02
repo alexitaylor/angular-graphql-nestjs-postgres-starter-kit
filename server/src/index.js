@@ -21,12 +21,11 @@ app.use(cors());
 // Else fn continues with request.
 const getMe = async req => {
   const token = req.headers['x-token'];
-
   if (token) {
     try {
       return await jwt.verify(token, process.env.SECRET);
     } catch (e) {
-      throw new AuthenticationError('Your session expired. Sign in again.')
+      throw new AuthenticationError('Your session expired. Sign in again.');
     }
   }
 };
@@ -82,13 +81,12 @@ server.applyMiddleware({ app, path: '/graphql' });
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
+const isTest = !!process.env.TEST_DATABASE;
+const isProduction = !!process.env.DATABASE_URL;
 const port = process.env.PORT || 8000;
-// TODO remove later on
-const eraseDatabaseOnSync = true;
 
-// TODO remove force flag (seeds the database on every application startup
-sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
-  if (eraseDatabaseOnSync) {
+sequelize.sync({ force: isTest }).then(async () => {
+  if (isTest) {
     createUsersWithMessages(new Date());
   }
 
@@ -100,10 +98,10 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
 const createUsersWithMessages = async date => {
   await models.User.create(
     {
-      firstName: 'Alexi',
-      lastName: 'Taylor',
-      username: 'ataylor',
-      email: 'ataylor@localhost.com',
+      firstName: 'Charlie',
+      lastName: 'Wallie',
+      username: 'cwallie',
+      email: 'cwallie@localhost.com',
       role: 'ADMIN',
       password: '12345678',
       messages: [
@@ -120,10 +118,10 @@ const createUsersWithMessages = async date => {
 
   await models.User.create(
     {
-      firstName: 'Dave',
-      lastName: 'Davids',
-      username: 'ddavids',
-      email: 'ddavids@localhost.com',
+      firstName: 'Collie',
+      lastName: 'Collins',
+      username: 'ccollins',
+      email: 'ccollins@localhost.com',
       role: 'USER',
       password: '12345678',
       messages: [
