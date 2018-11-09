@@ -17,31 +17,30 @@
     <div class="container">
       <div class="card col-md-6 mt-3 mx-auto">
         <div class="card-body">
-          <h4 class="card-title text-center">
-            <i class="far fa-3x fa-user-circle text-muted"></i>
-          </h4>
+          <div class=" d-flex flex-column">
+            <h4 class="card-title text-center">
+              <i class="far fa-3x fa-user-circle text-muted"></i>
+            </h4>
+            <h2 class="card-title text-center mt-2 mb-3 text-bold">Welcome back!</h2>
+          </div>
           <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
             <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
               Username or password incorrect.
             </div>
             <div class="form-group">
               <label class="d-block">
+                <label class="text-black-50">Username</label>
                 <input type="text" class="form-control" formControlName="username" autocomplete="username"
                        [placeholder]="'Username' | translate"/>
                 <span hidden translate>Username</span>
-                <small [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"
-                       class="text-danger" translate>
-                  Username is required
-                </small>
+                <app-control-messages [control]="loginForm.controls.username"></app-control-messages>
               </label>
               <label class="d-block">
+                <label class="text-black-50">Password</label>
                 <input type="password" class="form-control" formControlName="password" autocomplete="current-password"
                        [placeholder]="'Password' | translate" required/>
                 <span hidden translate>Password</span>
-                <small [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"
-                       class="text-danger" translate>
-                  Password is required
-                </small>
+                <app-control-messages [control]="loginForm.controls.password"></app-control-messages>
               </label>
               <div class="form-check">
                 <label class="form-check-label">
@@ -54,6 +53,10 @@
               <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
               <span translate>Login</span>
             </button>
+            <p class="d-flex flex-row justify-content-center">
+              <span style="padding: 0.5rem 0;">Don't have an account?</span>
+              <a class="nav-link" routerLink="/register">Sign up</a>
+            </p>
           </form>
         </div>
       </div>

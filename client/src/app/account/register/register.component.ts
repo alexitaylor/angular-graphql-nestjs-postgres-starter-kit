@@ -3,17 +3,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
-import { environment } from '@env/environment';
-import { Logger, I18nService, AuthenticationService } from '@app/core';
+import { environment } from 'environments/environment';
+import { Logger, I18nService, AuthenticationService } from 'app/core/index';
+import {ValidationService} from '@app/shared';
 
 const log = new Logger('Login');
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   version: string = environment.version;
   error: string;
   loginForm: FormGroup;
@@ -69,8 +70,11 @@ export class LoginComponent implements OnInit {
 
   private createForm() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, ValidationService.emailValidator]],
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, ValidationService.passwordValidator]],
       remember: true
     });
   }

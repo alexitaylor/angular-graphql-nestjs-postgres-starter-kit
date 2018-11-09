@@ -13,7 +13,8 @@ import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
-import { LoginModule } from './login/login.module';
+import { LoginModule } from './account/login/login.module';
+import { RegisterModule } from './account/register/register.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -30,6 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
     ShellModule,
     HomeModule,
     LoginModule,
+    RegisterModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],

@@ -1,0 +1,86 @@
+<div class="login-container bg-light">
+  <div class="login-box">
+    <h1 translate>APP_NAME</h1>
+    <div>
+      <h6 class="d-inline-block">v{{version}}</h6>
+      <div class="d-inline-block ml-3" ngbDropdown>
+        <button id="language-dropdown" class="btn btn-sm btn-secondary" ngbDropdownToggle>
+          {{currentLanguage}}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="language-dropdown">
+          <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">
+            {{language}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card col-md-6 mt-3 mx-auto">
+        <div class="card-body">
+          <div class=" d-flex flex-column">
+            <h4 class="card-title text-center">
+              <i class="far fa-3x fa-user-circle text-muted"></i>
+            </h4>
+            <h2 class="card-title text-center mt-2 mb-3 text-bold">Sign Up</h2>
+          </div>
+          <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
+            <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
+              Username or password incorrect.
+            </div>
+            <div class="form-group">
+              <label class="d-block">
+                <label class="text-black-50">First Name</label>
+                <input type="text" class="form-control" formControlName="firstName" autocomplete="firstName"
+                       [placeholder]="'First Name' | translate"/>
+                <span hidden translate>First Name</span>
+                <app-control-messages [control]="loginForm.controls.firstName"></app-control-messages>
+              </label>
+              <label class="d-block">
+                <label class="text-black-50">Last Name</label>
+                <input type="text" class="form-control" formControlName="lastName" autocomplete="lastName"
+                       [placeholder]="'Last Name' | translate"/>
+                <span hidden translate>Last Name</span>
+                <app-control-messages [control]="loginForm.controls.lastName"></app-control-messages>
+              </label>
+              <label class="d-block">
+                <label class="text-black-50">Email</label>
+                <input type="email" class="form-control" formControlName="email" autocomplete="email"
+                       [placeholder]="'Email' | translate"/>
+                <span hidden translate>Username</span>
+                <app-control-messages [control]="loginForm.controls.email"></app-control-messages>
+              </label>
+              <label class="d-block">
+                <label class="text-black-50">Username</label>
+                <input type="text" class="form-control" formControlName="username" autocomplete="username"
+                       [placeholder]="'Username' | translate"/>
+                <span hidden translate>Username</span>
+                <app-control-messages [control]="loginForm.controls.username"></app-control-messages>
+              </label>
+              <label class="d-block">
+                <label class="text-black-50">Password</label>
+                <input type="password" class="form-control" formControlName="password" autocomplete="current-password"
+                       [placeholder]="'Password' | translate" required/>
+                <span hidden translate>Password</span>
+                <app-control-messages [control]="loginForm.controls.password"></app-control-messages>
+              </label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" formControlName="remember"/>
+                  <span translate>Remember me</span>
+                </label>
+              </div>
+            </div>
+            <button class="btn btn-primary w-100" type="submit" [disabled]="loginForm.invalid || isLoading">
+              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+              <span translate>Login</span>
+            </button>
+            <p class="d-flex flex-row justify-content-center">
+              <span style="padding: 0.5rem 0;">Already have an account?</span>
+              <a class="nav-link" routerLink="/login">Sign In</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
