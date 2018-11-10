@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         credentials => {
+          const s = localStorage.getItem('credentials');
+          console.log('s: ', s);
           log.debug(`${credentials.username} successfully logged in`);
           this.route.queryParams.subscribe(params =>
             this.router.navigate([params.redirect || '/'], { replaceUrl: true })

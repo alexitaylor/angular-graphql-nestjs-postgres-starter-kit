@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
+import { map, catchError } from 'rxjs/operators';
 
 export interface Credentials {
   // Customize received credentials here
@@ -15,6 +18,14 @@ export interface LoginContext {
 
 const credentialsKey = 'credentials';
 
+const signIn = gql`
+  mutation signIn($login: String!, $password: String!) {
+    signIn(login: $login, password: $password) {
+      token
+    }
+  }
+`;
+
 /**
  * Provides a base for authentication workflow.
  * The Credentials interface as well as login/logout methods should be replaced with proper implementation.
@@ -23,7 +34,7 @@ const credentialsKey = 'credentials';
 export class AuthenticationService {
   private _credentials: Credentials | null;
 
-  constructor() {
+  constructor(private apollo: Apollo) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -35,14 +46,29 @@ export class AuthenticationService {
    * @param context The login parameters.
    * @return The user credentials.
    */
-  login(context: LoginContext): Observable<Credentials> {
+  login(context: LoginContext): Observable<Credentials | any> {
     // Replace by proper authentication call
-    const data = {
+    const user = {
       username: context.username,
-      token: '123456'
+      token: '',
+      remember: context.remember
     };
-    this.setCredentials(data, context.remember);
-    return of(data);
+
+    return this.apollo
+      .mutate({
+        mutation: signIn,
+        variables: {
+          login: context.username,
+          password: context.password
+        }
+      })
+      .pipe(
+        map(({ data }) => {
+          user.token = data.signIn.token;
+          this.setCredentials(user, context.remember);
+          return user;
+        })
+      );
   }
 
   /**
@@ -52,6 +78,7 @@ export class AuthenticationService {
   logout(): Observable<boolean> {
     // Customize credentials invalidation here
     this.setCredentials();
+    this.apollo.getClient().resetStore();
     return of(true);
   }
 
