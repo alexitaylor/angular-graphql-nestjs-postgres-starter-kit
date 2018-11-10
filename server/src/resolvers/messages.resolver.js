@@ -15,7 +15,7 @@ export default {
       parent,
       { cursor, limit = 100 },
       { models }
-    ) => {
+     ) => {
       // The following sequelize clause:
       // 1. find all items in a list by the starting property createdAt
       // with less than (lt) values for this property.

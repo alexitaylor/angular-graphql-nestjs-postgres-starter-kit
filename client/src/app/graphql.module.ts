@@ -6,8 +6,9 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import { WebSocketLink } from 'apollo-link-ws';
-import { split } from 'apollo-link';
+import { split, ApolloLink } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
+import { onError } from 'apollo-link-error';
 import { Credentials } from '@app/core/authentication/authentication.service';
 
 const uri = 'http://localhost:8000/graphql';
@@ -45,6 +46,18 @@ export class GraphQLModule {
       }
     });
 
+    const errorLink = onError(res => {
+      if (res.graphQLErrors) {
+        res.graphQLErrors.map(({ message, locations, path }) => {
+          console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
+        });
+      }
+
+      if (res.networkError) {
+        console.log(`[Network error]: ${res.networkError}`);
+      }
+    });
+
     // using the ability to split links, you can send data to each link
     // depending on what kind of operation is being sent
     const link = split(
@@ -57,9 +70,11 @@ export class GraphQLModule {
       auth.concat(http)
     );
 
+    const httpLinkWithErrorHandling = ApolloLink.from([errorLink, link]);
+
     // Create Apollo client
     this.apollo.create({
-      link,
+      link: httpLinkWithErrorHandling,
       cache: new InMemoryCache()
     });
   }

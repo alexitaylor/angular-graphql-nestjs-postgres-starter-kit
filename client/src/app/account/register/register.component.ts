@@ -17,6 +17,7 @@ const log = new Logger('Login');
 export class RegisterComponent implements OnInit {
   version: string = environment.version;
   error: string;
+  errorMessage: string;
   loginForm: FormGroup;
   isLoading = false;
 
@@ -32,10 +33,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {}
 
-  login() {
+  signUp() {
     this.isLoading = true;
     this.authenticationService
-      .login(this.loginForm.value)
+      .signUp(this.loginForm.value)
       .pipe(
         finalize(() => {
           this.loginForm.markAsPristine();
@@ -44,14 +45,18 @@ export class RegisterComponent implements OnInit {
       )
       .subscribe(
         credentials => {
-          log.debug(`${credentials.username} successfully logged in`);
+          log.debug(`${credentials.username} successfully signed up`);
           this.route.queryParams.subscribe(params =>
             this.router.navigate([params.redirect || '/'], { replaceUrl: true })
           );
         },
         error => {
           log.debug(`Login error: ${error}`);
+          const errors = {};
           this.error = error;
+          this.errorMessage = error.message;
+          errors[error.message] = true;
+          this.loginForm.controls[error.path].setErrors(errors);
         }
       );
   }

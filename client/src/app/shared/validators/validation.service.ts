@@ -11,7 +11,9 @@ export class ValidationService {
       invalidEmailAddress: 'Invalid email address',
       invalidPassword: 'Invalid password. Password must be at least 6 characters long, and contain a number.',
       invalidCountryPhone: 'Invalid phone number.',
-      minlength: `Minimum length ${validatorValue.requiredLength}`
+      minlength: `Minimum length ${validatorValue.requiredLength}`,
+      'username must be unique': 'The username already exists. Please choose another one.',
+      'email must be unique': 'The email already exists. Please choose another one.'
     };
 
     return `${config[validatorName]}`;
@@ -48,7 +50,7 @@ export class ValidationService {
   static passwordValidator(control: any) {
     // {6,100}           - Assert password is between 6 and 100 characters
     // (?=.*[0-9])       - Assert a string has at least one number
-    if (control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {
+    if (control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{7,100}$/)) {
       return null;
     } else {
       return { invalidPassword: true };
@@ -78,7 +80,6 @@ export class ValidationService {
             return undefined;
           }
         } catch (e) {
-          console.log(e);
           return {
             invalidCountryPhone: true
           };

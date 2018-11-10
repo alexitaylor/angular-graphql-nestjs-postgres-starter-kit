@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
@@ -16,11 +16,28 @@ export interface LoginContext {
   remember?: boolean;
 }
 
+export interface SignUpContext {
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  password: string;
+  remember?: boolean;
+}
+
 const credentialsKey = 'credentials';
 
 const signIn = gql`
   mutation signIn($login: String!, $password: String!) {
     signIn(login: $login, password: $password) {
+      token
+    }
+  }
+`;
+
+const signUp = gql`
+  mutation signUp($firstName: String!, $lastName: String!, $email: String!, $username: String!, $password: String!) {
+    signUp(firstName: $firstName, lastName: $lastName, email: $email, username: $username, password: $password) {
       token
     }
   }
@@ -47,7 +64,6 @@ export class AuthenticationService {
    * @return The user credentials.
    */
   login(context: LoginContext): Observable<Credentials | any> {
-    // Replace by proper authentication call
     const user = {
       username: context.username,
       token: '',
@@ -67,6 +83,76 @@ export class AuthenticationService {
           user.token = data.signIn.token;
           this.setCredentials(user, context.remember);
           return user;
+        }),
+        catchError(err => {
+          if (err.graphQLErrors) {
+            let error = null;
+
+            err.graphQLErrors.forEach((e: any) => {
+              error = {
+                message: e.extensions.exception.errors[0].message,
+                path: e.extensions.exception.errors[0].path,
+                type: e.extensions.exception.errors[0].type,
+                value: e.extensions.exception.errors[0].value
+              };
+            });
+
+            return throwError(error);
+          }
+          if (err.networkError) {
+            return throwError(err);
+          }
+        })
+      );
+  }
+
+  /**
+   * Create and authenticate the user.
+   * @param context The signUp parameters.
+   * @return The user credentials.
+   */
+  signUp(context: SignUpContext): Observable<Credentials | any> {
+    const user = {
+      username: context.username,
+      token: '',
+      remember: context.remember
+    };
+
+    return this.apollo
+      .mutate({
+        mutation: signUp,
+        variables: {
+          firstName: context.firstName,
+          lastName: context.lastName,
+          email: context.email,
+          username: context.username,
+          password: context.password
+        }
+      })
+      .pipe(
+        map(({ data }) => {
+          user.token = data.signUp.token;
+          this.setCredentials(user, context.remember);
+          return user;
+        }),
+        catchError(err => {
+          if (err.graphQLErrors) {
+            let error = null;
+
+            err.graphQLErrors.forEach((e: any) => {
+              error = {
+                message: e.extensions.exception.errors[0].message,
+                path: e.extensions.exception.errors[0].path,
+                type: e.extensions.exception.errors[0].type,
+                value: e.extensions.exception.errors[0].value
+              };
+            });
+
+            return throwError(error);
+          }
+          if (err.networkError) {
+            return throwError(err);
+          }
         })
       );
   }

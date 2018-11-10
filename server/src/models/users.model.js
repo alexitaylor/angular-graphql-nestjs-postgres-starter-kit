@@ -1,19 +1,19 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 const user = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
+  const User = sequelize.define("user", {
     firstName: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     lastName: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     username: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
       validate: {
-        notEmpty: true,
+        notEmpty: true
       }
     },
     email: {
@@ -22,20 +22,20 @@ const user = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: true,
-        isEmail: true,
-      },
+        isEmail: true
+      }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [7, 42],
-      },
+        len: [7, 100]
+      }
     },
     role: {
-      type: DataTypes.STRING,
-    },
+      type: DataTypes.STRING
+    }
   });
 
   User.beforeCreate(async user => {
@@ -44,7 +44,7 @@ const user = (sequelize, DataTypes) => {
 
   // Possible to execute on each user instance and have the user
   // available within the method as this.
-  User.prototype.generatePasswordHash = async function () {
+  User.prototype.generatePasswordHash = async function() {
     const salt = bcrypt.genSaltSync(10);
     return await bcrypt.hashSync(this.password, salt);
   };
@@ -54,17 +54,17 @@ const user = (sequelize, DataTypes) => {
   };
 
   User.associate = models => {
-    User.hasMany(models.Message, { onDelete: 'CASCADE' });
+    User.hasMany(models.Message, { onDelete: "CASCADE" });
   };
 
-  User.findByLogin = async (login) => {
+  User.findByLogin = async login => {
     let user = await User.findOne({
-      where: { username: login },
+      where: { username: login }
     });
 
     if (!user) {
       user = await User.findOne({
-        where: { email: login },
+        where: { email: login }
       });
     }
 
