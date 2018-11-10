@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
-import {SharedModule} from '@app/shared';
+import { SharedModule } from '@app/shared';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, TranslateModule, NgbModule, RegisterRoutingModule, SharedModule],

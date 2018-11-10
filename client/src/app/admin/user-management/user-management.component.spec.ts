@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ControlMessagesComponent } from './control-messages.component';
+import { UserManagementComponent } from './user-management.component';
 
-describe('ControlMessagesComponent', () => {
-  let component: ControlMessagesComponent;
-  let fixture: ComponentFixture<ControlMessagesComponent>;
+describe('UserManagementComponent', () => {
+  let component: UserManagementComponent;
+  let fixture: ComponentFixture<UserManagementComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ControlMessagesComponent]
+      declarations: [UserManagementComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ControlMessagesComponent);
+    fixture = TestBed.createComponent(UserManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LoaderComponent, ValidationService, ControlMessagesComponent } from './';
+import { LoaderComponent, ValidationService } from './';
+import { ControlMessagesComponent } from '@app/shared/validators/control-messages/control-messages.component';
 
 @NgModule({
   imports: [CommonModule],

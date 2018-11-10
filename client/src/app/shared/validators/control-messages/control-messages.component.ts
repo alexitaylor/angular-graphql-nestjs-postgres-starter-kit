@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {ValidationService} from '@app/shared';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ValidationService } from '@app/shared';
 
 @Component({
   selector: 'app-control-messages',
@@ -8,9 +8,10 @@ import {ValidationService} from '@app/shared';
   styleUrls: ['./control-messages.component.scss']
 })
 export class ControlMessagesComponent implements OnInit {
-  @Input() control: FormControl;
+  @Input()
+  control: FormControl;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
 
@@ -23,5 +24,4 @@ export class ControlMessagesComponent implements OnInit {
 
     return null;
   }
-
 }

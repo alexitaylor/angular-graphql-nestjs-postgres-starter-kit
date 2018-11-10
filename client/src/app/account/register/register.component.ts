@@ -5,7 +5,7 @@ import { finalize } from 'rxjs/operators';
 
 import { environment } from 'environments/environment';
 import { Logger, I18nService, AuthenticationService } from 'app/core/index';
-import {ValidationService} from '@app/shared';
+import { ValidationService } from '@app/shared';
 
 const log = new Logger('Login');
 
