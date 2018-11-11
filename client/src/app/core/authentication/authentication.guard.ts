@@ -19,14 +19,16 @@ export class AuthenticationGuard implements CanActivate {
   }
 
   checkLogin(authorities: string[], state: RouterStateSnapshot): Observable<boolean> {
+
     return this.authenticationService.identity().pipe(
       map(account => {
+
         if (!authorities || authorities.length === 0) {
           return true;
         }
 
         if (account) {
-          if (this.authenticationService.hasAnyAuthority(authorities)) {
+          if (this.authenticationService.hasAnyAuthority(authorities, account.role)) {
             return true;
           }
         }

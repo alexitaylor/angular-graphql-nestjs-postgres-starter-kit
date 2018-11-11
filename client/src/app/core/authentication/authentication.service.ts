@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import {Observable, of, Subject, throwError} from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
@@ -57,12 +57,18 @@ declare interface Me {
 export class AuthenticationService {
   private _credentials: Credentials | null;
   private _userIdentity: IUser;
+  private authenticated = false;
 
   constructor(private apollo: Apollo) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
     }
+  }
+
+  authenticate(identity: IUser) {
+    this._userIdentity = identity;
+    this.authenticated = identity !== null;
   }
 
   /**
@@ -193,6 +199,7 @@ export class AuthenticationService {
     // Customize credentials invalidation here
     this.setCredentials();
     this.apollo.getClient().resetStore();
+    this.authenticate(null);
     return of(true);
   }
 
@@ -208,20 +215,21 @@ export class AuthenticationService {
    * Checks if user has authority
    * @return True if the user is authorized.
    */
-  hasAnyAuthority(authorities: string[]): boolean {
-    return this.hasAnyAuthorityDirect(authorities);
+  hasAnyAuthority(authorities: string[], role: string): boolean {
+    return this.hasAnyAuthorityDirect(authorities, role);
   }
 
   /**
    * Checks if user has authority and is authenticated.
    * @return True if the user is authenticated and authorized.
    */
-  hasAnyAuthorityDirect(authorities: string[]): boolean {
-    if (!this.isAuthenticated() || !this._userIdentity) {
+  hasAnyAuthorityDirect(authorities: string[], role: string): boolean {
+    // TODO if (!this.isAuthenticated() || !this._userIdentity) {
+    if (!this.isAuthenticated()) {
       return false;
     }
 
-    if (authorities.includes(this._userIdentity.role)) {
+    if (authorities.includes(role)) {
       return true;
     }
 

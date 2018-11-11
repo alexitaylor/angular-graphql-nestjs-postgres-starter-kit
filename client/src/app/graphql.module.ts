@@ -68,7 +68,7 @@ export class GraphQLModule {
       }
 
       if (res.networkError) {
-        console.log(`[Network error]: ${res.networkError}`);
+        console.log(`[Network error]: ${res.networkError.message}`);
       }
     });
 
