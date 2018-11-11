@@ -85,23 +85,23 @@ const isTest = !!process.env.TEST_DATABASE;
 const isProduction = !!process.env.DATABASE_URL;
 const port = process.env.PORT || 8000;
 
-sequelize.sync({ force: isTest }).then(async () => {
-  if (isTest) {
+sequelize.sync({ force: false }).then(async () => {
+  if (false) {
     createUsersWithMessages(new Date());
   }
 
   httpServer.listen({ port }, () => {
-    console.log('🚀  🚀   🚀 Apollo Server on http://localhost:8000/graphql');
+    console.log('🚀  🚀   🚀   🚀 Apollo Server on http://localhost:8000/graphql');
   });
 });
 
 const createUsersWithMessages = async date => {
   await models.User.create(
     {
-      firstName: 'Charlie',
-      lastName: 'Wallie',
-      username: 'cwallie',
-      email: 'cwallie@localhost.com',
+      firstName: 'Admin',
+      lastName: 'Admin',
+      username: 'admin',
+      email: 'admin@localhost.com',
       role: 'ADMIN',
       password: '12345678',
       messages: [
@@ -118,9 +118,9 @@ const createUsersWithMessages = async date => {
 
   await models.User.create(
     {
-      firstName: 'Collie',
-      lastName: 'Collins',
-      username: 'ccollins',
+      firstName: 'User',
+      lastName: 'User',
+      username: 'user',
       email: 'ccollins@localhost.com',
       role: 'USER',
       password: '12345678',

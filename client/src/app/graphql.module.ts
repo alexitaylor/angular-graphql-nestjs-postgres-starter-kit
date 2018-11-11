@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { setContext } from 'apollo-link-context';
 import { WebSocketLink } from 'apollo-link-ws';
 import { split, ApolloLink } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
@@ -31,19 +30,34 @@ export class GraphQLModule {
       token = ssCredentials.token;
     }
 
-    const auth = setContext((request, previousContext) => ({
-      authorization: token
-    }));
-
     // Create a WebSocket link:
-    const ws = new WebSocketLink({
+    const wsLink = new WebSocketLink({
       uri: `ws://localhost:8000/graphql`,
       options: {
-        reconnect: true,
-        connectionParams: {
-          authToken: token
-        }
+        reconnect: true
       }
+    });
+
+    const terminatingLink = split(
+      ({ query }) => {
+        const def = getMainDefinition(query);
+        return def.kind === 'OperationDefinition' && def.operation === 'subscription';
+      },
+      wsLink,
+      http
+    );
+
+    const authLink = new ApolloLink((operation, forward) => {
+      operation.setContext(({ headers = {} }) => {
+        if (token) {
+          headers['x-token'] = token;
+        }
+        return {
+          headers
+        };
+      });
+
+      return forward(operation);
     });
 
     const errorLink = onError(res => {
@@ -58,24 +72,14 @@ export class GraphQLModule {
       }
     });
 
-    // using the ability to split links, you can send data to each link
-    // depending on what kind of operation is being sent
-    const link = split(
-      // split based on operation type
-      ({ query }) => {
-        const definition = getMainDefinition(query);
-        return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
-      },
-      ws,
-      auth.concat(http)
-    );
+    const link = ApolloLink.from([authLink, errorLink, terminatingLink]);
 
-    const httpLinkWithErrorHandling = ApolloLink.from([errorLink, link]);
+    const cache = new InMemoryCache();
 
     // Create Apollo client
     this.apollo.create({
-      link: httpLinkWithErrorHandling,
-      cache: new InMemoryCache()
+      link,
+      cache
     });
   }
 }

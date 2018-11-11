@@ -43,6 +43,7 @@ export default {
         lastName,
         username,
         email,
+        role: 'USER',
         password
       });
 

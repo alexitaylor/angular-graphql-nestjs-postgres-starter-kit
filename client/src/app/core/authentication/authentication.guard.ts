@@ -3,6 +3,8 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { Logger } from '../logger.service';
 import { AuthenticationService } from './authentication.service';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 const log = new Logger('AuthenticationGuard');
 
@@ -10,13 +12,29 @@ const log = new Logger('AuthenticationGuard');
 export class AuthenticationGuard implements CanActivate {
   constructor(private router: Router, private authenticationService: AuthenticationService) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.authenticationService.isAuthenticated()) {
-      return true;
-    }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> {
+    const authorities = route.data['authorities'];
 
-    log.debug('Not authenticated, redirecting and adding redirect url...');
-    this.router.navigate(['/login'], { queryParams: { redirect: state.url }, replaceUrl: true });
-    return false;
+    return this.checkLogin(authorities, state).pipe(map(res => res));
+  }
+
+  checkLogin(authorities: string[], state: RouterStateSnapshot): Observable<boolean> {
+    return this.authenticationService.identity().pipe(
+      map(account => {
+        if (!authorities || authorities.length === 0) {
+          return true;
+        }
+
+        if (account) {
+          if (this.authenticationService.hasAnyAuthority(authorities)) {
+            return true;
+          }
+        }
+
+        log.debug('Not authenticated, redirecting and adding redirect url...');
+        this.router.navigate(['/access-denied'], { queryParams: { redirect: state.url }, replaceUrl: true });
+        return false;
+      })
+    );
   }
 }

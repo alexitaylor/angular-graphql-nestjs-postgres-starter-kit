@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { extract } from 'app/core/index';
 import { UserManagementComponent } from '@app/admin/user-management/user-management.component';
+import { AuthenticationGuard } from '@app/core';
 
 const routes: Routes = [
   // Module is lazy loaded, see app-routing.module.ts
@@ -10,8 +11,10 @@ const routes: Routes = [
     path: '',
     component: UserManagementComponent,
     data: {
-      title: extract('User Management')
-    }
+      title: extract('User Management'),
+      authorities: ['ADMIN']
+    },
+    canActivate: [AuthenticationGuard]
   }
 ];
 

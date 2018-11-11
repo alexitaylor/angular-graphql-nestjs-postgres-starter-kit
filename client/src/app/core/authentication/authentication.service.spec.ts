@@ -1,11 +1,13 @@
 import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 
 import { AuthenticationService, Credentials } from './authentication.service';
+import { MockAuthenticationService } from '@app/core/authentication/authentication.service.mock';
 
 const credentialsKey = 'credentials';
 
 describe('AuthenticationService', () => {
   let authenticationService: AuthenticationService;
+  const mockAuthenticationService: MockAuthenticationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -40,7 +42,7 @@ describe('AuthenticationService', () => {
     }));
 
     it('should authenticate user', fakeAsync(() => {
-      expect(authenticationService.isAuthenticated()).toBe(false);
+      expect(mockAuthenticationService.isAuthenticated()).toBe(false);
 
       // Act
       const request = authenticationService.login({
@@ -51,7 +53,7 @@ describe('AuthenticationService', () => {
 
       // Assert
       request.subscribe(() => {
-        expect(authenticationService.isAuthenticated()).toBe(true);
+        expect(mockAuthenticationService.isAuthenticated()).toBe(true);
         expect(authenticationService.credentials).toBeDefined();
         expect(authenticationService.credentials).not.toBeNull();
         expect((<Credentials>authenticationService.credentials).token).toBeDefined();
@@ -100,13 +102,13 @@ describe('AuthenticationService', () => {
 
       // Assert
       loginRequest.subscribe(() => {
-        expect(authenticationService.isAuthenticated()).toBe(true);
+        expect(mockAuthenticationService.isAuthenticated()).toBe(true);
 
         const request = authenticationService.logout();
         tick();
 
         request.subscribe(() => {
-          expect(authenticationService.isAuthenticated()).toBe(false);
+          expect(mockAuthenticationService.isAuthenticated()).toBe(false);
           expect(authenticationService.credentials).toBeNull();
           expect(sessionStorage.getItem(credentialsKey)).toBeNull();
           expect(localStorage.getItem(credentialsKey)).toBeNull();
@@ -125,13 +127,13 @@ describe('AuthenticationService', () => {
 
       // Assert
       loginRequest.subscribe(() => {
-        expect(authenticationService.isAuthenticated()).toBe(true);
+        expect(mockAuthenticationService.isAuthenticated()).toBe(true);
 
         const request = authenticationService.logout();
         tick();
 
         request.subscribe(() => {
-          expect(authenticationService.isAuthenticated()).toBe(false);
+          expect(mockAuthenticationService.isAuthenticated()).toBe(false);
           expect(authenticationService.credentials).toBeNull();
           expect(sessionStorage.getItem(credentialsKey)).toBeNull();
           expect(localStorage.getItem(credentialsKey)).toBeNull();

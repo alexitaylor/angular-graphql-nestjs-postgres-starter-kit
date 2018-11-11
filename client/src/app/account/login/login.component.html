@@ -53,11 +53,15 @@
               <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
               <span translate>Login</span>
             </button>
-            <p class="d-flex flex-row justify-content-center">
+            <p class="d-flex flex-row justify-content-center mt-3">
               <span style="padding: 0.5rem 0;">Don't have an account?</span>
               <a class="nav-link" routerLink="/register">Sign up</a>
             </p>
           </form>
+          <div class="alert alert-info">
+            <span>If you want to </span>
+            <a class="alert-link">sign in</a><span>, you can try the default accounts:<br/>- Administrator (username="admin" and password="12345678") <br/>- User (username="user" and password="12345678").</span>
+          </div>
         </div>
       </div>
     </div>

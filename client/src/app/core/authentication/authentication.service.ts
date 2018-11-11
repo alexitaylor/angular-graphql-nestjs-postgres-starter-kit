@@ -3,6 +3,8 @@ import { Observable, of, throwError } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
+import { IUser } from '@app/shared/model/user.model';
+import { concatMap } from 'rxjs/internal/operators';
 
 export interface Credentials {
   // Customize received credentials here
@@ -43,6 +45,10 @@ const signUp = gql`
   }
 `;
 
+declare interface Me {
+  me: IUser;
+}
+
 /**
  * Provides a base for authentication workflow.
  * The Credentials interface as well as login/logout methods should be replaced with proper implementation.
@@ -50,12 +56,34 @@ const signUp = gql`
 @Injectable()
 export class AuthenticationService {
   private _credentials: Credentials | null;
+  private _userIdentity: IUser;
 
   constructor(private apollo: Apollo) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
     }
+  }
+
+  /**
+   * Get current logged in user
+   * @return The the logged in user's data.
+   */
+  identity(): Observable<IUser> {
+    return this.apollo
+      .watchQuery<Me>({
+        query: gql`
+          query me {
+            me {
+              role
+              firstName
+              lastName
+              username
+            }
+          }
+        `
+      })
+      .valueChanges.pipe(map(res => res.data.me));
   }
 
   /**
@@ -169,11 +197,35 @@ export class AuthenticationService {
   }
 
   /**
-   * Checks is the user is authenticated.
+   * Checks if user is authenticated.
    * @return True if the user is authenticated.
    */
   isAuthenticated(): boolean {
     return !!this.credentials;
+  }
+
+  /**
+   * Checks if user has authority
+   * @return True if the user is authorized.
+   */
+  hasAnyAuthority(authorities: string[]): boolean {
+    return this.hasAnyAuthorityDirect(authorities);
+  }
+
+  /**
+   * Checks if user has authority and is authenticated.
+   * @return True if the user is authenticated and authorized.
+   */
+  hasAnyAuthorityDirect(authorities: string[]): boolean {
+    if (!this.isAuthenticated() || !this._userIdentity) {
+      return false;
+    }
+
+    if (authorities.includes(this._userIdentity.role)) {
+      return true;
+    }
+
+    return false;
   }
 
   /**
@@ -193,6 +245,12 @@ export class AuthenticationService {
    */
   private setCredentials(credentials?: Credentials, remember?: boolean) {
     this._credentials = credentials || null;
+
+    this.identity().pipe(
+      map(res => {
+        this._userIdentity = res;
+      })
+    );
 
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
