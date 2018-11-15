@@ -1,10 +1,12 @@
-# fullstack-apollo-react-express-boilerplate-project
+# fullstack-apollo-angular-express-boilerplate-project
 
 A full-stack starter kit with Apollo and Express server, Postgres database and Angualr front-end
 
 ## Features
 
 * Angular (ngx-rocket)
+* GraphQL
+* Bootstrap 4, ng-bootstrap and Font Awesome
 * Node, Express and Apollo server
 * Postgres database with Sequelize
 * Authentication w/ JWT and local storage

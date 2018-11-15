@@ -114,7 +114,9 @@ export class MessengerComponent implements OnInit {
   private scrollToBottom() {
     setTimeout(() => {
       let $messages = document.getElementById("messages");
-      $messages.scrollTop = $messages.scrollHeight;
+      if ($messages) {
+        $messages.scrollTop = $messages.scrollHeight;
+      }
     }, 150);
   }
 

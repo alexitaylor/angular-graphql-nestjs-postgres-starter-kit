@@ -116,6 +116,7 @@ export class AuthenticationService {
         map(({ data }) => {
           user.token = data.signIn.token;
           this.setCredentials(user, context.remember);
+          this.apollo.getClient().resetStore();
           return user;
         }),
         catchError(err => {

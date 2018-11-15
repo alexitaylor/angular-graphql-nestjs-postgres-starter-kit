@@ -1,10 +1,91 @@
 <div class="container-fluid">
-  <div class="jumbotron text-center">
-    <h1>
-      <span translate>APP_NAME</span>
-    </h1>
-    <p>
-      <i class="far fa-bookmark"></i> <span translate>Version</span> {{version}}
-    </p>
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="text-center">
+        <span translate>APP_NAME</span>
+      </h1>
+      <p class="text-center">
+        <i class="far fa-bookmark"></i> <span translate>Version</span> {{version}}
+      </p>
+      <h5 class="text-center mt-3">
+        A full-stack starter kit with Apollo and Express server, Postgres database and Angualr front-end
+      </h5>
+      <hr>
+
+      <h3 class="mt-4">Features</h3>
+      <hr>
+      <ul>
+        <li><a href="https://angular.io/" target="_blank">Angular (ngx-rocket)</a></li>
+        <li><a href="https://graphql.org/" target="_blank">GraphQL</a></li>
+        <li><a href="https://getbootstrap.com/" target="_blank">Bootstrap 4</a>, <a href="https://ng-bootstrap.github.io/#/home" target="_blank">ng-bootstrap</a> and <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></li>
+        <li><a href="https://nodejs.org/en/" target="_blank">Node</a>, <a href="https://expressjs.com/" target="_blank">Express</a> and <a href="https://www.apollographql.com/" target="_blank">Apollo</a> server</li>
+        <li><a href="https://www.postgresql.org/" target="_blank">Postgres</a> database with <a href="http://docs.sequelizejs.com/" target="_blank">Sequelize</a></li>
+        <li>Authentication w/ <a href="https://jwt.io/" target="_blank">JWT</a> and local storage</li>
+        <li>Authorization</li>
+        <li>E2E testing</li>
+      </ul>
+
+      <h3 class="mt-5">Installation</h3>
+      <hr>
+      <ul>
+        <li>
+          <code>git clone git@https://github.com/alexitaylor/fullstack-apollo-angular-express-starter-kit.git</code>
+        </li>
+        <li>
+          <code>cd fullstack-apollo-angular-express-starter-kit</code>
+        </li>
+      </ul>
+
+      <h2 class="mt-4">Client</h2>
+      <hr>
+
+      <h3 class="mt-4">Get started with these tasks:</h3>
+      <hr>
+      <ul>
+        <li>
+          <code>$ npm start</code>: start dev server with live reload on <a href="http://localhost:4200" target="_blank">http://localhost:4200</a>
+        </li>
+        <li>
+          <code>$ npm run build</code>: build web app for production
+        </li>
+        <li>
+          <code>$ npm test</code>: run unit tests in watch mode for TDD
+        </li>
+        <li>
+          <code>$ npm run test:ci</code>: lint code and run units tests with coverage
+        </li>
+        <li>
+          <code>$ npm run e2e</code>: launch e2e tests
+        </li>
+        <li>
+          <code>$ npm run docs</code>: show docs and coding guides
+        </li>
+        <li>
+          <code>$ npm run prettier</code>: format your code automatically
+        </li>
+      </ul>
+
+      <h2 class="mt-5">Server</h2>
+      <hr>
+
+      <h3 class="mt-4">Get started with these tasks:</h3>
+      <hr>
+      <ul>
+        <li>
+          <code>cd server</code>
+        </li>
+        <li>
+          <code>npm install</code>
+        </li>
+        <li>
+          <code>touch .env</code>
+        </li>
+        <li>fill out .env file with postgres env variables</li>
+        <li>
+          <code>npm start</code>
+        </li>
+        <li>optional visit <a href="http://localhost:8000" target="_blank">http://localhost:8000</a> for GraphQL playground</li>
+      </ul>
+    </div>
   </div>
 </div>

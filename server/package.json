@@ -9,7 +9,7 @@
     "test": "mocha --require babel-core/register 'src/**/*.spec.js'"
   },
   "keywords": [
-    "alphaC",
+    "fullstack-apollo-angular-express-boilerplate-project",
     "server",
     "node",
     "express",
