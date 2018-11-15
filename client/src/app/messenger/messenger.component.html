@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Messenger</h1>
+  <div class="message-container">
+    <div id="messages" class="messages" *ngIf="messages.length !== 0">
+      <div class="message" *ngFor="let message of messages | reverse">
+        <span>{{message.user.username}}:</span> <span>{{message.text}}</span>
+      </div>
+    </div>
+    <div class="input">
+      <input type="text" [(ngModel)]="message" placeholder="Enter message here..."/>
+      <button type="button" class="btn btn-dark" (click)="sendMessage()" [disabled]="!message">Send Message</button>
+    </div>
+  </div>
+</div>
