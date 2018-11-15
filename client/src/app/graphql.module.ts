@@ -9,6 +9,7 @@ import { split, ApolloLink } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import { onError } from 'apollo-link-error';
 import { Credentials } from '@app/core/authentication/authentication.service';
+import {AuthenticationService} from '@app/core';
 
 const uri = 'http://localhost:8000/graphql';
 const credentialsKey = 'credentials';
@@ -17,18 +18,8 @@ const credentialsKey = 'credentials';
   exports: [HttpClientModule, ApolloModule, HttpLinkModule]
 })
 export class GraphQLModule {
-  constructor(private apollo: Apollo, private httpLink: HttpLink) {
+  constructor(private apollo: Apollo, private httpLink: HttpLink, private auth$: AuthenticationService) {
     const http = httpLink.create({ uri });
-    // get the authentication token from local storage if it exists
-    const lsCredentials: Credentials | null = JSON.parse(localStorage.getItem(credentialsKey));
-    const ssCredentials: Credentials | null = JSON.parse(sessionStorage.getItem(credentialsKey));
-    let token: string;
-
-    if (!!lsCredentials) {
-      token = lsCredentials.token;
-    } else if (!!ssCredentials) {
-      token = ssCredentials.token;
-    }
 
     // Create a WebSocket link:
     const wsLink = new WebSocketLink({
@@ -48,10 +39,13 @@ export class GraphQLModule {
     );
 
     const authLink = new ApolloLink((operation, forward) => {
+      const token = this.auth$.getToken();
+
       operation.setContext(({ headers = {} }) => {
         if (token) {
           headers['x-token'] = token;
         }
+
         return {
           headers
         };

@@ -4,7 +4,6 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
 import { IUser } from '@app/shared/model/user.model';
-import { concatMap } from 'rxjs/internal/operators';
 
 export interface Credentials {
   // Customize received credentials here
@@ -81,6 +80,7 @@ export class AuthenticationService {
         query: gql`
           query me {
             me {
+              id
               role
               firstName
               lastName
@@ -198,9 +198,29 @@ export class AuthenticationService {
   logout(): Observable<boolean> {
     // Customize credentials invalidation here
     this.setCredentials();
-    this.apollo.getClient().resetStore();
     this.authenticate(null);
+    // reset the store: This will cause the store to be cleared and all active queries to be refetched.
+    this.apollo.getClient().resetStore();
     return of(true);
+  }
+
+  /**
+   * Retrieves token from local storage or session storage
+   * @return Token
+   */
+  getToken(): string {
+    // get the authentication token from local storage if it exists
+    const lsCredentials: Credentials | null = JSON.parse(localStorage.getItem(credentialsKey));
+    const ssCredentials: Credentials | null = JSON.parse(sessionStorage.getItem(credentialsKey));
+    let token: string;
+
+    if (!!lsCredentials) {
+      token = lsCredentials.token;
+    } else if (!!ssCredentials) {
+      token = ssCredentials.token;
+    }
+
+    return token;
   }
 
   /**
@@ -254,12 +274,6 @@ export class AuthenticationService {
   private setCredentials(credentials?: Credentials, remember?: boolean) {
     this._credentials = credentials || null;
 
-    this.identity().pipe(
-      map(res => {
-        this._userIdentity = res;
-      })
-    );
-
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
@@ -267,5 +281,11 @@ export class AuthenticationService {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
     }
+
+    this.identity().pipe(
+      map(res => {
+        this._userIdentity = res;
+      })
+    );
   }
 }
