@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 import { environment } from '@env/environment';
 import { CoreModule } from '@app/core';
@@ -35,7 +36,13 @@ import { GraphQLModule } from '@app/graphql.module';
     RegisterModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
-    GraphQLModule
+    GraphQLModule,
+    SweetAlert2Module.forRoot({
+      buttonsStyling: false,
+      customClass: 'modal-content',
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn'
+    }),
   ],
   declarations: [AppComponent],
   providers: [],

@@ -34,6 +34,7 @@
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "@ng-bootstrap/ng-bootstrap": "^3.3.0",
     "@ngx-translate/core": "^10.0.1",
+    "@toverux/ngx-sweetalert2": "^4.0.0",
     "@types/google-libphonenumber": "^7.4.17",
     "@types/graphql": "^14.0.3",
     "@types/ws": "^6.0.1",
@@ -53,6 +54,7 @@
     "lodash": "^4.17.10",
     "rxjs": "^6.3.1",
     "subscriptions-transport-ws": "^0.9.15",
+    "sweetalert2": "^7.29.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

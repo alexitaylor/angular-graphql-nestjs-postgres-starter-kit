@@ -47,7 +47,8 @@ export default {
         password
       });
 
-      return { token: createToken(user, secret, "30min") };
+      // Expires in 30 min
+      return { token: createToken(user, secret, "1800000") };
     },
 
     signIn: async (parent, { login, password }, { models, secret }) => {
@@ -63,7 +64,8 @@ export default {
         throw new AuthenticationError("Invalid password.");
       }
 
-      return { token: createToken(user, secret, "30m") };
+      // Expires in 30 min
+      return { token: createToken(user, secret, "1800000") };
     },
 
     deleteUser: combineResolvers(

@@ -4,6 +4,8 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
 import { IUser } from '@app/shared/model/user.model';
+import swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 export interface Credentials {
   // Customize received credentials here
@@ -58,7 +60,7 @@ export class AuthenticationService {
   private _userIdentity: IUser;
   private authenticated = false;
 
-  constructor(private apollo: Apollo) {
+  constructor(private apollo: Apollo, private router: Router) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -222,6 +224,21 @@ export class AuthenticationService {
     }
 
     return token;
+  }
+
+  redirectLogoutOnSessionExpired() {
+    this.router.navigate(['/access-denied']);
+    swal({
+      title: 'Your session has expired. You will be automatically signed out.',
+      timer: 3500,
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      onOpen: () => {
+        swal.showLoading();
+      }
+    }).then(() => {
+      this.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+    });
   }
 
   /**

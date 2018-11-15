@@ -8,17 +8,19 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { split, ApolloLink } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import { onError } from 'apollo-link-error';
-import { Credentials } from '@app/core/authentication/authentication.service';
 import {AuthenticationService} from '@app/core';
 
 const uri = 'http://localhost:8000/graphql';
-const credentialsKey = 'credentials';
 
 @NgModule({
   exports: [HttpClientModule, ApolloModule, HttpLinkModule]
 })
 export class GraphQLModule {
-  constructor(private apollo: Apollo, private httpLink: HttpLink, private auth$: AuthenticationService) {
+  constructor(
+    private apollo: Apollo,
+    private httpLink: HttpLink,
+    private auth$: AuthenticationService,
+    ) {
     const http = httpLink.create({ uri });
 
     // Create a WebSocket link:
@@ -53,15 +55,26 @@ export class GraphQLModule {
       return forward(operation);
     });
 
-    const errorLink = onError(res => {
-      if (res.graphQLErrors) {
-        res.graphQLErrors.map(({ message, locations, path }) => {
-          console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
+    const errorLink = onError(({ graphQLErrors, networkError }) => {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message, locations, path }) => {
+          if (message === 'NOT_AUTHENTICATED') {
+            this.auth$.redirectLogoutOnSessionExpired();
+          }
         });
       }
 
-      if (res.networkError) {
-        console.log(`[Network error]: ${res.networkError.message}`);
+      if (networkError) {
+
+        if (networkError['statusCode'] === 401) {
+          this.auth$.redirectLogoutOnSessionExpired();
+        }
+
+        networkError['error'].errors.forEach((err: any) => {
+          if (err.message === 'Context creation failed: Your session expired. Sign in again.') {
+            this.auth$.redirectLogoutOnSessionExpired();
+          }
+        });
       }
     });
 
