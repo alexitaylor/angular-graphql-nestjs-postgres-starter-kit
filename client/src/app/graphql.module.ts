@@ -60,6 +60,7 @@ export class GraphQLModule {
         graphQLErrors.forEach(({ message, locations, path }) => {
           console.log(`GRAPHQL ERROR: ${message}`);
           if (message === 'NOT_AUTHENTICATED') {
+            this.auth$.logout();
             this.auth$.redirectLogoutOnSessionExpired();
           }
         });
@@ -68,11 +69,13 @@ export class GraphQLModule {
       if (networkError) {
 
         if (networkError['statusCode'] === 401) {
+          this.auth$.logout();
           this.auth$.redirectLogoutOnSessionExpired();
         }
 
         networkError['error'].errors.forEach((err: any) => {
           if (err.message === 'Context creation failed: Your session expired. Sign in again.') {
+            this.auth$.logout();
             this.auth$.redirectLogoutOnSessionExpired();
           }
         });
