@@ -5,6 +5,10 @@ import {
   UserManagementDeleteDialogComponent,
   UserManagementDeletePopupComponent
 } from '@app/admin/user-management/user-management-delete-dialog/user-management-delete-dialog.component';
+import {
+  UserManagementCreateDialogComponent,
+  UserManagementCreatePopupComponent
+} from '@app/admin/user-management/user-management-create-dialog/user-management-create-dialog.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -21,7 +25,12 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
-  entryComponents: [UserManagementDeleteDialogComponent, UserManagementDeletePopupComponent],
+  entryComponents: [
+    UserManagementDeleteDialogComponent,
+    UserManagementDeletePopupComponent,
+    UserManagementCreateDialogComponent,
+    UserManagementCreatePopupComponent,
+  ],
   providers: []
 })
 export class AppRoutingModule {}

@@ -45,7 +45,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   }
 
   listenToUserManagementChange() {
-    this.eventSub = this.eventManager.subscribe('userManagementDeleteUser', () => {
+    this.eventSub = this.eventManager.subscribe('userManagementChange', () => {
       setTimeout(() => {
         this.reset();
       }, 300);

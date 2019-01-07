@@ -11,10 +11,26 @@ import {
   UserManagementDeleteDialogComponent,
   UserManagementDeletePopupComponent
 } from '@app/admin/user-management/user-management-delete-dialog/user-management-delete-dialog.component';
+import {
+  UserManagementCreateDialogComponent,
+  UserManagementCreatePopupComponent
+} from '@app/admin/user-management/user-management-create-dialog/user-management-create-dialog.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, TranslateModule, SharedModule, UserManagementRoutingModule, FormsModule],
-  declarations: [UserManagementComponent, UserManagementUpdateComponent, UserManagementDeleteDialogComponent, UserManagementDeletePopupComponent],
-  entryComponents: [UserManagementDeleteDialogComponent, UserManagementDeletePopupComponent]
+  declarations: [
+    UserManagementComponent,
+    UserManagementUpdateComponent,
+    UserManagementDeleteDialogComponent,
+    UserManagementDeletePopupComponent,
+    UserManagementCreateDialogComponent,
+    UserManagementCreatePopupComponent,
+  ],
+  entryComponents: [
+    UserManagementDeleteDialogComponent,
+    UserManagementDeletePopupComponent,
+    UserManagementCreateDialogComponent,
+    UserManagementCreatePopupComponent,
+  ]
 })
 export class UserManagementModule {}

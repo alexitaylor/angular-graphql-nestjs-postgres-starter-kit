@@ -13,6 +13,7 @@ import {first} from 'rxjs/internal/operators';
 import {
   UserManagementDeletePopupComponent
 } from '@app/admin/user-management/user-management-delete-dialog/user-management-delete-dialog.component';
+import {UserManagementCreatePopupComponent} from '@app/admin/user-management/user-management-create-dialog/user-management-create-dialog.component';
 
 @Injectable({ providedIn: 'root' })
 export class UserMgmtResolve implements Resolve<any> {
@@ -67,6 +68,15 @@ const routes: Routes = [
     resolve: {
       user: UserMgmtResolve
     },
+    data: {
+      title: extract('User Management Delete'),
+      authorities: ['ADMIN']
+    },
+    outlet: 'popup'
+  },
+  {
+    path: 'create',
+    component: UserManagementCreatePopupComponent,
     data: {
       title: extract('User Management Delete'),
       authorities: ['ADMIN']

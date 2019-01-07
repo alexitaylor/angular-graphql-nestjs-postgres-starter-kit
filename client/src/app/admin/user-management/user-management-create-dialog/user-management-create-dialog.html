@@ -1,0 +1,67 @@
+<form name="deleteForm" (ngSubmit)="submit()">
+  <div class="modal-header">
+    <h4 class="modal-title">Create a New User</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;</button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="submit()" [formGroup]="createUserForm" novalidate>
+      <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
+        {{errorMessage | titlecase}}
+      </div>
+      <div class="form-group">
+
+        <label class="d-block">
+          <label class="text-black-50">First Name</label>
+          <input type="text" class="form-control" formControlName="firstName" autocomplete="firstName"
+                 [placeholder]="'First Name' | translate"/>
+          <span hidden translate>First Name</span>
+          <app-control-messages [control]="createUserForm.controls.firstName"></app-control-messages>
+        </label>
+
+        <label class="d-block">
+          <label class="text-black-50">Last Name</label>
+          <input type="text" class="form-control" formControlName="lastName" autocomplete="lastName"
+                 [placeholder]="'Last Name' | translate"/>
+          <span hidden translate>Last Name</span>
+          <app-control-messages [control]="createUserForm.controls.lastName"></app-control-messages>
+        </label>
+
+        <label class="d-block">
+          <label class="text-black-50">Email</label>
+          <input type="email" class="form-control" formControlName="email" autocomplete="email"
+                 [placeholder]="'Email' | translate"/>
+          <span hidden translate>Username</span>
+          <app-control-messages [control]="createUserForm.controls.email"></app-control-messages>
+        </label>
+
+        <label class="d-block">
+          <label class="text-black-50">Username</label>
+          <input type="text" class="form-control" formControlName="username" autocomplete="username"
+                 [placeholder]="'Username' | translate"/>
+          <span hidden translate>Username</span>
+          <app-control-messages [control]="createUserForm.controls.username"></app-control-messages>
+        </label>
+
+        <label class="d-block">
+          <label class="text-black-50">Role</label>
+          <select id="roleId" formControlName="roleId" class="custom-select">
+            <option disabled selected [value]="''">Select Role</option>
+            <option *ngFor="let item of roles" [value]="item.id">{{item.name}}</option>
+          </select>
+          <span hidden translate>Role</span>
+          <app-control-messages [control]="createUserForm.controls.roleId"></app-control-messages>
+        </label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+      <i class="fas fa-ban"></i>&nbsp;<span>Cancel</span>
+    </button>
+    <button class="btn btn-primary" type="submit" [disabled]="createUserForm.invalid || isLoading">
+      <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+      <i class="fas fa-user-plus"></i>&nbsp;<span translate>Create User</span>
+    </button>
+  </div>
+</form>

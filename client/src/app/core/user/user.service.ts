@@ -13,6 +13,14 @@ declare interface QueryUser {
   user: IUser;
 }
 
+export interface ICreateUserContext {
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  role: string;
+}
+
 const deleteUser = gql`
   mutation deleteUser($id: ID!) {
     deleteUser(id: $id)
@@ -32,6 +40,17 @@ const queryUsers = gql`
       }
     }
   }
+`;
+
+const createUser = gql`
+  mutation createUser($firstName: String!, $lastName: String!, $email: String!, $username: String!, $roleId: ID!) {
+    createUser(firstName: $firstName, lastName: $lastName, email: $email, username: $username, roleId: $roleId) {
+      firstName
+      lastName
+      username
+      email
+    }
+  } 
 `;
 
 @Injectable({ providedIn: 'root'})
@@ -67,8 +86,40 @@ export class UserService {
     }).valueChanges.pipe(map(res => res.data.user));
   }
 
+  createUser(user: ICreateUserContext): Observable<IUser> {
+    return this.apollo.mutate({
+      mutation: createUser,
+      variables: {
+        ...user
+      },
+      refetchQueries: [{
+        query: queryUsers
+      }]
+    }).pipe(
+      map(({ data }) => data.createUser),
+      catchError(err => {
+        if (err.graphQLErrors) {
+          let error = null;
+
+          err.graphQLErrors.forEach((e: any) => {
+            error = {
+              message: e.extensions.exception.errors[0].message,
+              path: e.extensions.exception.errors[0].path,
+              type: e.extensions.exception.errors[0].type,
+              value: e.extensions.exception.errors[0].value
+            };
+          });
+
+          return throwError(error);
+        }
+        if (err.networkError) {
+          return throwError(err);
+        }
+      })
+    )
+  }
+
   deleteUser(id: number): Observable<boolean> {
-    console.log(': ', );
     return this.apollo.mutate({
       mutation: deleteUser,
       variables: {
@@ -80,9 +131,7 @@ export class UserService {
         query: queryUsers
       }]
     }).pipe(
-      map(({ data }) => {
-        return data.deleteUser;
-      }),
+      map(({ data }) => data.deleteUser),
       catchError(err => {
         if (err.graphQLErrors) {
           let error = null;

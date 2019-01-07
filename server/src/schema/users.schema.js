@@ -17,6 +17,14 @@ export default gql`
     ): Token!
 
     signIn(login: String!, password: String!): Token!
+    
+    createUser(
+      firstName: String!
+      lastName: String!
+      email: String!
+      username: String!
+      roleId: ID!
+    ): User!
 
     deleteUser(id: ID!): Boolean!
   }

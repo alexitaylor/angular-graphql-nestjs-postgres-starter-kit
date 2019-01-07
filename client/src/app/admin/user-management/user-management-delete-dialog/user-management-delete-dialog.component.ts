@@ -26,9 +26,8 @@ export class UserManagementDeleteDialogComponent {
 
   confirmDelete(id: number) {
     this.user$.deleteUser(id).subscribe(res => {
-      console.log('res: ', res);
       this.eventManager.broadcast({
-        name: 'userManagementDeleteUser',
+        name: 'userManagementChange',
         content: 'Deleted user'
       });
       this.route.navigate(['/user-management'], {replaceUrl: true});
