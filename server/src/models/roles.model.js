@@ -10,6 +10,10 @@ const role = (sequelize, Datatypes) => {
     },
   });
 
+  Role.associate = models => {
+    Role.hasMany(models.User);
+  };
+
   return Role;
 };
 

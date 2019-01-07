@@ -31,7 +31,7 @@ export default gql`
     lastName: String!
     username: String
     email: String!
-    role: String
+    role: Role!
     messages: [Message!]
   }
 `;

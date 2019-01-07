@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import {AuthenticationGuard, extract} from 'app/core/index';
-import {MessengerComponent} from 'app/messenger/messenger.component';
+import {MessagesComponent} from '@app/entities/messages/messages.component';
 
 const routes: Routes = [
   // Module is lazy loaded, see app-routing.module.ts
   { path: '',
-    component: MessengerComponent,
+    component: MessagesComponent,
     data: {
-    title: extract('Messenger'),
-    authorities: ['ADMIN', 'USER']
+      title: extract('Messenger'),
+      authorities: ['ADMIN', 'USER']
     } ,
     canActivate: [AuthenticationGuard]
   }
@@ -21,4 +21,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class MessengerRoutingModule {}
+export class MessagesRoutingModule {}

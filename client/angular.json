@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "alpha-c": {
+    "fullstack-apollo-angular-express-boilerplate-project": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -58,18 +58,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "alpha-c:build"
+            "browserTarget": "fullstack-apollo-angular-express-boilerplate-project:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "alpha-c:build:production"
+              "browserTarget": "fullstack-apollo-angular-express-boilerplate-project:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "alpha-c:build"
+            "browserTarget": "fullstack-apollo-angular-express-boilerplate-project:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "alpha-c-e2e": {
+    "fullstack-apollo-angular-express-boilerplate-project-e2e": {
       "root": "e2e",
       "projectType": "application",
       "architect": {
@@ -114,7 +114,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "alpha-c:serve"
+            "devServerTarget": "fullstack-apollo-angular-express-boilerplate-project:serve"
           }
         },
         "lint": {
@@ -131,5 +131,5 @@
       }
     }
   },
-  "defaultProject": "alpha-c"
+  "defaultProject": "fullstack-apollo-angular-express-boilerplate-project"
 }

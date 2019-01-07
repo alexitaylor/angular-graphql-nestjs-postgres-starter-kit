@@ -64,7 +64,6 @@ const server = new ApolloServer({
       // with every request to your Apollo Server’s context.
       // The me user is the user which you encode in the token in your createToken() fn.
       const me = await getMe(req);
-
       return {
         models,
         me,
@@ -85,8 +84,8 @@ const isTest = !!process.env.TEST_DATABASE;
 const isProduction = !!process.env.DATABASE_URL;
 const port = process.env.PORT || 8000;
 
-sequelize.sync({ force: false }).then(async () => {
-  if (false) {
+sequelize.sync({ force: true }).then(async () => {
+  if (true) {
     createUsersWithMessages(new Date());
   }
 
@@ -96,14 +95,27 @@ sequelize.sync({ force: false }).then(async () => {
 });
 
 const createUsersWithMessages = async date => {
+
+  await models.Role.create(
+    {
+      name: 'ADMIN'
+    },
+  );
+
+  await models.Role.create(
+    {
+      name: 'USER'
+    },
+  );
+
   await models.User.create(
     {
       firstName: 'Admin',
       lastName: 'Admin',
       username: 'admin',
       email: 'admin@localhost.com',
-      role: 'ADMIN',
       password: '12345678',
+      roleId: 1,
       messages: [
         {
           text: 'Hello World',
@@ -122,8 +134,8 @@ const createUsersWithMessages = async date => {
       lastName: 'User',
       username: 'user',
       email: 'ccollins@localhost.com',
-      role: 'USER',
       password: '12345678',
+      roleId: 2,
       messages: [
         {
           text: 'Hello World!',
@@ -137,18 +149,6 @@ const createUsersWithMessages = async date => {
     },
     {
       include: [models.Message],
-    },
-  );
-
-  await models.Role.create(
-    {
-      name: 'ADMIN'
-    },
-  );
-
-  await models.Role.create(
-    {
-      name: 'USER'
     },
   );
 };

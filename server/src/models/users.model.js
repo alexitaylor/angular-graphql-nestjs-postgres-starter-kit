@@ -33,9 +33,6 @@ const user = (sequelize, DataTypes) => {
         len: [7, 100]
       }
     },
-    role: {
-      type: DataTypes.STRING
-    }
   });
 
   User.beforeCreate(async user => {
@@ -51,6 +48,10 @@ const user = (sequelize, DataTypes) => {
 
   User.prototype.validatePassword = async function(password) {
     return await bcrypt.compareSync(password, this.password);
+  };
+
+  User.associate = models => {
+    User.belongsTo(models.Role);
   };
 
   User.associate = models => {

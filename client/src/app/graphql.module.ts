@@ -58,6 +58,7 @@ export class GraphQLModule {
     const errorLink = onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
         graphQLErrors.forEach(({ message, locations, path }) => {
+          console.log(`GRAPHQL ERROR: ${message}`);
           if (message === 'NOT_AUTHENTICATED') {
             this.auth$.redirectLogoutOnSessionExpired();
           }

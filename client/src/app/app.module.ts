@@ -19,6 +19,7 @@ import { RegisterModule } from './account/register/register.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GraphQLModule } from '@app/graphql.module';
+import { EntityModule } from './entities/entity.module';
 
 @NgModule({
   imports: [
@@ -35,7 +36,7 @@ import { GraphQLModule } from '@app/graphql.module';
     LoginModule,
     RegisterModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
-    AppRoutingModule, // must be imported as the last module as it contains the fallback route
+    EntityModule,
     GraphQLModule,
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
@@ -43,6 +44,7 @@ import { GraphQLModule } from '@app/graphql.module';
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn'
     }),
+    AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],
   providers: [],

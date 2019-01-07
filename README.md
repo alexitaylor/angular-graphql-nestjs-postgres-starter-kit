@@ -41,4 +41,4 @@ A full-stack starter kit with Apollo and Express server, Postgres database and A
 * `touch .env`
 * fill out *.env file* with postgres env variables
 * `npm start`
-* optional visit `http://localhost:8000` for GraphQL playground
+* optional visit `http://localhost:8000/graphql` for GraphQL playground

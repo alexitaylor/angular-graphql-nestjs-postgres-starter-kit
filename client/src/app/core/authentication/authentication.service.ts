@@ -83,7 +83,9 @@ export class AuthenticationService {
           query me {
             me {
               id
-              role
+              role {
+                name
+              }
               firstName
               lastName
               username

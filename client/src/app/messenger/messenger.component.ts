@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {IMessages} from '@app/shared/model/messages.model';
+import {IMessages} from 'app/shared/model/messages.model';
 import {Apollo} from 'apollo-angular';
-import {IUser} from '@app/shared/model/user.model';
+import {IUser} from 'app/shared/model/user.model';
 import {Observable, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import gql from 'graphql-tag';
-import {AuthenticationService} from '@app/core';
+import {AuthenticationService} from 'app/core/index';
 
 declare interface Query {
   messages: IMessages[];

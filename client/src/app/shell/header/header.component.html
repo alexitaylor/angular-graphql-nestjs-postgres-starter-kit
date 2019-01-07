@@ -20,9 +20,21 @@
           <span translate>User Management</span>
         </a>
         <a class="nav-item nav-link text-uppercase" routerLink="/messenger" routerLinkActive="active">
-          <i class="fas fa-comment-alt"></i>
+          <i class="fas fa-comments"></i>
           <span translate>Messenger</span>
         </a>
+        <div class="nav-item" ngbDropdown placement="bottom-right">
+          <a id="entities-dropdown" class="nav-link" ngbDropdownToggle>
+            <i class="fas fa-th-list"></i>
+            <span translate>Entities</span>
+          </a>
+          <div ngbDropdownMenu aria-labelledby="entities-dropdown">
+            <button class="dropdown-item" routerLink="/entities/messages">
+              <i class="fas fa-comment-alt"></i>
+              <span translate>Messages</span>
+            </button>
+          </div>
+        </div>
       </div>
       <div class="navbar-nav ml-auto">
         <div class="nav-item" ngbDropdown placement="bottom-right">

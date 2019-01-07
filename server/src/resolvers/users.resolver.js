@@ -8,8 +8,9 @@ import { isAdmin } from "./authorization";
 // In order to secure toke, pass in secret which is only available
 // between you and your server.
 // Token only valid for 30min
-const createToken = async (user, secret, expiresIn) => {
-  const { id, email, username, role } = user;
+const createToken = async (user, secret, expiresIn, models) => {
+  const { id, email, username, roleId } = user;
+  const role = await models.Role.findById(roleId);
   return await jwt.sign({ id, email, username, role }, secret, {
     expiresIn
   });
@@ -27,7 +28,6 @@ export default {
       if (!me) {
         return null;
       }
-
       return await models.User.findById(me.id);
     }
   },
@@ -43,12 +43,12 @@ export default {
         lastName,
         username,
         email,
-        role: 'USER',
+        roleId: 2,
         password
       });
 
       // Expires in 30 min
-      return { token: createToken(user, secret, "1800000") };
+      return { token: createToken(user, secret, "1800000", models) };
     },
 
     signIn: async (parent, { login, password }, { models, secret }) => {
@@ -65,7 +65,7 @@ export default {
       }
 
       // Expires in 30 min
-      return { token: createToken(user, secret, "1800000") };
+      return { token: createToken(user, secret, "1800000", models) };
     },
 
     deleteUser: combineResolvers(
@@ -88,6 +88,7 @@ export default {
           userId: user.id
         }
       });
-    }
+    },
+    role: async (user, args, { models }) => await models.Role.findById(user.roleId),
   }
 };

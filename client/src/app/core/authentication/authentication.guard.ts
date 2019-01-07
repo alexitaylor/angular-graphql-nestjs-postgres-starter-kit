@@ -28,7 +28,7 @@ export class AuthenticationGuard implements CanActivate {
         }
 
         if (account) {
-          if (this.authenticationService.hasAnyAuthority(authorities, account.role)) {
+          if (this.authenticationService.hasAnyAuthority(authorities, account.role.name)) {
             return true;
           }
         }

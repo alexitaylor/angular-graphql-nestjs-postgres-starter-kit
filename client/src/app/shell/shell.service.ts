@@ -22,4 +22,14 @@ export class Shell {
       data: { reuse: true }
     };
   }
+
+  static childChildRoutes(routes: Routes): Route {
+    return {
+      path: '',
+      children: routes,
+      canActivate: [AuthenticationGuard],
+      // Reuse ShellComponent instance when navigating between child views
+      data: { reuse: true }
+    };
+  }
 }

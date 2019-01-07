@@ -1,10 +1,12 @@
+import {IRole} from '@app/shared/model/role.model';
+
 export interface IUser {
   id?: any;
   firstName?: string;
   lastName?: string;
   login?: string;
   email?: string;
-  role?: string;
+  role?: IRole;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -16,7 +18,7 @@ export class User implements IUser {
     public lastName?: string,
     public login?: string,
     public email?: string,
-    public role?: string,
+    public role?: IRole,
     public createdAt?: Date,
     public updateAt?: Date
   ) {

@@ -6,6 +6,9 @@
   </div>
 
   <div class="card">
+    <div class="card-header">
+      <button class="btn btn-primary"><i class="fas fa-user-plus"></i> Create User</button>
+    </div>
     <div class="card-body">
       <table *ngIf="users" id="user-management" class="table table-striped table-dark">
         <thead>
@@ -16,6 +19,7 @@
           <th scope="col">Username</th>
           <th scope="col">Email</th>
           <th scope="col">Role</th>
+          <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -25,7 +29,25 @@
           <td>{{user.lastName}}</td>
           <td>{{user.username}}</td>
           <td>{{user.email}}</td>
-          <td>{{user.role}}</td>
+          <td>
+            <span class="badge badge-info p-2">{{user.role.name}}</span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group flex-btn-group-container">
+              <button type="submit"
+                      [routerLink]="['./', user.id, 'edit']"
+                      class="btn btn-primary btn-sm">
+                <i class="fas fa-pencil-alt"></i>
+                <span class="d-none d-md-inline" translate>Edit</span>
+              </button>
+              <button type="submit"
+                      [routerLink]="['./', {outlets: { popup: user.id + '/delete' }}]"
+                      class="btn btn-danger btn-sm">
+                <i class="fas fa-user-times"></i>
+                <span class="d-none d-md-inline" translate>Delete</span>
+              </button>
+            </div>
+          </td>
         </tr>
         </tbody>
       </table>

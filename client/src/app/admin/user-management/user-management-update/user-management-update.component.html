@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <form (ngSubmit)="submit()" [formGroup]="userForm" novalidate>
+        <div class="form-group">
+          <label class="d-block">
+            <label class="text-black-50">ID</label>
+            <input type="text" class="form-control" formControlName="id"/>
+            <span hidden translate>ID</span>
+            <app-control-messages [control]="userForm.controls.id"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">First Name</label>
+            <input type="text" class="form-control" formControlName="firstName" autocomplete="firstName"
+                   [placeholder]="'First Name' | translate"/>
+            <span hidden translate>First Name</span>
+            <app-control-messages [control]="userForm.controls.firstName"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">Last Name</label>
+            <input type="text" class="form-control" formControlName="lastName" autocomplete="lastName"
+                   [placeholder]="'Last Name' | translate"/>
+            <span hidden translate>Last Name</span>
+            <app-control-messages [control]="userForm.controls.lastName"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">Email</label>
+            <input type="email" class="form-control" formControlName="email" autocomplete="email"
+                   [placeholder]="'Email' | translate"/>
+            <span hidden translate>Email</span>
+            <app-control-messages [control]="userForm.controls.email"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">Username</label>
+            <input type="text" class="form-control" formControlName="username" autocomplete="username"
+                   [placeholder]="'Username' | translate"/>
+            <span hidden translate>Username</span>
+            <app-control-messages [control]="userForm.controls.username"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">Role</label>
+            <select id="role" formControlName="role" class="custom-select">
+              <option *ngFor="let item of roles" [value]="item.name">{{item.name}}</option>
+            </select>
+            <span hidden translate>Role</span>
+            <app-control-messages [control]="userForm.controls.role"></app-control-messages>
+          </label>
+
+          <div class="mt-5">
+            <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid || isLoading">
+              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+              <span translate>Update</span>
+            </button>
+
+            <button class="btn btn-warning" (click)="previousState()">
+              <span translate>Previous Page</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
