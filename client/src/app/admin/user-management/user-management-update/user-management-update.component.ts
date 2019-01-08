@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidationService} from '@app/shared';
 import {IRole} from '@app/shared/model/role.model';
 import {RolesService} from '@app/core/roles/roles.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-management-update',
@@ -19,7 +20,7 @@ export class UserManagementUpdateComponent implements OnInit {
   roles: IRole[];
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private user$: UserService,
     private roles$: RolesService,
     private formBuilder: FormBuilder
@@ -28,7 +29,7 @@ export class UserManagementUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.subscribe(({ user }) => {
+    this.activatedRoute.data.subscribe(({ user }) => {
       this.user = user;
       const userFormData = {
         id: user.id,
@@ -36,7 +37,7 @@ export class UserManagementUpdateComponent implements OnInit {
         lastName: user.lastName,
         email: user.email,
         username: user.username,
-        role: user.role.name,
+        roleId: user.role.id,
         __typename: user.__typename,
       };
       this.userForm.setValue({
@@ -51,6 +52,15 @@ export class UserManagementUpdateComponent implements OnInit {
 
   public submit() {
     this.isLoading = true;
+    const user = { id: this.user.id, ...this.userForm.value };
+    this.user$.updateUser(user).pipe(
+      finalize(() => {
+        this.userForm.markAsPristine();
+        this.isLoading = false;
+      })
+    ).subscribe(() => {
+      this.previousState();
+    });
   }
 
   public previousState() {
@@ -64,7 +74,7 @@ export class UserManagementUpdateComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, ValidationService.emailValidator]],
       username: ['', [Validators.required, Validators.minLength(4)]],
-      role: ['', Validators.required],
+      roleId: ['', Validators.required],
       __typename: ['']
     });
   }

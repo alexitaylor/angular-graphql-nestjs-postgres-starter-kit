@@ -4,7 +4,8 @@ import { Shell } from '@app/shell/shell.service';
 
 const routes: Routes = [
   Shell.childChildRoutes([
-    { path: 'messages', loadChildren: 'app/entities/messages/messages.module#MessagesModule' },
+    { path: '', loadChildren: 'app/entities/messages/messages.module#MessagesModule' },
+    { path: '', loadChildren: 'app/entities/roles/roles.module#RolesModule' },
   ]),
 ];
 

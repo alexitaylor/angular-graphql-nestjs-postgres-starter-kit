@@ -41,24 +41,13 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
   {
-    path: ':id/view',
-    component: UserManagementUpdateComponent,
-    resolve: {
-      user: UserMgmtResolve
-    },
-    data: {
-      title: extract('User Management Update'),
-      authorities: ['ADMIN']
-    },
-  },
-  {
     path: ':id/edit',
     component: UserManagementUpdateComponent,
     resolve: {
       user: UserMgmtResolve
     },
     data: {
-      title: extract('User Management Update'),
+      title: extract('User Management Edit'),
       authorities: ['ADMIN']
     },
   },
@@ -78,7 +67,7 @@ const routes: Routes = [
     path: 'create',
     component: UserManagementCreatePopupComponent,
     data: {
-      title: extract('User Management Delete'),
+      title: extract('User Management Create'),
       authorities: ['ADMIN']
     },
     outlet: 'popup'

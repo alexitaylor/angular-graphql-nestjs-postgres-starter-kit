@@ -1,49 +1,39 @@
 <div class="container-fluid">
   <div class="jumbotron text-center">
     <h1>
-      <span translate>User Management</span>
+      <span translate>Roles Entity</span>
     </h1>
   </div>
 
   <div class="card">
     <div class="card-header">
       <button class="btn btn-primary" [routerLink]="['./', {outlets: { popup: 'create' }}]">
-        <i class="fas fa-user-plus"></i> Create User
+        <i class="fas fa-user-plus"></i> Create Role
       </button>
     </div>
     <div class="card-body">
-      <table *ngIf="users" id="user-management" class="table table-striped table-dark">
+      <table *ngIf="roles" id="roles-table" class="table table-striped table-dark">
         <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Username</th>
-          <th scope="col">Email</th>
-          <th scope="col">Role</th>
+          <th scope="col">Name</th>
           <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let user of users">
-          <th scope="row">{{user.id}}</th>
-          <td>{{user.firstName}}</td>
-          <td>{{user.lastName}}</td>
-          <td>{{user.username}}</td>
-          <td>{{user.email}}</td>
-          <td>
-            <span class="badge badge-info p-2">{{user.role.name}}</span>
-          </td>
+        <tr *ngFor="let role of roles">
+          <th scope="row">{{role.id}}</th>
+          <td>{{role.name}}</td>
           <td class="text-right">
             <div class="btn-group flex-btn-group-container">
               <button type="submit"
-                      [routerLink]="['./', user.id, 'edit']"
+                      [routerLink]="['./', role.id, 'edit']"
                       class="btn btn-primary btn-sm">
                 <i class="fas fa-pencil-alt"></i>
                 <span class="d-none d-md-inline" translate>Edit</span>
               </button>
               <button type="submit"
-                      [routerLink]="['./', {outlets: { popup: user.id + '/delete' }}]"
+                      [routerLink]="['./', {outlets: { popup: role.id + '/delete' }}]"
                       class="btn btn-danger btn-sm">
                 <i class="fas fa-user-times"></i>
                 <span class="d-none d-md-inline" translate>Delete</span>

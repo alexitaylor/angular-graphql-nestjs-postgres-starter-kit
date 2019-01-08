@@ -8,8 +8,7 @@ import { ValidationService } from '@app/shared';
   styleUrls: ['./control-messages.component.scss']
 })
 export class ControlMessagesComponent implements OnInit {
-  @Input()
-  control: FormControl;
+  @Input() control: FormControl;
 
   constructor() {}
 

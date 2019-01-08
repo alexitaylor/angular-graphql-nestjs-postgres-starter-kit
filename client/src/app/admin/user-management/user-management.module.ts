@@ -17,7 +17,14 @@ import {
 } from '@app/admin/user-management/user-management-create-dialog/user-management-create-dialog.component';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule, SharedModule, UserManagementRoutingModule, FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    SharedModule,
+    UserManagementRoutingModule,
+    FormsModule
+  ],
   declarations: [
     UserManagementComponent,
     UserManagementUpdateComponent,
@@ -26,11 +33,5 @@ import {
     UserManagementCreateDialogComponent,
     UserManagementCreatePopupComponent,
   ],
-  entryComponents: [
-    UserManagementDeleteDialogComponent,
-    UserManagementDeletePopupComponent,
-    UserManagementCreateDialogComponent,
-    UserManagementCreatePopupComponent,
-  ]
 })
 export class UserManagementModule {}

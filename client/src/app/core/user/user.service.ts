@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {IUser} from '@app/shared/model/user.model';
-import {Observable, throwError} from 'rxjs/index';
+import {Observable} from 'rxjs/index';
 import gql from 'graphql-tag';
 import {catchError, map} from 'rxjs/operators';
 import {Apollo} from 'apollo-angular';
+import {handleError} from '@app/core/utils';
 
 declare interface QueryUsers {
   users: IUser[];
@@ -21,12 +22,6 @@ export interface ICreateUserContext {
   role: string;
 }
 
-const deleteUser = gql`
-  mutation deleteUser($id: ID!) {
-    deleteUser(id: $id)
-  }
-`;
-
 const queryUsers = gql`
   query users {
     users {
@@ -36,6 +31,23 @@ const queryUsers = gql`
       username
       email
       role {
+      id
+        name
+      }
+    }
+  }
+`;
+
+const queryUser = gql`
+  query user($id: ID!) {
+    user (id: $id) {
+      id
+      firstName
+      lastName
+      username
+      email
+      role {
+        id
         name
       }
     }
@@ -53,6 +65,24 @@ const createUser = gql`
   } 
 `;
 
+const updateUser = gql`
+  mutation updateUser($id: ID!, $firstName: String!, $lastName: String!, $email: String!, $username: String!, $roleId: ID!) {
+    updateUser(id: $id, firstName: $firstName, lastName: $lastName, email: $email, username: $username, roleId: $roleId) {
+      id
+      firstName
+      lastName
+      username
+      email
+    }
+  }
+`;
+
+const deleteUser = gql`
+  mutation deleteUser($id: ID!) {
+    deleteUser(id: $id)
+  }
+`;
+
 @Injectable({ providedIn: 'root'})
 export class UserService {
 
@@ -66,20 +96,7 @@ export class UserService {
 
   findById(id: number): Observable<IUser> {
     return this.apollo.watchQuery<QueryUser>({
-      query: gql`
-        query user($id: ID!) {
-          user (id: $id) {
-            id
-            firstName
-            lastName
-            username
-            email
-            role {
-              name
-            }
-          }
-        }
-      `,
+      query: queryUser,
       variables: {
         id,
       }
@@ -92,30 +109,29 @@ export class UserService {
       variables: {
         ...user
       },
+      // refetchQueries: Updates the cache in order to refetch parts of the store
+      // that may have been affected by the mutation
       refetchQueries: [{
         query: queryUsers
       }]
     }).pipe(
       map(({ data }) => data.createUser),
-      catchError(err => {
-        if (err.graphQLErrors) {
-          let error = null;
+      catchError(handleError)
+    )
+  }
 
-          err.graphQLErrors.forEach((e: any) => {
-            error = {
-              message: e.extensions.exception.errors[0].message,
-              path: e.extensions.exception.errors[0].path,
-              type: e.extensions.exception.errors[0].type,
-              value: e.extensions.exception.errors[0].value
-            };
-          });
-
-          return throwError(error);
-        }
-        if (err.networkError) {
-          return throwError(err);
-        }
-      })
+  updateUser(user: IUser): Observable<IUser> {
+    return this.apollo.mutate({
+      mutation: updateUser,
+      variables: {
+       ...user
+      },
+      refetchQueries: [{
+        query: queryUsers
+      }]
+    }).pipe(
+      map(({ data }) => data.updateUser),
+      catchError(handleError)
     )
   }
 
@@ -123,34 +139,14 @@ export class UserService {
     return this.apollo.mutate({
       mutation: deleteUser,
       variables: {
-        id: id
+        id
       },
-      // refetchQueries: Updates the cache in order to refetch parts of the store
-      // that may have been affected by the mutation
       refetchQueries: [{
         query: queryUsers
       }]
     }).pipe(
       map(({ data }) => data.deleteUser),
-      catchError(err => {
-        if (err.graphQLErrors) {
-          let error = null;
-
-          err.graphQLErrors.forEach((e: any) => {
-            error = {
-              message: e.extensions.exception.errors[0].message,
-              path: e.extensions.exception.errors[0].path,
-              type: e.extensions.exception.errors[0].type,
-              value: e.extensions.exception.errors[0].value
-            };
-          });
-
-          return throwError(error);
-        }
-        if (err.networkError) {
-          return throwError(err);
-        }
-      })
+      catchError(handleError)
     )
   }
 }

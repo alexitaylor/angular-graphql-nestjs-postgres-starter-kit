@@ -6,7 +6,7 @@ import {MessagesComponent} from '@app/entities/messages/messages.component';
 
 const routes: Routes = [
   // Module is lazy loaded, see app-routing.module.ts
-  { path: '',
+  { path: 'messages',
     component: MessagesComponent,
     data: {
       title: extract('Messenger'),

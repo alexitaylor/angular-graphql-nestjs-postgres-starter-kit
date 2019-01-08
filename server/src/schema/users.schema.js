@@ -25,6 +25,15 @@ export default gql`
       username: String!
       roleId: ID!
     ): User!
+    
+    updateUser(
+      id: ID!
+      firstName: String!
+      lastName: String!
+      email: String!
+      username: String!
+      roleId: ID!
+    ): User!
 
     deleteUser(id: ID!): Boolean!
   }

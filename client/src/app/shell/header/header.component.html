@@ -29,9 +29,13 @@
             <span translate>Entities</span>
           </a>
           <div ngbDropdownMenu aria-labelledby="entities-dropdown">
-            <button class="dropdown-item" routerLink="/entities/messages">
+            <button class="dropdown-item" routerLink="/entities/messages" routerLinkActive="active">
               <i class="fas fa-comment-alt"></i>
               <span translate>Messages</span>
+            </button>
+            <button class="dropdown-item" routerLink="/entities/roles" routerLinkActive="active">
+              <i class="fas fa-user-circle"></i>
+              <span translate>Roles</span>
             </button>
           </div>
         </div>

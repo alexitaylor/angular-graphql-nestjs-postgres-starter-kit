@@ -9,6 +9,14 @@ import {
   UserManagementCreateDialogComponent,
   UserManagementCreatePopupComponent
 } from '@app/admin/user-management/user-management-create-dialog/user-management-create-dialog.component';
+import {
+  RolesCreateDialogComponent,
+  RolesCreatePopupComponent
+} from '@app/entities/roles/roles-create-dialog/roles-create-dialog.component';
+import {
+  RolesDeleteDialogComponent,
+  RolesDeletePopupComponent
+} from '@app/entities/roles/roles-delete-dialog/roles-delete-dialog.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -30,6 +38,10 @@ const routes: Routes = [
     UserManagementDeletePopupComponent,
     UserManagementCreateDialogComponent,
     UserManagementCreatePopupComponent,
+    RolesCreateDialogComponent,
+    RolesCreatePopupComponent,
+    RolesDeleteDialogComponent,
+    RolesDeletePopupComponent,
   ],
   providers: []
 })

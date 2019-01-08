@@ -68,24 +68,54 @@ export default {
       return { token: createToken(user, secret, "1800000", models) };
     },
 
-    createUser: async (
-      parent,
-      { firstName, lastName, email, username, roleId },
-      { models }
-    ) => {
-      // TODO generate random password
-      const password = '12345678';
-      const user = await models.User.create({
-        firstName,
-        lastName,
-        username,
-        email,
-        roleId,
-        password
-      });
+    createUser: combineResolvers(
+      isAdmin,
+      async (
+        parent,
+        { firstName, lastName, email, username, roleId },
+        { models }
+      ) => {
+        // TODO generate random password
+        const password = '12345678';
+        const user = await models.User.create({
+          firstName,
+          lastName,
+          username,
+          email,
+          roleId,
+          password
+        });
 
-      return user;
-    },
+        return user;
+      }
+    ),
+
+    updateUser: combineResolvers(
+      isAdmin,
+      async (
+        parent,
+        { id, firstName, lastName, email, username, roleId },
+        { models }
+      ) => {
+        const res = await models.User.update({
+          firstName,
+          lastName,
+          username,
+          email,
+          roleId,
+        }, {
+          where: { id },
+          // Return the updated object
+          returning: true,
+          // Return the object itself and no meta data
+          plain: true,
+        });
+
+        const user = res[1].dataValues;
+
+        return user;
+      }
+    ),
 
     deleteUser: combineResolvers(
       isAdmin,
@@ -94,7 +124,7 @@ export default {
           where: { id }
         });
       }
-    )
+    ),
   },
 
   User: {

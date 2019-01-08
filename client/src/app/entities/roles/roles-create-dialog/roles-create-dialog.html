@@ -1,0 +1,29 @@
+<form name="roleForm" (ngSubmit)="submit()">
+  <div class="modal-header">
+    <h4 class="modal-title">Create a Role</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;</button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="submit()" [formGroup]="roleForm" novalidate>
+      <div class="form-group">
+        <label class="d-block">
+          <label class="text-black-50">Name</label>
+          <input type="text" class="form-control" formControlName="name" autocomplete="name"
+                 [placeholder]="'Name' | translate"/>
+          <span hidden translate>Name</span>
+          <app-control-messages [control]="roleForm.controls.name"></app-control-messages>
+        </label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+      <i class="fas fa-ban"></i>&nbsp;<span>Cancel</span>
+    </button>
+    <button class="btn btn-primary" type="submit" [disabled]="roleForm.invalid || isLoading">
+      <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+      <i class="fas fa-user-plus"></i>&nbsp;<span translate>Create Role</span>
+    </button>
+  </div>
+</form>

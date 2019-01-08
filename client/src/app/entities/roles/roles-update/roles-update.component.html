@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <form (ngSubmit)="submit()" [formGroup]="roleForm" novalidate>
+        <div class="form-group">
+          <label class="d-block">
+            <label class="text-black-50">ID</label>
+            <input type="text" class="form-control" formControlName="id"/>
+            <span hidden translate>ID</span>
+            <app-control-messages [control]="roleForm.controls.id"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">Name</label>
+            <input type="text" class="form-control" formControlName="name" autocomplete="name"
+                   [placeholder]="'Name' | translate"/>
+            <span hidden translate>Name</span>
+            <app-control-messages [control]="roleForm.controls.name"></app-control-messages>
+          </label>
+
+          <div class="mt-5">
+            <button class="btn btn-primary" type="submit" [disabled]="roleForm.invalid || isLoading">
+              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+              <span translate>Update</span>
+            </button>
+
+            <button class="btn btn-warning" (click)="previousState()">
+              <span translate>Previous Page</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
