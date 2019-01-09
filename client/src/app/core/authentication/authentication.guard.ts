@@ -4,7 +4,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Logger } from '../logger.service';
 import { AuthenticationService } from './authentication.service';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 const log = new Logger('AuthenticationGuard');
 

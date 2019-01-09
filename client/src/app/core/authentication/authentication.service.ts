@@ -11,6 +11,7 @@ export interface Credentials {
   // Customize received credentials here
   username: string;
   token: string;
+  role?: string;
 }
 
 export interface LoginContext {
@@ -54,21 +55,22 @@ declare interface Me {
  * Provides a base for authentication workflow.
  * The Credentials interface as well as login/logout methods should be replaced with proper implementation.
  */
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
   private _credentials: Credentials | null;
   private _userIdentity: IUser;
   private authenticated = false;
+  authenticationState = new Subject<any>();
 
   constructor(private apollo: Apollo, private router: Router) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
+      this.authenticationState.next(this._credentials);
     }
   }
 
   authenticate(identity: IUser) {
-    this._userIdentity = identity;
     this.authenticated = identity !== null;
   }
 
@@ -264,7 +266,6 @@ export class AuthenticationService {
    * @return True if the user is authenticated and authorized.
    */
   hasAnyAuthorityDirect(authorities: string[], role: string): boolean {
-    // TODO if (!this.isAuthenticated() || !this._userIdentity) {
     if (!this.isAuthenticated()) {
       return false;
     }
@@ -294,18 +295,22 @@ export class AuthenticationService {
   private setCredentials(credentials?: Credentials, remember?: boolean) {
     this._credentials = credentials || null;
 
-    if (credentials) {
+    if (this._credentials) {
       const storage = remember ? localStorage : sessionStorage;
-      storage.setItem(credentialsKey, JSON.stringify(credentials));
+      storage.setItem(credentialsKey, JSON.stringify(this._credentials));
+      // this.identity().subscribe(res => {
+      //   this._userIdentity = res;
+      //   this._credentials.role = this._userIdentity.role.name;
+      // });
     } else {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
     }
 
-    this.identity().pipe(
-      map(res => {
-        this._userIdentity = res;
-      })
-    );
+    this.authenticationState.next(this._credentials);
+  }
+
+  getAuthenticatedState(): Observable<any> {
+    return this.authenticationState.asObservable();
   }
 }

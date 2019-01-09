@@ -15,5 +15,23 @@
         Click me to send an Analytics event
       </button>
     </p>
+    <p class="d-flex flex-row justify-content-center">
+      <button
+        class="btn btn-primary mt-4 mr-3"
+        angulartics2On="click"
+        angularticsAction="Click button below quote"
+        [routerLink]="'/login'"
+      >
+        Login
+      </button>
+      <button
+        class="btn btn-primary mt-4"
+        angulartics2On="click"
+        angularticsAction="Click button below quote"
+        [routerLink]="'/register'"
+      >
+        Sign up
+      </button>
+    </p>
   </div>
 </div>
