@@ -1,6 +1,6 @@
-# fullstack-apollo-angular-express-boilerplate-project
+# Angular GraphQL Apollo Express Postgres Starter Kit
 
-A full-stack starter kit with Apollo and Express server, Postgres database and Angualr front-end
+A full-stack starter kit with Angular 7, GraphQL, Apollo, Express and Postgres
 
 ## Features
 

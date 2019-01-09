@@ -20,6 +20,19 @@
     "precommit": "pretty-quick --staged",
     "generate": "ng generate"
   },
+  "keywords": [
+    "angular-graphql-apollo-express-postgres-starter-kit",
+    "angular",
+    "angular 7",
+    "graphql",
+    "server",
+    "node",
+    "express",
+    "graphql",
+    "apollo",
+    "postgres",
+    "boilerplate"
+  ],
   "dependencies": {
     "@angular/animations": "^7.0.0",
     "@angular/common": "^7.0.0",

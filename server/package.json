@@ -9,13 +9,17 @@
     "test": "mocha --require babel-core/register 'src/**/*.spec.js'"
   },
   "keywords": [
-    "fullstack-apollo-angular-express-boilerplate-project",
+    "angular-graphql-apollo-express-postgres-starter-kit",
+    "angular",
+    "angular 7",
+    "graphql",
     "server",
     "node",
     "express",
     "graphql",
     "apollo",
-    "postgres"
+    "postgres",
+    "boilerplate"
   ],
   "author": "alexi taylor",
   "license": "ISC",
