@@ -4,7 +4,7 @@ import {Routes, RouterModule, Resolve, ActivatedRouteSnapshot, RouterStateSnapsh
 import {AuthenticationGuard, extract} from 'app/core/index';
 import {RolesComponent} from '@app/entities/roles/roles.component';
 import {RolesUpdateComponent} from '@app/entities/roles/roles-update/roles-update.component';
-import {RolesService} from '@app/core/roles/roles.service';
+import {RolesService} from '@app/core/services/roles.service';
 import {IRole, Role} from '@app/shared/model/role.model';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';

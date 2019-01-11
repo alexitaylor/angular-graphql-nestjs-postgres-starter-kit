@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {IUser} from '@app/shared/model/user.model';
+import {IUser} from '../../shared/model/user.model';
 import {Observable} from 'rxjs/index';
 import gql from 'graphql-tag';
 import {catchError, map} from 'rxjs/operators';
 import {Apollo} from 'apollo-angular';
-import {handleError} from '@app/core/utils';
+import {handleError} from '../utils';
 
 declare interface QueryUsers {
   users: IUser[];

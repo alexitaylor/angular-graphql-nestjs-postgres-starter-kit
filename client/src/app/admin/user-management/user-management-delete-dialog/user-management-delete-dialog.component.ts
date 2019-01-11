@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import {IUser} from '@app/shared/model/user.model';
-import {UserService} from '@app/core/user/user.service';
+import {UserService} from '@app/core/services/user.service';
 import {EventManager} from '@app/shared/services/event-manager.service';
 
 @Component({

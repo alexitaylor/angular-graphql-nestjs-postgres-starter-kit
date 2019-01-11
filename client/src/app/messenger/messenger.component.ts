@@ -3,40 +3,8 @@ import {IMessages} from 'app/shared/model/messages.model';
 import {Apollo} from 'apollo-angular';
 import {IUser} from 'app/shared/model/user.model';
 import {Observable, Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
-import gql from 'graphql-tag';
 import {AuthenticationService} from 'app/core/index';
-
-declare interface Query {
-  messages: IMessages[];
-}
-
-const createMessage = gql`
-  mutation createMessage($text: String!) {
-    createMessage(text: $text) {
-      text
-      user {
-        id
-       }
-    }
-  }
-`;
-
-const MESSAGE_CREATED = gql`
-  subscription messageCreated {
-    messageCreated {
-      message {
-        id
-        text
-        createdAt
-        user {
-          id
-          username
-        }
-      }
-    }
-  }
-`;
+import {MessagesService} from '@app/core/services/messages.service';
 
 @Component({
   selector: 'app-messenger',
@@ -53,6 +21,7 @@ export class MessengerComponent implements OnInit {
   constructor(
     private  apollo: Apollo,
     private authentication: AuthenticationService,
+    private messages$: MessagesService,
   ) { }
 
   ngOnInit() {
@@ -60,26 +29,7 @@ export class MessengerComponent implements OnInit {
       this.user = res;
     });
 
-    this.$messages = this.apollo
-      .watchQuery<Query>({
-        query: gql`
-          query messages {
-            messages(limit: 20) {
-              edges {
-                text
-                user {
-                  id,
-                  username
-                }
-              }
-              pageInfo {
-                endCursor,
-                hasNextPage
-              }
-            }
-          }
-        `
-      }).valueChanges.pipe(map(res => res.data.messages));
+    this.$messages = this.messages$.query();
 
     this.$messages.subscribe((res: any) => {
       const messages: [] = res.edges;
@@ -87,24 +37,16 @@ export class MessengerComponent implements OnInit {
       this.scrollToBottom();
     });
 
-    this.messagesSubscription = this.apollo
-      .subscribe({
-        query: MESSAGE_CREATED
-      })
-      .subscribe(({ data }) => {
+    this.messagesSubscription = this.messages$.messageConnection()
+      .subscribe(({ message }) => {
         const messages = this.messages;
-        this.messages = [data.messageCreated.message, ...messages];
+        this.messages = [message, ...messages];
         this.scrollToBottom();
       });
   }
 
   sendMessage() {
-    this.apollo.mutate({
-      mutation: createMessage,
-      variables: {
-        text: this.message
-      }
-    }).subscribe(({ data }) => {
+    this.messages$.createMessage(this.message).subscribe(({ text }) => {
       this.message = '';
     },(error) => {
       console.log('there was an error sending the query', error);

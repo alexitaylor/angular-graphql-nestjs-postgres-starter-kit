@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {IUser} from '@app/shared/model/user.model';
 import {ActivatedRoute} from '@angular/router';
-import {UserService} from '@app/core/user/user.service';
+import {UserService} from '@app/core/services/user.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidationService} from '@app/shared';
 import {IRole} from '@app/shared/model/role.model';
-import {RolesService} from '@app/core/roles/roles.service';
+import {RolesService} from '@app/core/services/roles.service';
 import {finalize} from 'rxjs/operators';
 
 @Component({

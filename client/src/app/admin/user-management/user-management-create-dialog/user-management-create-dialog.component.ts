@@ -2,13 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import {IUser, User} from '@app/shared/model/user.model';
-import {UserService} from '@app/core/user/user.service';
+import {UserService} from '@app/core/services/user.service';
 import {EventManager} from '@app/shared/services/event-manager.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidationService} from '@app/shared';
 import {finalize} from 'rxjs/operators';
 import {Logger} from '@app/core';
-import {RolesService} from '@app/core/roles/roles.service';
+import {RolesService} from '@app/core/services/roles.service';
 import {IRole} from '@app/shared/model/role.model';
 
 const log = new Logger('Login');

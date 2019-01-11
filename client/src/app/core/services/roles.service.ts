@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {IRole} from '@app/shared/model/role.model';
+import {IRole} from '../../shared/model/role.model';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import gql from 'graphql-tag';
-import {handleError} from '@app/core/utils';
+import {handleError} from '../utils';
 
 declare interface QueryRoles {
   roles: IRole[];

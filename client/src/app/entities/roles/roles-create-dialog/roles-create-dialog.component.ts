@@ -5,7 +5,7 @@ import {EventManager} from '@app/shared/services/event-manager.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
 import {Logger} from '@app/core';
-import {RolesService} from '@app/core/roles/roles.service';
+import {RolesService} from '@app/core/services/roles.service';
 import {IRole, Role} from '@app/shared/model/role.model';
 
 const log = new Logger('Login');

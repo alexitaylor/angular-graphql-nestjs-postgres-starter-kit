@@ -7,7 +7,12 @@
       </div>
     </div>
     <div class="input">
-      <input type="text" [(ngModel)]="message" placeholder="Enter message here..."/>
+      <input
+        type="text"
+        [(ngModel)]="message"
+        placeholder="Enter message here..."
+        (keydown.enter)="sendMessage()"
+      />
       <button type="button" class="btn btn-dark" (click)="sendMessage()" [disabled]="!message">Send Message</button>
     </div>
   </div>

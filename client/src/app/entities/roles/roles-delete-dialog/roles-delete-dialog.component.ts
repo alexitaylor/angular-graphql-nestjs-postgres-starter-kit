@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import {EventManager} from '@app/shared/services/event-manager.service';
 import {IRole} from '@app/shared/model/role.model';
-import {RolesService} from '@app/core/roles/roles.service';
+import {RolesService} from '@app/core/services/roles.service';
 
 @Component({
   selector: 'app-roles-delete-dialog',

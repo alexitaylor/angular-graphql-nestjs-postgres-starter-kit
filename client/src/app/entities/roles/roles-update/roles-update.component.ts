@@ -3,7 +3,7 @@ import {IRole} from '@app/shared/model/role.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {RolesService} from '@app/core/roles/roles.service';
+import {RolesService} from '@app/core/services/roles.service';
 import {finalize} from 'rxjs/operators';
 
 @Component({

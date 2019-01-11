@@ -81,7 +81,16 @@ export default {
     ),
 
     updateMessage: async (parent, { id, text }, { models }) => {
-      return await models.Message.update({ text, where: { id }})
+      const res = await models.Message.update(
+        { text}, {
+          where: { id },
+          // Return the updated object
+          returning: true,
+          // Return the object itself and no meta data
+          plain: true,
+        });
+
+      return res[1].dataValues;
     },
 
   },

@@ -6,7 +6,7 @@ import { UserManagementComponent } from '@app/admin/user-management/user-managem
 import { AuthenticationGuard } from '@app/core';
 import {UserManagementUpdateComponent} from '@app/admin/user-management/user-management-update/user-management-update.component';
 import {IUser, User} from '@app/shared/model/user.model';
-import {UserService} from '@app/core/user/user.service';
+import {UserService} from '@app/core/services/user.service';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {first} from 'rxjs/internal/operators';
