@@ -4,7 +4,7 @@ import {Apollo} from 'apollo-angular';
 import {IUser} from 'app/shared/model/user.model';
 import {Observable, Subscription} from 'rxjs';
 import {AuthenticationService} from 'app/core/index';
-import {MessagesService} from '@app/core/services/messages.service';
+import {IQueryMessages, MessagesService} from '@app/core/services/messages.service';
 
 @Component({
   selector: 'app-messenger',
@@ -12,7 +12,7 @@ import {MessagesService} from '@app/core/services/messages.service';
   styleUrls: ['./messenger.component.scss']
 })
 export class MessengerComponent implements OnInit {
-  $messages: Observable<IMessages[]>;
+  $messages: Observable<IQueryMessages>;
   messages: IMessages[] = [];
   message: string;
   messagesSubscription: Subscription;
@@ -38,7 +38,7 @@ export class MessengerComponent implements OnInit {
     });
 
     this.messagesSubscription = this.messages$.messageConnection()
-      .subscribe(({ message }) => {
+      .subscribe((message) => {
         const messages = this.messages;
         this.messages = [message, ...messages];
         this.scrollToBottom();

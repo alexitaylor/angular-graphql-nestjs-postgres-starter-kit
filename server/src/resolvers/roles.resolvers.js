@@ -7,7 +7,7 @@ export const canDeleteRole =
     const users = await models.User.find({
       where: { roleId: id }
     });
-    console.log('users: ', users);
+
     return !users
       ? skip :
       new ForbiddenError('Unable to delete role. Associations found in User table.')

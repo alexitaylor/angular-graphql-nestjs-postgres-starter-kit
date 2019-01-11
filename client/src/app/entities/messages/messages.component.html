@@ -1,3 +1,54 @@
-<p>
-  messages works!
-</p>
+<div class="container-fluid">
+  <div class="jumbotron text-center">
+    <h1>
+      <span translate>Messages Entity</span>
+    </h1>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <button class="btn btn-primary" [routerLink]="['./', {outlets: { popup: 'create' }}]">
+        <i class="fas fa-user-plus"></i> Create Message
+      </button>
+    </div>
+    <div class="card-body">
+      <table *ngIf="messages" id="messages-table" class="table table-striped table-dark">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Created At</th>
+          <th scope="col">Updated At</th>
+          <th scope="col">User</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let message of messages">
+          <th scope="row">{{message.id}}</th>
+          <td>{{message.text}}</td>
+          <td>{{message.createdAt | formatDate}}</td>
+          <td>{{message.updatedAt | formatDate}}</td>
+          <td>{{message.user.username}}</td>
+          <td class="text-right">
+            <div class="btn-group flex-btn-group-container">
+              <button type="submit"
+                      [routerLink]="['./', message.id, 'edit']"
+                      class="btn btn-primary btn-sm">
+                <i class="fas fa-pencil-alt"></i>
+                <span class="d-none d-md-inline" translate>Edit</span>
+              </button>
+              <button type="submit"
+                      [routerLink]="['./', {outlets: { popup: message.id + '/delete' }}]"
+                      class="btn btn-danger btn-sm">
+                <i class="fas fa-user-times"></i>
+                <span class="d-none d-md-inline" translate>Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

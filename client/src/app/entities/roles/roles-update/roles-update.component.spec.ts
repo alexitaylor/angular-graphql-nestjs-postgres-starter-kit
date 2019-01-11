@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RolesUpdateComponent } from './roles-update.component';
 
-describe('RolesUpdateComponent', () => {
+describe('MessagesUpdateComponent', () => {
   let component: RolesUpdateComponent;
   let fixture: ComponentFixture<RolesUpdateComponent>;
 

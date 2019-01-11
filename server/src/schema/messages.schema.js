@@ -28,6 +28,7 @@ export default gql`
     id: ID!
     text: String!
     createdAt: String!
+    updatedAt: String!
     user: User! 
   }
   

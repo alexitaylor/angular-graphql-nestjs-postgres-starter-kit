@@ -17,6 +17,14 @@ import {
   RolesDeleteDialogComponent,
   RolesDeletePopupComponent
 } from '@app/entities/roles/roles-delete-dialog/roles-delete-dialog.component';
+import {
+  MessagesCreateDialogComponent,
+  MessagesCreatePopupComponent
+} from '@app/entities/messages/messages-create-dialog/messages-create-dialog.component';
+import {
+  MessagesDeleteDialogComponent,
+  MessagesDeletePopupComponent
+} from '@app/entities/messages/messages-delete-dialog/messages-delete-dialog.component';
 
 const routes: Routes = [
   Shell.childRoutes([
@@ -42,6 +50,10 @@ const routes: Routes = [
     RolesCreatePopupComponent,
     RolesDeleteDialogComponent,
     RolesDeletePopupComponent,
+    MessagesCreateDialogComponent,
+    MessagesCreatePopupComponent,
+    MessagesDeleteDialogComponent,
+    MessagesDeletePopupComponent,
   ],
   providers: []
 })

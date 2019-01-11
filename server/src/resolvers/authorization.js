@@ -21,14 +21,16 @@ export const isAdmin = combineResolvers(
 // It’s the perfect check before deleting a message if only the message creator should be able to delete it.
 // The guarding resolver retrieves the message by id, checks the message’s associated user with
 // the authenticated user, and either throws an error or continues with the next resolver.
-export const isMessageOwner = async (
+export const isMessageOwnerOrAdmin = async (
   parent,
   { id },
   { models, me },
 ) => {
   const message = await models.Message.findById(id, { raw: true });
 
-  if (message.userId !== me.id) {
+  if (me.role.name === 'ADMIN') {
+    return skip;
+  } else if (message.userId !== me.id) {
     throw new ForbiddenError('Not authenticated as owner.');
   }
 

@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {RolesService} from '@app/core/services/roles.service';
 import {finalize} from 'rxjs/operators';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-roles-update',
@@ -22,6 +23,7 @@ export class RolesUpdateComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private roles$: RolesService,
+    private location: Location,
   ) {
     this.createForm();
   }
@@ -53,7 +55,7 @@ export class RolesUpdateComponent implements OnInit, OnDestroy {
   }
 
   public previousState() {
-    window.history.back();
+    this.location.back();
   }
 
   private createForm() {

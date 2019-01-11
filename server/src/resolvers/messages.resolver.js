@@ -1,5 +1,5 @@
 import { combineResolvers } from 'graphql-resolvers';
-import { isAuthenticated, isMessageOwner } from './authorization';
+import { isAuthenticated, isMessageOwnerOrAdmin } from './authorization';
 import Sequelize from 'sequelize';
 import pubsub, { EVENTS } from '../subscription';
 
@@ -74,7 +74,7 @@ export default {
     // Can stack protecting resolver (resolver guards) on top of each other.
     deleteMessage: combineResolvers(
       isAuthenticated,
-      isMessageOwner,
+      isMessageOwnerOrAdmin,
       async (parent, { id }, { models }) => {
         return await models.Message.destroy({ where: { id } });
       },

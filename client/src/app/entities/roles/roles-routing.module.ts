@@ -35,7 +35,7 @@ const routes: Routes = [
         component: RolesComponent,
         data: {
           title: extract('Roles'),
-          authorities: ['ADMIN', 'USER']
+          authorities: ['ADMIN']
         } ,
         canActivate: [AuthenticationGuard]
       },
@@ -46,7 +46,7 @@ const routes: Routes = [
         },
         data: {
           title: extract('Roles Update'),
-          authorities: ['ADMIN', 'USER']
+          authorities: ['ADMIN']
         } ,
         canActivate: [AuthenticationGuard]
       },
@@ -66,7 +66,7 @@ const routes: Routes = [
           role: RolesResolve
         },
         data: {
-          title: extract('Roles Update'),
+          title: extract('Roles Delete'),
           authorities: ['ADMIN']
         },
         outlet: 'popup'

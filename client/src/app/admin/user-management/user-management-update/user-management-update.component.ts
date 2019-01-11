@@ -7,6 +7,7 @@ import {ValidationService} from '@app/shared';
 import {IRole} from '@app/shared/model/role.model';
 import {RolesService} from '@app/core/services/roles.service';
 import {finalize} from 'rxjs/operators';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-user-management-update',
@@ -23,7 +24,8 @@ export class UserManagementUpdateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private user$: UserService,
     private roles$: RolesService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private location: Location,
   ) {
     this.createForm();
   }
@@ -64,7 +66,7 @@ export class UserManagementUpdateComponent implements OnInit {
   }
 
   public previousState() {
-    window.history.back();
+    this.location.back();
   }
 
   private createForm() {

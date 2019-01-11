@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <form (ngSubmit)="submit()" [formGroup]="messageForm" novalidate>
+        <div class="form-group">
+          <label class="d-block">
+            <label class="text-black-50">ID</label>
+            <input type="text" class="form-control" formControlName="id"/>
+            <span hidden translate>ID</span>
+            <app-control-messages [control]="messageForm.controls.id"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">Message Text</label>
+            <input type="text" class="form-control" formControlName="text" autocomplete="text"
+                   [placeholder]="'Message Text' | translate"/>
+            <span hidden translate>Message Text</span>
+            <app-control-messages [control]="messageForm.controls.text"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">Created At</label>
+            <input type="text" class="form-control" formControlName="createdAt"/>
+            <span hidden translate>Created At</span>
+            <app-control-messages [control]="messageForm.controls.createdAt"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">Updated At</label>
+            <input type="text" class="form-control" formControlName="updatedAt"/>
+            <span hidden translate>Updated At</span>
+            <app-control-messages [control]="messageForm.controls.updatedAt"></app-control-messages>
+          </label>
+
+          <label class="d-block">
+            <label class="text-black-50">User</label>
+            <input type="text" class="form-control" formControlName="username"/>
+            <span hidden translate>User</span>
+            <app-control-messages [control]="messageForm.controls.username"></app-control-messages>
+          </label>
+        </div>
+      </form>
+      <div class="mt-5">
+        <button class="btn btn-primary" type="submit" (click)="submit()" [disabled]="messageForm.invalid || isLoading">
+          <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+          <span translate>Update</span>
+        </button>
+
+        <button class="btn btn-warning" (click)="previousState()">
+          <span translate>Previous Page</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
