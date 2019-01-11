@@ -181,7 +181,7 @@ export class MessagesService {
         query: queryMessages,
       }]
     }).pipe(
-      map(res => res.data.createMessage),
+      map((res: any) => res.data.createMessage),
       catchError(handleError)
     );
   }
@@ -197,7 +197,7 @@ export class MessagesService {
         query: queryMessages,
       }]
     }).pipe(
-      map(({ data }) => data.updateMessage),
+      map(({ data }: any) => data.updateMessage),
       catchError(handleError)
     )
   }
@@ -212,7 +212,7 @@ export class MessagesService {
         query: queryMessages,
       }]
     }).pipe(
-      map(({ data }) => data.deleteMessage),
+      map(({ data }: any) => data.deleteMessage),
       catchError(handleError)
     )
   }

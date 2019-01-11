@@ -81,16 +81,16 @@ const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 const isTest = !!process.env.TEST_DATABASE;
-const isProduction = !!process.env.DATABASE_URL;
+const isProduction = process.env.NODE_ENV === 'production';
 const port = process.env.PORT || 8000;
 
-sequelize.sync({ force: true }).then(async () => {
-  if (true) {
+sequelize.sync({ force: !isProduction }).then(async () => {
+  if (!isProduction) {
     createUsersWithMessages(new Date());
   }
 
   httpServer.listen({ port }, () => {
-    console.log('🚀  🚀   🚀   🚀 Apollo Server on http://localhost:8000/graphql');
+    console.log(`🚀  🚀   🚀   🚀 Apollo Server on http://localhost:${port}/graphql`);
   });
 });
 

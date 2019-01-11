@@ -3,10 +3,35 @@
   "version": "1.0.0",
   "description": "Server",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexitaylor/angular-graphql-express-postgres-starter-kit"
+  },
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start:dev": "nodemon --exec babel-node src/index.js",
+    "build": "babel src -d dist --source-maps",
+    "serve": "node dist/index.js",
+    "start": "babel-node src/index.js",
+    "clean": "rm -rf build && mkdir build",
     "test-server": "TEST_DATABASE=mytestdatabase npm start",
     "test": "mocha --require babel-core/register 'src/**/*.spec.js'"
+  },
+  "babel": {
+    "presets": [
+      "node8"
+    ]
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "env": {
+    "jest/globals": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018
   },
   "keywords": [
     "angular-graphql-express-postgres-starter-kit",

@@ -88,7 +88,7 @@ export class RolesService {
         query: queryRoles,
       }]
     }).pipe(
-      map(({ data }) => data.createRole),
+      map(({ data }: any) => data.createRole),
       catchError(handleError)
     )
   }
@@ -103,7 +103,7 @@ export class RolesService {
         query: queryRoles,
       }]
     }).pipe(
-      map(({ data }) => data.updateRole),
+      map(({ data }: any) => data.updateRole),
       catchError(handleError)
     )
   }
@@ -118,7 +118,7 @@ export class RolesService {
         query: queryRoles,
       }]
     }).pipe(
-      map(({ data }) => data.deleteUser),
+      map(({ data }: any) => data.deleteUser),
       catchError(handleError)
     )
   }

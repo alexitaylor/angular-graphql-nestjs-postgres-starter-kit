@@ -2,11 +2,16 @@
   "name": "client",
   "version": "1.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexitaylor/angular-graphql-express-postgres-starter-kit"
+  },
   "scripts": {
     "ng": "ng",
     "build": "npm run env -s && ng build --prod",
     "start": "npm run env -s && ng serve --aot --proxy-config proxy.conf.js",
     "serve:sw": "npm run build -s && npx http-server ./dist -p 4200",
+    "serve": "npx http-server ./dist -p 4200",
     "lint": "ng lint && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
     "test": "npm run env -s && ng test",
     "test:ci": "npm run env -s && npm run lint -s && ng test --code-coverage --watch=false",

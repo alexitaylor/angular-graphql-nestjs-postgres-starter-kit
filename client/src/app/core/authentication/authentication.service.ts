@@ -119,7 +119,7 @@ export class AuthenticationService {
         }
       })
       .pipe(
-        map(({ data }) => {
+        map(({ data }: any) => {
           user.token = data.signIn.token;
           this.setCredentials(user, context.remember);
           this.apollo.getClient().resetStore();
@@ -171,7 +171,7 @@ export class AuthenticationService {
         }
       })
       .pipe(
-        map(({ data }) => {
+        map(({ data }: any) => {
           user.token = data.signUp.token;
           this.setCredentials(user, context.remember);
           return user;

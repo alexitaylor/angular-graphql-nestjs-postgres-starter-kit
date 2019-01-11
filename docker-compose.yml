@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  server: # Node.js App
+    build: ./server
+    image: 'agepsk_server'
+    environment:
+      NODE_ENV: production
+    links:
+      - postgres
+    ports:
+      - "8000:8000"
+
+  client: # Node.js App
+    build: ./client
+    image: 'agepsk_client'
+    ports:
+      - "4200:4200"
+    expose:
+      # Port for ng serve
+      - "4200"
+
+  postgres:
+    container_name: 'agepsk_postgres'
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - 5432:5432

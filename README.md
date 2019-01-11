@@ -1,4 +1,4 @@
-# Angular 7 GraphQL Express Postgres Starter Kit
+# Angular 7 + GraphQL + Express + Postgres Starter Kit
 
 A full-stack starter kit with Angular 7, GraphQL, Apollo, Express and Postgres
 

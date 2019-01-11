@@ -115,7 +115,7 @@ export class UserService {
         query: queryUsers
       }]
     }).pipe(
-      map(({ data }) => data.createUser),
+      map(({ data }: any) => data.createUser),
       catchError(handleError)
     )
   }
@@ -130,7 +130,7 @@ export class UserService {
         query: queryUsers
       }]
     }).pipe(
-      map(({ data }) => data.updateUser),
+      map(({ data }: any) => data.updateUser),
       catchError(handleError)
     )
   }
@@ -145,7 +145,7 @@ export class UserService {
         query: queryUsers
       }]
     }).pipe(
-      map(({ data }) => data.deleteUser),
+      map(({ data }: any) => data.deleteUser),
       catchError(handleError)
     )
   }
