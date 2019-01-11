@@ -21,7 +21,7 @@
     "generate": "ng generate"
   },
   "keywords": [
-    "angular-graphql-apollo-express-postgres-starter-kit",
+    "angular-graphql-express-postgres-starter-kit",
     "angular",
     "angular 7",
     "graphql",

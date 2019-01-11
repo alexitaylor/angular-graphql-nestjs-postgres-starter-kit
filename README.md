@@ -1,4 +1,4 @@
-# Angular GraphQL Apollo Express Postgres Starter Kit
+# Angular 7 GraphQL Express Postgres Starter Kit
 
 A full-stack starter kit with Angular 7, GraphQL, Apollo, Express and Postgres
 
@@ -6,8 +6,9 @@ A full-stack starter kit with Angular 7, GraphQL, Apollo, Express and Postgres
 
 * Angular (ngx-rocket)
 * GraphQL
+* Apollo
 * Bootstrap 4, ng-bootstrap and Font Awesome
-* Node, Express and Apollo server
+* Node, Express server
 * Postgres database with Sequelize
 * Authentication w/ JWT and local storage
 * Authorization

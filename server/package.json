@@ -9,7 +9,7 @@
     "test": "mocha --require babel-core/register 'src/**/*.spec.js'"
   },
   "keywords": [
-    "angular-graphql-apollo-express-postgres-starter-kit",
+    "angular-graphql-express-postgres-starter-kit",
     "angular",
     "angular 7",
     "graphql",
