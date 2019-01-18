@@ -2,3 +2,4 @@
 .idea/
 server/build
 client/dist
+dist/

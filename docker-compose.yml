@@ -6,6 +6,13 @@ services:
     image: 'agepsk_server'
     environment:
       NODE_ENV: production
+      DATABASE: ${DATABASE}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+    depends_on:
+      - postgres
     links:
       - postgres
     ports:
