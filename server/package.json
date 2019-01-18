@@ -8,9 +8,11 @@
     "url": "https://github.com/alexitaylor/angular-graphql-express-postgres-starter-kit"
   },
   "scripts": {
-    "start:dev": "nodemon --exec babel-node src/index.js",
+    "start:dev": "npm run db:migrate && npm run db:seed && nodemon --exec babel-node src/index.js",
+    "db:migrate": "./node_modules/.bin/sequelize db:migrate",
+    "db:seed": "./node_modules/.bin/sequelize db:seed:all",
     "build": "babel src -d dist --source-maps",
-    "serve": "node dist/index.js",
+    "serve": "npm run db:migrate && npm run db:seed && node dist/index.js",
     "start": "babel-node src/index.js",
     "clean": "rm -rf build && mkdir build",
     "test-server": "TEST_DATABASE=mytestdatabase npm start",
@@ -55,11 +57,13 @@
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "fs": "0.0.1-security",
     "graphql": "^14.0.2",
     "graphql-resolvers": "^0.2.2",
     "jsonwebtoken": "^8.3.0",
     "pg": "^7.4.3",
     "sequelize": "^4.38.1",
+    "sequelize-cli": "^5.4.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

@@ -1,12 +1,27 @@
 import Sequelize from 'sequelize';
 
+let db, dbUser, dbPassword, dbHost, dbPort;
+if (process.env.NODE_ENV === 'production') {
+  db = process.env.DATABASE;
+  dbUser = process.env.DATABASE_USER;
+  dbPassword = process.env.DATABASE_PASSWORD;
+  dbHost = process.env.DATABASE_HOST;
+  dbPort = process.env.PORT;
+} else {
+  db = process.env.TEST_DATABASE || process.env.DATABASE_DEV;
+  dbUser = process.env.DATABASE_USER_DEV;
+  dbPassword = process.env.DATABASE_PASSWORD_DEV;
+  dbHost = process.env.DATABASE_HOST_DEV;
+  dbPort = process.env.DATABASE_PORT_DEV;
+}
+
 const sequelize = new Sequelize(
-  process.env.TEST_DATABASE || process.env.DATABASE,
-  process.env.DATABASE_USER,
-  process.env.DATABASE_PASSWORD, {
+  db,
+  dbUser,
+  dbPassword, {
     dialect: 'postgres',
-    host: process.env.DATABASE_HOST,
-    port: process.env.PORT
+    host: dbHost,
+    port: dbPort
   }
 );
 
