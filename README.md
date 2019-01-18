@@ -13,11 +13,12 @@ A full-stack starter kit with Angular 7, GraphQL, Apollo, Express and Postgres
 * Authentication w/ JWT and local storage
 * Authorization
 * E2E testing
+* Docker Compose
 
 ## Installation
 
-* `git clone git@https://github.com/alexitaylor/fullstack-apollo-angular-express-starter-kit.git`
-* `cd fullstack-apollo-angular-express-starter-kit`
+* `git clone git@https://github.com/alexitaylor/angular-graphql-express-postgres-starter-kit.git`
+* `cd angular-graphql-express-postgres-starter-kit`
 
 # Client
 
