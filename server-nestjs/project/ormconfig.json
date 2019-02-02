@@ -1,0 +1,13 @@
+{
+  "name": "default",
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "",
+  "database": "nest_graphql_test",
+  "synchronize": true,
+  "dropSchema": false,
+  "logging": true,
+  "entities": ["src/**/*.entity.ts", "dist/**/*.entity.js"]
+}

@@ -74,7 +74,7 @@ describe('Login', () => {
     expect(browser.getCurrentUrl()).toContain('/register');
   });
   
-  it('should allow a user to log in', () => {
+  it(users, () => {
     page.emailInput.sendKeys('test@mail.com');
     page.passwordInput.sendKeys('abc123');
     page.loginButton.click();

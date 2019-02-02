@@ -40,7 +40,7 @@ export class UserManagementCreateDialogComponent {
   }
 
   clear() {
-    this.route.navigate(['/user-management'], {replaceUrl: true});
+    this.route.navigate(['/users-management'], {replaceUrl: true});
     this.activeModal.dismiss('cancel');
   }
 
@@ -54,9 +54,9 @@ export class UserManagementCreateDialogComponent {
     ).subscribe((res: any) => {
         this.eventManager.broadcast({
           name: 'userManagementChange',
-          content: 'Create user'
+          content: 'Create users'
         });
-        this.route.navigate(['/user-management'], {replaceUrl: true});
+        this.route.navigate(['/users-management'], {replaceUrl: true});
         this.activeModal.dismiss(true);
     },
       (error: any) => {

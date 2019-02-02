@@ -38,11 +38,11 @@ describe('AuthenticationGuard', () => {
     expect(typeof authenticationGuard.canActivate).toBe('function');
   });
 
-  it('should return true if user is authenticated', () => {
+  it('should return true if users is authenticated', () => {
     expect(authenticationGuard.canActivate(null, mockSnapshot)).toBe(true);
   });
 
-  it('should return false and redirect to login if user is not authenticated', () => {
+  it('should return false and redirect to login if users is not authenticated', () => {
     // Arrange
     authenticationService.credentials = null;
 
@@ -57,7 +57,7 @@ describe('AuthenticationGuard', () => {
     expect(result).toBe(false);
   });
 
-  it('should save url as queryParam if user is not authenticated', () => {
+  it('should save url as queryParam if users is not authenticated', () => {
     authenticationService.credentials = null;
     mockRouter.url = '/about';
     mockSnapshot.url = '/about';

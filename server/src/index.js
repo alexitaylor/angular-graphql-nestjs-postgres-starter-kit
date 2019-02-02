@@ -47,7 +47,7 @@ const server = new ApolloServer({
   },
   // context fn: returns the context object rather than an object for the context in Apollo Server.
   // the async / await fn is invoked on every request hitting the GraphQlL API
-  // So that the me user is retrieved from the db with every request
+  // So that the me users is retrieved from the db with every request
   context: async ({ req, connection }) => {
     // Distinguish between Subscription
     // Subscription comes with a connection object
@@ -60,9 +60,9 @@ const server = new ApolloServer({
     // Or HTTP requests (GraphQL mutations and queries)
     // HTTP requests come with a req and res object
     if (req) {
-      // Injecting the me user, which is the authenticated user from the token,
+      // Injecting the me users, which is the authenticated users from the token,
       // with every request to your Apollo Server’s context.
-      // The me user is the user which you encode in the token in your createToken() fn.
+      // The me users is the users which you encode in the token in your createToken() fn.
       const me = await getMe(req);
       return {
         models,

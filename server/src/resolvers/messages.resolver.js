@@ -54,7 +54,7 @@ export default {
 
   Mutation: {
     // isAuthenticated runs before the actual resolver
-    // that creates the message associated with the authenticated user in the db
+    // that creates the message associated with the authenticated users in the db
     createMessage: combineResolvers(
       isAuthenticated,
       async (parent, { text }, { models, me }) => {

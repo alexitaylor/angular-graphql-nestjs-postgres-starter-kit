@@ -2,12 +2,12 @@ import { expect } from 'chai';
 import * as userApi from './api';
 
 describe('users', () => {
-  it('user is user', () => {
+  it('users is users', () => {
     expect('user').to.eql('user');
   });
 
-  describe('user(id: String!): User', () => {
-    it('returns a user when user can be found', async () => {
+  describe('users(id: String!): User', () => {
+    it('returns a users when users can be found', async () => {
       const expectedResult = {
         data: {
           user: {
@@ -26,7 +26,7 @@ describe('users', () => {
       expect(result.data).to.eql(expectedResult);
     });
 
-    it('returns null when user cannot be found', async () => {
+    it('returns null when users cannot be found', async () => {
       const expectedResult = {
         data: {
           user: null,
@@ -41,7 +41,7 @@ describe('users', () => {
   });
 
   describe('deleteUser(id: String!): Boolean!', () => {
-    it('returns an error because only admins can delete a user', async () => {
+    it('returns an error because only admins can delete a users', async () => {
       const {
         data: {
           data: {
@@ -60,7 +60,7 @@ describe('users', () => {
       expect(errors[0].message).to.eql('Not authorized as admin.');
     });
 
-    it('deletes a user because only admins can delete a user', async ( ) => {
+    it('deletes a users because only admins can delete a users', async ( ) => {
       const {
         data: {
           data: {

@@ -42,7 +42,7 @@ const user = (sequelize, DataTypes) => {
     user.password = await user.generatePasswordHash();
   });
 
-  // Possible to execute on each user instance and have the user
+  // Possible to execute on each users instance and have the users
   // available within the method as this.
   User.prototype.generatePasswordHash = async function() {
     const salt = bcrypt.genSaltSync(10);

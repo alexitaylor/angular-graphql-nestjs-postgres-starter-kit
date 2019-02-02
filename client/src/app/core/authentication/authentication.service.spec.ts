@@ -41,7 +41,7 @@ describe('AuthenticationService', () => {
       });
     }));
 
-    it('should authenticate user', fakeAsync(() => {
+    it('should authenticate users', fakeAsync(() => {
       expect(mockAuthenticationService.isAuthenticated()).toBe(false);
 
       // Act
@@ -92,7 +92,7 @@ describe('AuthenticationService', () => {
   });
 
   describe('logout', () => {
-    it('should clear user authentication', fakeAsync(() => {
+    it('should clear users authentication', fakeAsync(() => {
       // Arrange
       const loginRequest = authenticationService.login({
         username: 'toto',
@@ -116,7 +116,7 @@ describe('AuthenticationService', () => {
       });
     }));
 
-    it('should clear persisted user authentication', fakeAsync(() => {
+    it('should clear persisted users authentication', fakeAsync(() => {
       // Arrange
       const loginRequest = authenticationService.login({
         username: 'toto',

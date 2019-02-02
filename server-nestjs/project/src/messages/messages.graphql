@@ -1,0 +1,37 @@
+type Query {
+    messages(cursor: String, limit: Int): MessageConnection!
+    message(id: ID!): Message!
+}
+
+type Mutation {
+    createMessage(text: String!): Message!
+    updateMessage(id: ID!, text: String!): Message!
+    deleteMessage(id: ID!): Message!
+}
+
+type MessageConnection {
+    edges: [Message!]!
+    pageInfo: PageInfo!
+}
+
+type PageInfo {
+    hasNextPage: Boolean!
+    endCursor: String!
+}
+
+type Message {
+    id: ID!
+    text: String!
+    createdAt: String!
+    updatedAt: String!
+    user: User!
+}
+
+#type Subscription {
+#    messageCreated: MessageCreated!
+#}
+
+type MessageCreated {
+    message: Message!
+    messages: MessageConnection!
+}

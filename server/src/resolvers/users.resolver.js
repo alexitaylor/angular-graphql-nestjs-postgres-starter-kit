@@ -55,7 +55,7 @@ export default {
       const user = await models.User.findByLogin(login);
 
       if (!user) {
-        throw new UserInputError("No user found with this login credentials.");
+        throw new UserInputError("No users found with this login credentials.");
       }
 
       const isValid = await user.validatePassword(password);
@@ -128,8 +128,8 @@ export default {
   },
 
   User: {
-    // username: user => {
-    //   return `@${user.firstName[0]}${user.lastName}`;
+    // username: users => {
+    //   return `@${users.firstName[0]}${users.lastName}`;
     // },
     messages: async (user, args, { models }) => {
       return await models.Message.findAll({

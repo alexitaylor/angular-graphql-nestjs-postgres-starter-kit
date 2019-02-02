@@ -2,7 +2,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import {AuthenticationService,} from '@app/core';
 
 /**
- * @whatItDoes Conditionally includes an HTML element if current user has any
+ * @whatItDoes Conditionally includes an HTML element if current users has any
  * of the authorities passed as the `expression`.
  *
  * @howToUse

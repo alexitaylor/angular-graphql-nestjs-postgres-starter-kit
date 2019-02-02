@@ -4,7 +4,7 @@ LABEL maintainer="Alexi Taylor"
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 CMD [ "npm", "run", "serve" ]
-# Create a dedicated user
+# Create a dedicated users
 RUN addgroup -S server && adduser -S -g nodejs server
 # Install app dependencies
 COPY package.json /usr/src/app/
@@ -26,5 +26,5 @@ COPY . /usr/src/app
 RUN npm run build
 # Remove dev packages
 RUN npm prune --production
-# Use node user
+# Use node users
 USER server

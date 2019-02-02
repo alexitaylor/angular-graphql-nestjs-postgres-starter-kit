@@ -75,8 +75,8 @@ export class AuthenticationService {
   }
 
   /**
-   * Get current logged in user
-   * @return The the logged in user's data.
+   * Get current logged in users
+   * @return The the logged in users's data.
    */
   identity(): Observable<IUser> {
     return this.apollo
@@ -99,9 +99,9 @@ export class AuthenticationService {
   }
 
   /**
-   * Authenticates the user.
+   * Authenticates the users.
    * @param context The login parameters.
-   * @return The user credentials.
+   * @return The users credentials.
    */
   login(context: LoginContext): Observable<Credentials | any> {
     const user = {
@@ -148,9 +148,9 @@ export class AuthenticationService {
   }
 
   /**
-   * Create and authenticate the user.
+   * Create and authenticate the users.
    * @param context The signUp parameters.
-   * @return The user credentials.
+   * @return The users credentials.
    */
   signUp(context: SignUpContext): Observable<Credentials | any> {
     const user = {
@@ -199,8 +199,8 @@ export class AuthenticationService {
   }
 
   /**
-   * Logs out the user and clear credentials.
-   * @return True if the user was logged out successfully.
+   * Logs out the users and clear credentials.
+   * @return True if the users was logged out successfully.
    */
   logout(): Observable<boolean> {
     // Customize credentials invalidation here
@@ -246,24 +246,24 @@ export class AuthenticationService {
   }
 
   /**
-   * Checks if user is authenticated.
-   * @return True if the user is authenticated.
+   * Checks if users is authenticated.
+   * @return True if the users is authenticated.
    */
   isAuthenticated(): boolean {
     return !!this.credentials;
   }
 
   /**
-   * Checks if user has authority
-   * @return True if the user is authorized.
+   * Checks if users has authority
+   * @return True if the users is authorized.
    */
   hasAnyAuthority(authorities: string[], role: string): boolean {
     return this.hasAnyAuthorityDirect(authorities, role);
   }
 
   /**
-   * Checks if user has authority and is authenticated.
-   * @return True if the user is authenticated and authorized.
+   * Checks if users has authority and is authenticated.
+   * @return True if the users is authenticated and authorized.
    */
   hasAnyAuthorityDirect(authorities: string[], role: string): boolean {
     if (!this.isAuthenticated()) {
@@ -278,18 +278,18 @@ export class AuthenticationService {
   }
 
   /**
-   * Gets the user credentials.
-   * @return The user credentials or null if the user is not authenticated.
+   * Gets the users credentials.
+   * @return The users credentials or null if the users is not authenticated.
    */
   get credentials(): Credentials | null {
     return this._credentials;
   }
 
   /**
-   * Sets the user credentials.
+   * Sets the users credentials.
    * The credentials may be persisted across sessions by setting the `remember` parameter to true.
    * Otherwise, the credentials are only persisted for the current session.
-   * @param credentials The user credentials.
+   * @param credentials The users credentials.
    * @param remember True to remember credentials across sessions.
    */
   private setCredentials(credentials?: Credentials, remember?: boolean) {
