@@ -9,6 +9,8 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { MessagesModule } from './messages/messages.module';
 import {AuthModule} from './auth/auth.module';
+import {APP_INTERCEPTOR} from '@nestjs/core';
+import {LoggingInterceptor} from './shared/logging.interceptor';
 
 // TODO add subscriptions with installSubscriptionHandlers: true in GraphQLModule
 @Module({
@@ -28,6 +30,12 @@ import {AuthModule} from './auth/auth.module';
       }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+      AppService,
+      {
+          provide: APP_INTERCEPTOR,
+          useClass: LoggingInterceptor,
+      },
+  ],
 })
 export class AppModule {}
