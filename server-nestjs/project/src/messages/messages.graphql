@@ -1,5 +1,5 @@
 type Query {
-    messages(cursor: String, limit: Int): MessageConnection!
+    messages(page: Int, limit: Int, newest: Boolean): MessageConnection!
     message(id: ID!): Message!
 }
 
@@ -14,9 +14,14 @@ type MessageConnection {
     pageInfo: PageInfo!
 }
 
+#type PageInfo {
+#    hasNextPage: Boolean!
+#    endCursor: String!
+#}
+
 type PageInfo {
-    hasNextPage: Boolean!
-    endCursor: String!
+    page: Int!
+    limit: Int!
 }
 
 type Message {
@@ -27,9 +32,9 @@ type Message {
     user: User!
 }
 
-#type Subscription {
-#    messageCreated: MessageCreated!
-#}
+type Subscription {
+    messageCreated: Message
+}
 
 type MessageCreated {
     message: Message!

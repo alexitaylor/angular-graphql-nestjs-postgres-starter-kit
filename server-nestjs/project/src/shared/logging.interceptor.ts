@@ -32,6 +32,14 @@ export class LoggingInterceptor implements NestInterceptor {
             const resolverName = ctx.constructorRef.name;
             const info = ctx.getInfo();
             Logger.log(`${info.parentType} "${info.fieldName}" ${Date.now() - now}ms`, resolverName);
+            return call$.pipe(
+                tap(() =>
+                    Logger.log(
+                        `${info.parentType} "${info.fieldName}" ${Date.now() - now}ms`,
+                        resolverName,
+                    ),
+                ),
+            );
         }
     }
 }

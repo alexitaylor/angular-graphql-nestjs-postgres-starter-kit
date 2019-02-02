@@ -3,7 +3,8 @@ import {
     PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
-    UpdateDateColumn, ManyToOne
+    UpdateDateColumn,
+    ManyToOne
 } from 'typeorm';
 import {UsersEntity} from '../users/users.entity';
 import {MessagesDto} from './dto/messages.dto';

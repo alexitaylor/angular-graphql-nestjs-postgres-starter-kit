@@ -7,3 +7,13 @@ export class MessagesDto {
     updatedAt: Date;
     user?: UsersEntity;
 }
+
+export class PageInfo {
+    page: number;
+    limit: number;
+}
+
+export class MessageConnection {
+    edges: MessagesDto[];
+    pageInfo: PageInfo;
+}

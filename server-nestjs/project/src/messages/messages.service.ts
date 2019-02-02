@@ -17,13 +17,18 @@ export class MessagesService {
 
     // TODO cursor: string instead of page
     async findAll(page: number = 1, limit: number = 20, newest: boolean = true) {
-        // TODO order: newest && { created: 'DESC' },
         const messages = await this.messagesRepository.find({
             relations: ['user'],
             take: limit,
             skip: limit * (page - 1),
         });
-        return messages.map(message => message.toResponseObject());
+        return {
+            edges: messages.map(message => message.toResponseObject()),
+            pageInfo: {
+                page,
+                limit
+            }
+        };
     }
 
     async findOneById(id: number) {

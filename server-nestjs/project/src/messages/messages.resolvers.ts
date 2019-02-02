@@ -2,14 +2,15 @@ import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver, Subscription, Context } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 import {MessagesService} from './messages.service';
-import {MessagesDto} from './dto/messages.dto';
+import {MessagesDto, MessageConnection} from './dto/messages.dto';
 import {AuthGuard} from '../auth/guards/auth.guard';
 import {Roles} from '../decorators/roles.decorators';
+import {RolesGuard} from '../auth/guards/roles.guard';
 
 const pubSub = new PubSub();
 
 @Resolver('Message')
-@UseGuards(new AuthGuard())
+@UseGuards(new AuthGuard(), RolesGuard)
 export class MessagesResolvers {
     constructor(private readonly messagesService: MessagesService) {}
 
@@ -20,7 +21,7 @@ export class MessagesResolvers {
         @Args('page') page: number,
         @Args('limit') limit: number,
         @Args('newest') newest: boolean
-    ): Promise<MessagesDto[]> {
+    ): Promise<MessageConnection> {
         return await this.messagesService.findAll(page, limit, newest);
     }
 
@@ -41,7 +42,7 @@ export class MessagesResolvers {
     ): Promise<MessagesDto> {
         const userId = me.id;
         const createdMessage = await this.messagesService.createMessage(text, userId);
-        pubSub.publish('createdMessage', { createdMessage: createdMessage });
+        pubSub.publish('messageCreated', { messageCreated: createdMessage });
         return createdMessage;
     }
 
@@ -53,18 +54,23 @@ export class MessagesResolvers {
         @Context('me') me
     ): Promise<MessagesDto> {
         const updatedMessage = await this.messagesService.updateMessage(id, text, me);
-        pubSub.publish('updatedMessage', { updatedMessage: updatedMessage });
+        pubSub.publish('messageCreated', { messageCreated: updatedMessage });
         return updatedMessage;
     }
 
-    // TODO isMessageOwnerOrAdmin
     @Mutation('deleteMessage')
     @Roles('ADMIN', 'USER')
     async deleteMessage(@Args('id') id: string, @Context('me') me): Promise<MessagesDto> {
         const deletedMessage = await this.messagesService.deleteMessage(id, me);
-        pubSub.publish('deletedMessage', { deletedMessage: deletedMessage });
+        pubSub.publish('messageCreated', { messageCreated: deletedMessage });
         return deletedMessage;
     }
 
-    // TODO @Subscription
+    @Subscription()
+    @Roles('ADMIN', 'USER')
+    messageCreated() {
+        return {
+            subscribe: () => pubSub.asyncIterator('messageCreated'),
+        };
+    }
 }

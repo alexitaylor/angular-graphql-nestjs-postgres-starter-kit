@@ -59,12 +59,12 @@ export abstract class IMutation {
 }
 
 export class PageInfo {
-    hasNextPage: boolean;
-    endCursor: string;
+    page: number;
+    limit: number;
 }
 
 export abstract class IQuery {
-    abstract messages(cursor?: string, limit?: number): MessageConnection | Promise<MessageConnection>;
+    abstract messages(page?: number, limit?: number, newest?: boolean): MessageConnection | Promise<MessageConnection>;
 
     abstract message(id: string): Message | Promise<Message>;
 
@@ -84,6 +84,10 @@ export abstract class IQuery {
 export class Role {
     id: string;
     name: string;
+}
+
+export abstract class ISubscription {
+    abstract messageCreated(): Message | Promise<Message>;
 }
 
 export class Token {
