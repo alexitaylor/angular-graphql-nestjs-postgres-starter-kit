@@ -5,8 +5,9 @@ import {
     OnGatewayConnection,
     OnGatewayDisconnect,
 } from '@nestjs/websockets';
+import {environment} from './environments/environment';
 
-@WebSocketGateway(4001, { transport: ['websocket'] })
+@WebSocketGateway(environment.wsPort, { transport: ['websocket'] })
 export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer()
     wss;

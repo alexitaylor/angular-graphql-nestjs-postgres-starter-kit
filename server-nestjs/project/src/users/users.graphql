@@ -19,7 +19,7 @@ type Mutation {
 
     updateUser(updateUserInput: UpdateUseInput): User!
 
-    deleteUser(id: ID!): User!
+    deleteUser(id: ID!): Boolean
 }
 
 type Token {

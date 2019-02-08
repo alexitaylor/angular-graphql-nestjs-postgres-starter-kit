@@ -39,7 +39,7 @@ export class UserManagementUpdateComponent implements OnInit {
         lastName: user.lastName,
         email: user.email,
         username: user.username,
-        roleId: user.role.id,
+        roleName: user.role.name,
         __typename: user.__typename,
       };
       this.userForm.setValue({
@@ -54,6 +54,7 @@ export class UserManagementUpdateComponent implements OnInit {
 
   public submit() {
     this.isLoading = true;
+    console.log('this.userForm.value: ', this.userForm.value);
     const user = { id: this.user.id, ...this.userForm.value };
     this.user$.updateUser(user).pipe(
       finalize(() => {
@@ -76,7 +77,7 @@ export class UserManagementUpdateComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, ValidationService.emailValidator]],
       username: ['', [Validators.required, Validators.minLength(4)]],
-      roleId: ['', Validators.required],
+      roleName: ['', Validators.required],
       __typename: ['']
     });
   }

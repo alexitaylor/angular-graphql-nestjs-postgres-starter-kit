@@ -40,7 +40,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
 
   private initDataTable() {
     $(document).ready(() => {
-      $('#users-management').DataTable();
+      $('#user-management').DataTable();
     });
   }
 

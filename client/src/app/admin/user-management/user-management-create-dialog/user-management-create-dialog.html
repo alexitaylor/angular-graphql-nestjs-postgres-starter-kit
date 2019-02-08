@@ -45,12 +45,12 @@
 
         <label class="d-block">
           <label class="text-black-50">Role</label>
-          <select id="roleId" formControlName="roleId" class="custom-select">
+          <select id="roleName" formControlName="roleName" class="custom-select">
             <option disabled selected [value]="''">Select Role</option>
-            <option *ngFor="let item of roles" [value]="item.id">{{item.name}}</option>
+            <option *ngFor="let item of roles" [value]="item.name">{{item.name}}</option>
           </select>
           <span hidden translate>Role</span>
-          <app-control-messages [control]="createUserForm.controls.roleId"></app-control-messages>
+          <app-control-messages [control]="createUserForm.controls.roleName"></app-control-messages>
         </label>
       </div>
     </form>

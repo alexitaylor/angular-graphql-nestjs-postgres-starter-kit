@@ -19,7 +19,7 @@ export interface ICreateUserContext {
   lastName: string;
   email: string;
   username: string;
-  role: string;
+  roleName: string;
 }
 
 const queryUsers = gql`
@@ -55,8 +55,8 @@ const queryUser = gql`
 `;
 
 const createUser = gql`
-  mutation createUser($firstName: String!, $lastName: String!, $email: String!, $username: String!, $roleId: ID!) {
-    createUser(firstName: $firstName, lastName: $lastName, email: $email, username: $username, roleId: $roleId) {
+  mutation createUser($firstName: String!, $lastName: String!, $email: String!, $username: String!, $roleName: String!) {
+    createUser(createUserInput: { firstName: $firstName, lastName: $lastName, email: $email, username: $username, roleName: $roleName }) {
       firstName
       lastName
       username
@@ -66,8 +66,8 @@ const createUser = gql`
 `;
 
 const updateUser = gql`
-  mutation updateUser($id: ID!, $firstName: String!, $lastName: String!, $email: String!, $username: String!, $roleId: ID!) {
-    updateUser(id: $id, firstName: $firstName, lastName: $lastName, email: $email, username: $username, roleId: $roleId) {
+  mutation updateUser($id: ID!, $firstName: String!, $lastName: String!, $email: String!, $username: String!, $roleName: String!) {
+    updateUser(updateUserInput: { id: $id, firstName: $firstName, lastName: $lastName, email: $email, username: $username, roleName: $roleName }) {
       id
       firstName
       lastName
@@ -107,7 +107,8 @@ export class UserService {
     return this.apollo.mutate({
       mutation: createUser,
       variables: {
-        ...user
+        ...user,
+        roleName: user.roleName
       },
       // refetchQueries: Updates the cache in order to refetch parts of the store
       // that may have been affected by the mutation
@@ -124,7 +125,8 @@ export class UserService {
     return this.apollo.mutate({
       mutation: updateUser,
       variables: {
-       ...user
+       ...user,
+        roleName: user.roleName
       },
       refetchQueries: [{
         query: queryUsers

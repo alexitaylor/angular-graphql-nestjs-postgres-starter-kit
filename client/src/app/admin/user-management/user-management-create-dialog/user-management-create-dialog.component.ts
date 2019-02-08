@@ -40,7 +40,7 @@ export class UserManagementCreateDialogComponent {
   }
 
   clear() {
-    this.route.navigate(['/users-management'], {replaceUrl: true});
+    this.route.navigate(['/user-management'], {replaceUrl: true});
     this.activeModal.dismiss('cancel');
   }
 
@@ -54,9 +54,9 @@ export class UserManagementCreateDialogComponent {
     ).subscribe((res: any) => {
         this.eventManager.broadcast({
           name: 'userManagementChange',
-          content: 'Create users'
+          content: 'Create user'
         });
-        this.route.navigate(['/users-management'], {replaceUrl: true});
+        this.route.navigate(['/user-management'], {replaceUrl: true});
         this.activeModal.dismiss(true);
     },
       (error: any) => {
@@ -76,7 +76,7 @@ export class UserManagementCreateDialogComponent {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, ValidationService.emailValidator]],
       username: ['', [Validators.required, Validators.minLength(4)]],
-      roleId: ['2'],
+      roleName: ['USER'],
     });
   }
 }

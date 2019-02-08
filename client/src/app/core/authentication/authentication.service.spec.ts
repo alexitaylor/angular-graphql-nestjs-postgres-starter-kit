@@ -7,6 +7,7 @@ const credentialsKey = 'credentials';
 
 describe('AuthenticationService', () => {
   let authenticationService: AuthenticationService;
+  // @ts-ignore
   const mockAuthenticationService: MockAuthenticationService;
 
   beforeEach(() => {
@@ -41,7 +42,7 @@ describe('AuthenticationService', () => {
       });
     }));
 
-    it('should authenticate users', fakeAsync(() => {
+    it('should authenticate user', fakeAsync(() => {
       expect(mockAuthenticationService.isAuthenticated()).toBe(false);
 
       // Act
@@ -92,7 +93,7 @@ describe('AuthenticationService', () => {
   });
 
   describe('logout', () => {
-    it('should clear users authentication', fakeAsync(() => {
+    it('should clear user authentication', fakeAsync(() => {
       // Arrange
       const loginRequest = authenticationService.login({
         username: 'toto',
@@ -116,7 +117,7 @@ describe('AuthenticationService', () => {
       });
     }));
 
-    it('should clear persisted users authentication', fakeAsync(() => {
+    it('should clear persisted user authentication', fakeAsync(() => {
       // Arrange
       const loginRequest = authenticationService.login({
         username: 'toto',

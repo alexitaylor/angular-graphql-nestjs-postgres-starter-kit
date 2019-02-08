@@ -133,15 +133,16 @@ export class UsersService {
             throw new HttpException('User not found', HttpStatus.NOT_FOUND);
         }
 
-        delete user.updatedAt;
+        delete data.roleName;
+        delete data.id;
 
-        await this.userRepository.update({ id }, { ...user, role });
+        await this.userRepository.update({ id }, { ...data, role });
 
         user = await this.userRepository.findOne({
             where: { id },
             relations: ['role', 'messages'],
         });
-
+        console.log('user: ', user);
         return user.toResponseObject();
     }
 
@@ -152,7 +153,9 @@ export class UsersService {
         if (!user) {
             throw new HttpException('User not found', HttpStatus.NOT_FOUND);
         }
-        await this.userRepository.remove(user);
-        return user.toResponseObject();
+
+        const deletedUser = await this.userRepository.remove(user);
+
+        return !deletedUser.id;
     }
 }

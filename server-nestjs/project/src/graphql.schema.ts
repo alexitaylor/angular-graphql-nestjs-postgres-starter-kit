@@ -55,7 +55,7 @@ export abstract class IMutation {
 
     abstract updateUser(updateUserInput?: UpdateUseInput): User | Promise<User>;
 
-    abstract deleteUser(id: string): User | Promise<User>;
+    abstract deleteUser(id: string): boolean | Promise<boolean>;
 }
 
 export class PageInfo {

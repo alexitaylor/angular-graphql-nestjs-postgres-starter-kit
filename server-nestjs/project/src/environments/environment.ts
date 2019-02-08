@@ -5,4 +5,5 @@ export const environment = {
     expiresIn: 1800000,
     saltOrRounds: 10,
     port: 4000,
+    wsPort: 8001
 };

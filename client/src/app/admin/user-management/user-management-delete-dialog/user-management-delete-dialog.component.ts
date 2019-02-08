@@ -20,17 +20,18 @@ export class UserManagementDeleteDialogComponent {
   ) {}
 
   clear() {
-    this.route.navigate(['/users-management'], {replaceUrl: true});
+    this.route.navigate(['/user-management'], {replaceUrl: true});
     this.activeModal.dismiss('cancel');
   }
 
   confirmDelete(id: number) {
     this.user$.deleteUser(id).subscribe(res => {
+      console.log('res: ', res);
       this.eventManager.broadcast({
         name: 'userManagementChange',
-        content: 'Deleted users'
+        content: 'Deleted user'
       });
-      this.route.navigate(['/users-management'], {replaceUrl: true});
+      this.route.navigate(['/user-management'], {replaceUrl: true});
       this.activeModal.dismiss(true);
     });
   }

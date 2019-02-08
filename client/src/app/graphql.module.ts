@@ -10,7 +10,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import { onError } from 'apollo-link-error';
 import {AuthenticationService} from '@app/core';
 
-const uri = 'http://localhost:8000/graphql';
+const uri = 'http://localhost:4000/graphql';
 
 @NgModule({
   exports: [HttpClientModule, ApolloModule, HttpLinkModule]
@@ -25,7 +25,7 @@ export class GraphQLModule {
 
     // Create a WebSocket link:
     const wsLink = new WebSocketLink({
-      uri: `ws://localhost:8000/graphql`,
+      uri: `ws://localhost:4000/graphql`,
       options: {
         reconnect: true
       }
@@ -44,7 +44,8 @@ export class GraphQLModule {
       const vm = this;
       operation.setContext(({ headers = {}, localToken = vm.auth$.getToken(), }) => {
         if (localToken) {
-          headers['x-token'] = localToken;
+          // headers['x-token'] = localToken;
+          headers['authorization'] = `Bearer ${localToken}`
         }
 
         return {
@@ -60,6 +61,9 @@ export class GraphQLModule {
         graphQLErrors.forEach(({ message, locations, path }) => {
           console.log(`GRAPHQL ERROR: ${message}`);
           if (message === 'NOT_AUTHENTICATED') {
+            this.auth$.logout();
+            this.auth$.redirectLogoutOnSessionExpired();
+          } else if (message === 'Token error: invalid signature') {
             this.auth$.logout();
             this.auth$.redirectLogoutOnSessionExpired();
           }

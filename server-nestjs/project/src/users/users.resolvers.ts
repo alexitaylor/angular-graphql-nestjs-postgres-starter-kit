@@ -1,15 +1,10 @@
-import { ParseIntPipe, UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver, Subscription, Context } from '@nestjs/graphql';
-import { PubSub } from 'graphql-subscriptions';
+import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UsersService } from './users.service';
-import {SignUpUserDto, SignInUserDto, CreateUpdateUserDto, UserDto, Token} from './dto/users.dto';
+import {CreateUpdateUserDto, UserDto} from './dto/users.dto';
 import {AuthGuard} from '../auth/guards/auth.guard';
 import {RolesGuard} from '../auth/guards/roles.guard';
 import {Roles} from '../decorators/roles.decorators';
-// import { UsersGuard } from './users.guard';
-// import { User } from '../graphql.schema';
-
-const pubSub = new PubSub();
 
 @Resolver('User')
 @UseGuards(RolesGuard)
@@ -42,7 +37,6 @@ export class UsersResolvers {
     @UseGuards(new AuthGuard())
     async createUser(@Args('createUserInput') args: CreateUpdateUserDto): Promise<UserDto> {
         const createdUser = await this.usersService.createUser(args);
-        pubSub.publish('userCreated', { userCreated: createdUser });
         return createdUser;
     }
 
@@ -51,16 +45,13 @@ export class UsersResolvers {
     @UseGuards(new AuthGuard())
     async updateUser(@Args('updateUserInput') args: CreateUpdateUserDto): Promise<UserDto> {
         const updatedUser = await this.usersService.updateUser(args);
-        pubSub.publish('updatedUser', { updatedUser: updatedUser });
         return updatedUser;
     }
 
     @Mutation('deleteUser')
     @Roles('ADMIN')
     @UseGuards(new AuthGuard())
-    async deleteUser(@Args('id') id: string): Promise<UserDto> {
-        const deletedUser = await this.usersService.deleteUser(id);
-        pubSub.publish('deletedUser', { deletedUser: deletedUser });
-        return deletedUser;
+    async deleteUser(@Args('id') id: string): Promise<boolean> {
+        return await this.usersService.deleteUser(id);
     }
 }
