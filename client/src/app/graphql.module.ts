@@ -8,7 +8,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { split, ApolloLink } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import { onError } from 'apollo-link-error';
-import {AuthenticationService} from '@app/core';
+import { AuthenticationService } from '@app/core';
 
 const uri = 'http://localhost:4000/graphql';
 
@@ -16,11 +16,7 @@ const uri = 'http://localhost:4000/graphql';
   exports: [HttpClientModule, ApolloModule, HttpLinkModule]
 })
 export class GraphQLModule {
-  constructor(
-    private apollo: Apollo,
-    private httpLink: HttpLink,
-    private auth$: AuthenticationService,
-    ) {
+  constructor(private apollo: Apollo, private httpLink: HttpLink, private auth$: AuthenticationService) {
     const http = httpLink.create({ uri });
 
     // Create a WebSocket link:
@@ -42,10 +38,10 @@ export class GraphQLModule {
 
     const authLink = new ApolloLink((operation, forward) => {
       const vm = this;
-      operation.setContext(({ headers = {}, localToken = vm.auth$.getToken(), }) => {
+      operation.setContext(({ headers = {}, localToken = vm.auth$.getToken() }) => {
         if (localToken) {
           // headers['x-token'] = localToken;
-          headers['authorization'] = `Bearer ${localToken}`
+          headers['authorization'] = `Bearer ${localToken}`;
         }
 
         return {
@@ -71,7 +67,6 @@ export class GraphQLModule {
       }
 
       if (networkError) {
-
         if (networkError['statusCode'] === 401) {
           this.auth$.logout();
           this.auth$.redirectLogoutOnSessionExpired();

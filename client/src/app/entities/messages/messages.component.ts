@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MessagesService} from '@app/core/services/messages.service';
-import {EventManager} from '@app/shared/services/event-manager.service';
-import {Subscription} from 'rxjs';
-import {IMessages} from '@app/shared/model/messages.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MessagesService } from '@app/core/services/messages.service';
+import { EventManager } from '@app/shared/services/event-manager.service';
+import { Subscription } from 'rxjs';
+import { IMessages } from '@app/shared/model/messages.model';
 
 declare const $: any;
 
@@ -16,10 +16,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   messagesSub: Subscription;
   eventSub: Subscription;
 
-  constructor(
-    private messages$: MessagesService,
-    private eventManager: EventManager,
-  ) { }
+  constructor(private messages$: MessagesService, private eventManager: EventManager) {}
 
   ngOnInit() {
     this.reset();
@@ -35,15 +32,15 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.messagesSub = this.messages$.query().subscribe((res: any) => {
       this.messages = res.edges;
       this.initDataTable();
-    })
+    });
   }
 
   private initDataTable() {
     $(document).ready(() => {
       $('#messages-table').DataTable({
-        'order': [[ 2, 'asc' ]]
+        order: [[2, 'asc']]
       });
-    })
+    });
   }
 
   listenToUserManagementChange() {

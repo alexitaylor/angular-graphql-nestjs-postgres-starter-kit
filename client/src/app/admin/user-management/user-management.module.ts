@@ -6,7 +6,7 @@ import { SharedModule } from '@app/shared';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { UserManagementComponent } from './user-management.component';
 import { UserManagementUpdateComponent } from './user-management-update/user-management-update.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   UserManagementDeleteDialogComponent,
   UserManagementDeletePopupComponent
@@ -17,21 +17,14 @@ import {
 } from '@app/admin/user-management/user-management-create-dialog/user-management-create-dialog.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    SharedModule,
-    UserManagementRoutingModule,
-    FormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule, SharedModule, UserManagementRoutingModule, FormsModule],
   declarations: [
     UserManagementComponent,
     UserManagementUpdateComponent,
     UserManagementDeleteDialogComponent,
     UserManagementDeletePopupComponent,
     UserManagementCreateDialogComponent,
-    UserManagementCreatePopupComponent,
-  ],
+    UserManagementCreatePopupComponent
+  ]
 })
 export class UserManagementModule {}

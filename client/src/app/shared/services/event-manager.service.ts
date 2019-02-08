@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable ,  Observer ,  Subscription } from 'rxjs';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { filter, share } from 'rxjs/operators';
 
 export interface IEventManager {
-  name: string,
-  content: string,
+  name: string;
+  content: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventManager {
-
   observable: Observable<any>;
   observer: Observer<any>;
 
@@ -34,9 +33,13 @@ export class EventManager {
    * Method to subscribe to an event with callback
    */
   subscribe(eventName: string, callback: any) {
-    const subscriber: Subscription = this.observable.pipe(filter((event) => {
-      return event.name === eventName;
-    })).subscribe(callback);
+    const subscriber: Subscription = this.observable
+      .pipe(
+        filter(event => {
+          return event.name === eventName;
+        })
+      )
+      .subscribe(callback);
     return subscriber;
   }
 

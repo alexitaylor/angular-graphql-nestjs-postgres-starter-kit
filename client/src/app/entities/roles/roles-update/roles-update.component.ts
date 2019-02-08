@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {IRole} from '@app/shared/model/role.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {RolesService} from '@app/core/services/roles.service';
-import {finalize} from 'rxjs/operators';
-import {Location} from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IRole } from '@app/shared/model/role.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { RolesService } from '@app/core/services/roles.service';
+import { finalize } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-roles-update',
@@ -23,17 +23,17 @@ export class RolesUpdateComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private roles$: RolesService,
-    private location: Location,
+    private location: Location
   ) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.routeSub = this.route.data.subscribe(({role}) => {
+    this.routeSub = this.route.data.subscribe(({ role }) => {
       this.role = role;
       this.roleForm.setValue({
-        ...this.role,
-      })
+        ...this.role
+      });
     });
   }
 
@@ -44,14 +44,17 @@ export class RolesUpdateComponent implements OnInit, OnDestroy {
   public submit() {
     this.isLoading = true;
     const role = { id: this.role.id, ...this.roleForm.value };
-    this.roles$.updateRole(role).pipe(
-      finalize(() => {
-        this.roleForm.markAsPristine();
-        this.isLoading = false;
-      })
-    ).subscribe(() => {
-      this.previousState();
-    })
+    this.roles$
+      .updateRole(role)
+      .pipe(
+        finalize(() => {
+          this.roleForm.markAsPristine();
+          this.isLoading = false;
+        })
+      )
+      .subscribe(() => {
+        this.previousState();
+      });
   }
 
   public previousState() {
@@ -65,5 +68,4 @@ export class RolesUpdateComponent implements OnInit, OnDestroy {
       __typename: ['']
     });
   }
-
 }

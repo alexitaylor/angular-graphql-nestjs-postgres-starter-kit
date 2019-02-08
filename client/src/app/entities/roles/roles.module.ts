@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RolesRoutingModule} from '@app/entities/roles/roles-routing.module';
-import {RolesComponent} from '@app/entities/roles/roles.component';
+import { RolesRoutingModule } from '@app/entities/roles/roles-routing.module';
+import { RolesComponent } from '@app/entities/roles/roles.component';
 import { RolesUpdateComponent } from './roles-update/roles-update.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {SharedModule} from '@app/shared';
-import {TranslateModule} from '@ngx-translate/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@app/shared';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   RolesCreateDialogComponent,
   RolesCreatePopupComponent
@@ -16,21 +16,14 @@ import {
 } from '@app/entities/roles/roles-delete-dialog/roles-delete-dialog.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RolesRoutingModule
-  ],
+  imports: [CommonModule, SharedModule, TranslateModule, ReactiveFormsModule, FormsModule, RolesRoutingModule],
   declarations: [
     RolesComponent,
     RolesUpdateComponent,
     RolesCreateDialogComponent,
     RolesCreatePopupComponent,
     RolesDeleteDialogComponent,
-    RolesDeletePopupComponent,
-  ],
+    RolesDeletePopupComponent
+  ]
 })
-export class RolesModule { }
+export class RolesModule {}

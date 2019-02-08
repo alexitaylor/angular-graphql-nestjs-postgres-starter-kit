@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Observable, of, Subject, throwError} from 'rxjs';
+import { Observable, of, Subject, throwError } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
 import { IUser } from '@app/shared/model/user.model';
 import swal from 'sweetalert2';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 export interface Credentials {
   // Customize received credentials here
@@ -55,7 +55,7 @@ declare interface Me {
  * Provides a base for authentication workflow.
  * The Credentials interface as well as login/logout methods should be replaced with proper implementation.
  */
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private _credentials: Credentials | null;
   private _userIdentity: IUser;

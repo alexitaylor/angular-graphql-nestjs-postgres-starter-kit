@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Location} from '@angular/common';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {MessagesService} from '@app/core/services/messages.service';
-import {finalize} from 'rxjs/operators';
-import {IMessages} from '@app/shared/model/messages.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { MessagesService } from '@app/core/services/messages.service';
+import { finalize } from 'rxjs/operators';
+import { IMessages } from '@app/shared/model/messages.model';
 
 @Component({
   selector: 'app-messages-update',
@@ -23,24 +23,24 @@ export class MessagesUpdateComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private messages$: MessagesService,
-    private location: Location,
+    private location: Location
   ) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.routeSub = this.route.data.subscribe(({message}) => {
+    this.routeSub = this.route.data.subscribe(({ message }) => {
       this.message = message;
       const messageFormValue = {
         id: message.id,
         text: message.text,
         createdAt: message.createdAt,
         updatedAt: message.updatedAt,
-        username: message.user.username,
+        username: message.user.username
       };
       this.messageForm.setValue({
-        ...messageFormValue,
-      })
+        ...messageFormValue
+      });
     });
   }
 
@@ -52,14 +52,17 @@ export class MessagesUpdateComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const text = this.messageForm.value.text;
     const id = this.message.id;
-    this.messages$.updateMessage(id, text).pipe(
-      finalize(() => {
-        this.messageForm.markAsPristine();
-        this.isLoading = false;
-      })
-    ).subscribe(() => {
-      this.previousState();
-    })
+    this.messages$
+      .updateMessage(id, text)
+      .pipe(
+        finalize(() => {
+          this.messageForm.markAsPristine();
+          this.isLoading = false;
+        })
+      )
+      .subscribe(() => {
+        this.previousState();
+      });
   }
 
   public previousState() {
@@ -72,8 +75,7 @@ export class MessagesUpdateComponent implements OnInit, OnDestroy {
       text: ['', Validators.required],
       createdAt: [{ value: '', disabled: true }],
       updatedAt: [{ value: '', disabled: true }],
-      username: [{ value: '', disabled: true }],
+      username: [{ value: '', disabled: true }]
     });
   }
-
 }

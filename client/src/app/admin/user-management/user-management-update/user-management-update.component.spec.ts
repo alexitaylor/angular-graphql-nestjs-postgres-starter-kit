@@ -8,9 +8,8 @@ describe('UserManagementUpdateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserManagementUpdateComponent ]
-    })
-    .compileComponents();
+      declarations: [UserManagementUpdateComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

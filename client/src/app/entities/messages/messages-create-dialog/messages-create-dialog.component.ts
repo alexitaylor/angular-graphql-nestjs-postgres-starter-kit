@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import {EventManager} from '@app/shared/services/event-manager.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {finalize} from 'rxjs/operators';
-import {Logger} from '@app/core';
-import {MessagesService} from '@app/core/services/messages.service';
-import {IMessages, Messages} from '@app/shared/model/messages.model';
+import { EventManager } from '@app/shared/services/event-manager.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+import { Logger } from '@app/core';
+import { MessagesService } from '@app/core/services/messages.service';
+import { IMessages, Messages } from '@app/shared/model/messages.model';
 
 const log = new Logger('Login');
 
@@ -32,34 +32,38 @@ export class MessagesCreateDialogComponent {
   }
 
   clear() {
-    this.route.navigate(['/entities/messages'], {replaceUrl: true});
+    this.route.navigate(['/entities/messages'], { replaceUrl: true });
     this.activeModal.dismiss('cancel');
   }
 
   submit() {
     this.isLoading = true;
-    this.messages$.createMessage(this.messageForm.value.text).pipe(
-      finalize(() => {
-        this.messageForm.markAsPristine();
-        this.isLoading = false;
-      })
-    ).subscribe((res: any) => {
-        this.eventManager.broadcast({
-          name: 'messagesChange',
-          content: res
-        });
-        this.route.navigate(['/entities/messages'], {replaceUrl: true});
-        this.activeModal.dismiss(true);
-    },
-      (error: any) => {
-        log.debug(`Create Message error: ${error}`);
-        const errors = {};
-        this.error = error;
-        this.errorMessage = error.message;
-        errors[error.message] = true;
-        this.messageForm.controls[error.path].setErrors(errors);
-      }
-    )
+    this.messages$
+      .createMessage(this.messageForm.value.text)
+      .pipe(
+        finalize(() => {
+          this.messageForm.markAsPristine();
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        (res: any) => {
+          this.eventManager.broadcast({
+            name: 'messagesChange',
+            content: res
+          });
+          this.route.navigate(['/entities/messages'], { replaceUrl: true });
+          this.activeModal.dismiss(true);
+        },
+        (error: any) => {
+          log.debug(`Create Message error: ${error}`);
+          const errors = {};
+          this.error = error;
+          this.errorMessage = error.message;
+          errors[error.message] = true;
+          this.messageForm.controls[error.path].setErrors(errors);
+        }
+      );
   }
 
   private createForm() {

@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ShellComponent } from './shell.component';
 import { HeaderComponent } from './header/header.component';
-import {SharedModule} from '@app/shared';
+import { SharedModule } from '@app/shared';
 
 @NgModule({
   imports: [CommonModule, SharedModule, TranslateModule, NgbModule, RouterModule],

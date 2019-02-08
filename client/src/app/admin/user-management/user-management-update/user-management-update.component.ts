@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {IUser} from '@app/shared/model/user.model';
-import {ActivatedRoute} from '@angular/router';
-import {UserService} from '@app/core/services/user.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ValidationService} from '@app/shared';
-import {IRole} from '@app/shared/model/role.model';
-import {RolesService} from '@app/core/services/roles.service';
-import {finalize} from 'rxjs/operators';
-import {Location} from '@angular/common';
+import { IUser } from '@app/shared/model/user.model';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '@app/core/services/user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidationService } from '@app/shared';
+import { IRole } from '@app/shared/model/role.model';
+import { RolesService } from '@app/core/services/roles.service';
+import { finalize } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-user-management-update',
@@ -25,7 +25,7 @@ export class UserManagementUpdateComponent implements OnInit {
     private user$: UserService,
     private roles$: RolesService,
     private formBuilder: FormBuilder,
-    private location: Location,
+    private location: Location
   ) {
     this.createForm();
   }
@@ -40,7 +40,7 @@ export class UserManagementUpdateComponent implements OnInit {
         email: user.email,
         username: user.username,
         roleName: user.role.name,
-        __typename: user.__typename,
+        __typename: user.__typename
       };
       this.userForm.setValue({
         ...userFormData
@@ -56,14 +56,17 @@ export class UserManagementUpdateComponent implements OnInit {
     this.isLoading = true;
     console.log('this.userForm.value: ', this.userForm.value);
     const user = { id: this.user.id, ...this.userForm.value };
-    this.user$.updateUser(user).pipe(
-      finalize(() => {
-        this.userForm.markAsPristine();
-        this.isLoading = false;
-      })
-    ).subscribe(() => {
-      this.previousState();
-    });
+    this.user$
+      .updateUser(user)
+      .pipe(
+        finalize(() => {
+          this.userForm.markAsPristine();
+          this.isLoading = false;
+        })
+      )
+      .subscribe(() => {
+        this.previousState();
+      });
   }
 
   public previousState() {
@@ -81,5 +84,4 @@ export class UserManagementUpdateComponent implements OnInit {
       __typename: ['']
     });
   }
-
 }

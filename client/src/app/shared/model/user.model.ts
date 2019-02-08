@@ -1,4 +1,4 @@
-import {IRole} from '@app/shared/model/role.model';
+import { IRole } from '@app/shared/model/role.model';
 
 export interface IUser {
   id?: any;

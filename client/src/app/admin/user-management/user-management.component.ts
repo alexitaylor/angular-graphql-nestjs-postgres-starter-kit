@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IUser } from '@app/shared/model/user.model';
-import {UserService} from '@app/core/services/user.service';
-import {EventManager} from '@app/shared/services/event-manager.service';
-import {Subscription} from 'rxjs';
+import { UserService } from '@app/core/services/user.service';
+import { EventManager } from '@app/shared/services/event-manager.service';
+import { Subscription } from 'rxjs';
 
 declare const $: any;
 
@@ -16,10 +16,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   eventSub: Subscription;
   userSub: Subscription;
 
-  constructor(
-    private user$: UserService,
-    private eventManager: EventManager,
-  ) {}
+  constructor(private user$: UserService, private eventManager: EventManager) {}
 
   ngOnInit() {
     this.reset();
@@ -41,7 +38,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   private initDataTable() {
     $(document).ready(() => {
       $('#user-management').DataTable({
-        'order': [[ 6, 'asc' ]]
+        order: [[6, 'asc']]
       });
     });
   }

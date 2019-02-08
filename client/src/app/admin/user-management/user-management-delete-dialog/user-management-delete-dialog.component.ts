@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import {IUser} from '@app/shared/model/user.model';
-import {UserService} from '@app/core/services/user.service';
-import {EventManager} from '@app/shared/services/event-manager.service';
+import { IUser } from '@app/shared/model/user.model';
+import { UserService } from '@app/core/services/user.service';
+import { EventManager } from '@app/shared/services/event-manager.service';
 
 @Component({
   selector: 'app-user-management-delete-dialog',
@@ -16,11 +16,11 @@ export class UserManagementDeleteDialogComponent {
     private user$: UserService,
     public activeModal: NgbActiveModal,
     private route: Router,
-    private eventManager: EventManager,
+    private eventManager: EventManager
   ) {}
 
   clear() {
-    this.route.navigate(['/user-management'], {replaceUrl: true});
+    this.route.navigate(['/user-management'], { replaceUrl: true });
     this.activeModal.dismiss('cancel');
   }
 
@@ -31,7 +31,7 @@ export class UserManagementDeleteDialogComponent {
         name: 'userManagementChange',
         content: 'Deleted user'
       });
-      this.route.navigate(['/user-management'], {replaceUrl: true});
+      this.route.navigate(['/user-management'], { replaceUrl: true });
       this.activeModal.dismiss(true);
     });
   }

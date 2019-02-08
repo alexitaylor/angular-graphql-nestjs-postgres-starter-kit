@@ -1,19 +1,17 @@
-import {Injectable, NgModule} from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { RouterModule, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 
 import { extract } from 'app/core/index';
 import { UserManagementComponent } from '@app/admin/user-management/user-management.component';
 import { AuthenticationGuard } from '@app/core';
-import {UserManagementUpdateComponent} from '@app/admin/user-management/user-management-update/user-management-update.component';
-import {IUser, User} from '@app/shared/model/user.model';
-import {UserService} from '@app/core/services/user.service';
-import {Observable, of} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {first} from 'rxjs/internal/operators';
-import {
-  UserManagementDeletePopupComponent
-} from '@app/admin/user-management/user-management-delete-dialog/user-management-delete-dialog.component';
-import {UserManagementCreatePopupComponent} from '@app/admin/user-management/user-management-create-dialog/user-management-create-dialog.component';
+import { UserManagementUpdateComponent } from '@app/admin/user-management/user-management-update/user-management-update.component';
+import { IUser, User } from '@app/shared/model/user.model';
+import { UserService } from '@app/core/services/user.service';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { first } from 'rxjs/internal/operators';
+import { UserManagementDeletePopupComponent } from '@app/admin/user-management/user-management-delete-dialog/user-management-delete-dialog.component';
+import { UserManagementCreatePopupComponent } from '@app/admin/user-management/user-management-create-dialog/user-management-create-dialog.component';
 
 @Injectable({ providedIn: 'root' })
 export class UserMgmtResolve implements Resolve<any> {
@@ -23,7 +21,10 @@ export class UserMgmtResolve implements Resolve<any> {
     const id = route.params['id'] ? route.params['id'] : null;
     if (id) {
       // Close observable after first value is emitted with first operator
-      return this.service.findById(id).pipe(map(res => res), first());
+      return this.service.findById(id).pipe(
+        map(res => res),
+        first()
+      );
     }
     return of(new User());
   }
@@ -49,7 +50,7 @@ const routes: Routes = [
     data: {
       title: extract('User Management Edit'),
       authorities: ['ADMIN']
-    },
+    }
   },
   {
     path: ':id/delete',

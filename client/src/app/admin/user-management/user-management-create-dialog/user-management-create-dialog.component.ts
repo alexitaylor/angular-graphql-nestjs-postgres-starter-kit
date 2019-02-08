@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import {IUser, User} from '@app/shared/model/user.model';
-import {UserService} from '@app/core/services/user.service';
-import {EventManager} from '@app/shared/services/event-manager.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ValidationService} from '@app/shared';
-import {finalize} from 'rxjs/operators';
-import {Logger} from '@app/core';
-import {RolesService} from '@app/core/services/roles.service';
-import {IRole} from '@app/shared/model/role.model';
+import { IUser, User } from '@app/shared/model/user.model';
+import { UserService } from '@app/core/services/user.service';
+import { EventManager } from '@app/shared/services/event-manager.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidationService } from '@app/shared';
+import { finalize } from 'rxjs/operators';
+import { Logger } from '@app/core';
+import { RolesService } from '@app/core/services/roles.service';
+import { IRole } from '@app/shared/model/role.model';
 
 const log = new Logger('Login');
 
@@ -40,34 +40,38 @@ export class UserManagementCreateDialogComponent {
   }
 
   clear() {
-    this.route.navigate(['/user-management'], {replaceUrl: true});
+    this.route.navigate(['/user-management'], { replaceUrl: true });
     this.activeModal.dismiss('cancel');
   }
 
   submit() {
     this.isLoading = true;
-    this.user$.createUser(this.createUserForm.value).pipe(
-      finalize(() => {
-        this.createUserForm.markAsPristine();
-        this.isLoading = false;
-      })
-    ).subscribe((res: any) => {
-        this.eventManager.broadcast({
-          name: 'userManagementChange',
-          content: 'Create user'
-        });
-        this.route.navigate(['/user-management'], {replaceUrl: true});
-        this.activeModal.dismiss(true);
-    },
-      (error: any) => {
-        log.debug(`Create User error: ${error}`);
-        const errors = {};
-        this.error = error;
-        this.errorMessage = error.message;
-        errors[error.message] = true;
-        this.createUserForm.controls[error.path].setErrors(errors);
-      }
-    )
+    this.user$
+      .createUser(this.createUserForm.value)
+      .pipe(
+        finalize(() => {
+          this.createUserForm.markAsPristine();
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        (res: any) => {
+          this.eventManager.broadcast({
+            name: 'userManagementChange',
+            content: 'Create user'
+          });
+          this.route.navigate(['/user-management'], { replaceUrl: true });
+          this.activeModal.dismiss(true);
+        },
+        (error: any) => {
+          log.debug(`Create User error: ${error}`);
+          const errors = {};
+          this.error = error;
+          this.errorMessage = error.message;
+          errors[error.message] = true;
+          this.createUserForm.controls[error.path].setErrors(errors);
+        }
+      );
   }
 
   private createForm() {
@@ -76,7 +80,7 @@ export class UserManagementCreateDialogComponent {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, ValidationService.emailValidator]],
       username: ['', [Validators.required, Validators.minLength(4)]],
-      roleName: ['USER'],
+      roleName: ['USER']
     });
   }
 }

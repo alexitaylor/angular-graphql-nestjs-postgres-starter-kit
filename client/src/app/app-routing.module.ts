@@ -32,7 +32,7 @@ const routes: Routes = [
     { path: 'user-management', loadChildren: 'app/admin/user-management/user-management.module#UserManagementModule' },
     { path: 'access-denied', loadChildren: 'app/layouts/access-denied/access-denied.module#AccessDeniedModule' },
     { path: 'messenger', loadChildren: 'app/messenger/messenger.module#MessengerModule' },
-    { path: 'entities', loadChildren: 'app/entities/entity.module#EntityModule' },
+    { path: 'entities', loadChildren: 'app/entities/entity.module#EntityModule' }
   ]),
   // Fallback when no prior route is matched
   { path: '**', redirectTo: '', pathMatch: 'full' }
@@ -53,7 +53,7 @@ const routes: Routes = [
     MessagesCreateDialogComponent,
     MessagesCreatePopupComponent,
     MessagesDeleteDialogComponent,
-    MessagesDeletePopupComponent,
+    MessagesDeletePopupComponent
   ],
   providers: []
 })

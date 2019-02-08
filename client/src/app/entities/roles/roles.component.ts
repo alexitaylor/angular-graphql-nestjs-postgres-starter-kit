@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {IRole} from '@app/shared/model/role.model';
-import {RolesService} from '@app/core/services/roles.service';
-import {Subscription} from 'rxjs';
-import {EventManager} from '@app/shared/services/event-manager.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IRole } from '@app/shared/model/role.model';
+import { RolesService } from '@app/core/services/roles.service';
+import { Subscription } from 'rxjs';
+import { EventManager } from '@app/shared/services/event-manager.service';
 
 declare const $: any;
 
@@ -16,10 +16,7 @@ export class RolesComponent implements OnInit, OnDestroy {
   rolesSub: Subscription;
   eventSub: Subscription;
 
-  constructor(
-    private roles$: RolesService,
-    private eventManager: EventManager,
-  ) { }
+  constructor(private roles$: RolesService, private eventManager: EventManager) {}
 
   ngOnInit() {
     this.reset();
@@ -35,13 +32,13 @@ export class RolesComponent implements OnInit, OnDestroy {
     this.rolesSub = this.roles$.query().subscribe(res => {
       this.roles = res;
       this.initDataTable();
-    })
+    });
   }
 
   private initDataTable() {
     $(document).ready(() => {
       $('#roles-table').DataTable();
-    })
+    });
   }
 
   listenToUserManagementChange() {
@@ -51,5 +48,4 @@ export class RolesComponent implements OnInit, OnDestroy {
       }, 300);
     });
   }
-
 }

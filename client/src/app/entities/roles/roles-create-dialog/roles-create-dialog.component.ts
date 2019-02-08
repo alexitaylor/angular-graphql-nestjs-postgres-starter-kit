@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import {EventManager} from '@app/shared/services/event-manager.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {finalize} from 'rxjs/operators';
-import {Logger} from '@app/core';
-import {RolesService} from '@app/core/services/roles.service';
-import {IRole, Role} from '@app/shared/model/role.model';
+import { EventManager } from '@app/shared/services/event-manager.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+import { Logger } from '@app/core';
+import { RolesService } from '@app/core/services/roles.service';
+import { IRole, Role } from '@app/shared/model/role.model';
 
 const log = new Logger('Login');
 
@@ -32,34 +32,38 @@ export class RolesCreateDialogComponent {
   }
 
   clear() {
-    this.route.navigate(['/entities/roles'], {replaceUrl: true});
+    this.route.navigate(['/entities/roles'], { replaceUrl: true });
     this.activeModal.dismiss('cancel');
   }
 
   submit() {
     this.isLoading = true;
-    this.roles$.createRole(this.roleForm.value).pipe(
-      finalize(() => {
-        this.roleForm.markAsPristine();
-        this.isLoading = false;
-      })
-    ).subscribe((res: any) => {
-        this.eventManager.broadcast({
-          name: 'rolesChange',
-          content: 'Create role'
-        });
-        this.route.navigate(['/entities/roles'], {replaceUrl: true});
-        this.activeModal.dismiss(true);
-    },
-      (error: any) => {
-        log.debug(`Create Role error: ${error}`);
-        const errors = {};
-        this.error = error;
-        this.errorMessage = error.message;
-        errors[error.message] = true;
-        this.roleForm.controls[error.path].setErrors(errors);
-      }
-    )
+    this.roles$
+      .createRole(this.roleForm.value)
+      .pipe(
+        finalize(() => {
+          this.roleForm.markAsPristine();
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        (res: any) => {
+          this.eventManager.broadcast({
+            name: 'rolesChange',
+            content: 'Create role'
+          });
+          this.route.navigate(['/entities/roles'], { replaceUrl: true });
+          this.activeModal.dismiss(true);
+        },
+        (error: any) => {
+          log.debug(`Create Role error: ${error}`);
+          const errors = {};
+          this.error = error;
+          this.errorMessage = error.message;
+          errors[error.message] = true;
+          this.roleForm.controls[error.path].setErrors(errors);
+        }
+      );
   }
 
   private createForm() {

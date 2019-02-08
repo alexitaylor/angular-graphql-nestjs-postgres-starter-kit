@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import {EventManager} from '@app/shared/services/event-manager.service';
-import {MessagesService} from '@app/core/services/messages.service';
-import {IMessages} from '@app/shared/model/messages.model';
+import { EventManager } from '@app/shared/services/event-manager.service';
+import { MessagesService } from '@app/core/services/messages.service';
+import { IMessages } from '@app/shared/model/messages.model';
 
 @Component({
   selector: 'app-messages-delete-dialog',
@@ -16,11 +16,11 @@ export class MessagesDeleteDialogComponent {
     private messages$: MessagesService,
     public activeModal: NgbActiveModal,
     private route: Router,
-    private eventManager: EventManager,
+    private eventManager: EventManager
   ) {}
 
   clear() {
-    this.route.navigate(['/entities/messages'], {replaceUrl: true});
+    this.route.navigate(['/entities/messages'], { replaceUrl: true });
     this.activeModal.dismiss('cancel');
   }
 
@@ -30,7 +30,7 @@ export class MessagesDeleteDialogComponent {
         name: 'messagesChange',
         content: 'Deleted message'
       });
-      this.route.navigate(['/entities/messages'], {replaceUrl: true});
+      this.route.navigate(['/entities/messages'], { replaceUrl: true });
       this.activeModal.dismiss(true);
     });
   }

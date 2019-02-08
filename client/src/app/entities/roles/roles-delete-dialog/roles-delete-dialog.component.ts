@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import {EventManager} from '@app/shared/services/event-manager.service';
-import {IRole} from '@app/shared/model/role.model';
-import {RolesService} from '@app/core/services/roles.service';
+import { EventManager } from '@app/shared/services/event-manager.service';
+import { IRole } from '@app/shared/model/role.model';
+import { RolesService } from '@app/core/services/roles.service';
 
 @Component({
   selector: 'app-roles-delete-dialog',
@@ -16,11 +16,11 @@ export class RolesDeleteDialogComponent {
     private roles$: RolesService,
     public activeModal: NgbActiveModal,
     private route: Router,
-    private eventManager: EventManager,
+    private eventManager: EventManager
   ) {}
 
   clear() {
-    this.route.navigate(['/entities/roles'], {replaceUrl: true});
+    this.route.navigate(['/entities/roles'], { replaceUrl: true });
     this.activeModal.dismiss('cancel');
   }
 
@@ -30,7 +30,7 @@ export class RolesDeleteDialogComponent {
         name: 'rolesChange',
         content: 'Deleted role'
       });
-      this.route.navigate(['/entities/roles'], {replaceUrl: true});
+      this.route.navigate(['/entities/roles'], { replaceUrl: true });
       this.activeModal.dismiss(true);
     });
   }

@@ -1,4 +1,4 @@
-import {IUser} from '@app/shared/model/user.model';
+import { IUser } from '@app/shared/model/user.model';
 
 export interface IMessages {
   id?: any;
@@ -14,12 +14,12 @@ export class Messages implements IMessages {
     public text?: string,
     public createdAt?: string,
     public updatedAt?: string,
-    public user?: IUser,
+    public user?: IUser
   ) {
     this.id = id ? id : null;
     this.text = text ? text : null;
-    this.createdAt = createdAt? createdAt : null;
-    this.updatedAt = updatedAt? updatedAt : null;
+    this.createdAt = createdAt ? createdAt : null;
+    this.updatedAt = updatedAt ? updatedAt : null;
     this.user = user ? user : null;
   }
 }

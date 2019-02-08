@@ -19,10 +19,8 @@ export class AuthenticationGuard implements CanActivate {
   }
 
   checkLogin(authorities: string[], state: RouterStateSnapshot): Observable<boolean> {
-
     return this.authenticationService.identity().pipe(
       map(account => {
-
         if (!authorities || authorities.length === 0) {
           return true;
         }
