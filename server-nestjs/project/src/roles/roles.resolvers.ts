@@ -22,8 +22,7 @@ export class RolesResolvers {
     @Query('role')
     @Roles('ADMIN')
     async findOneById(
-        @Args('id', ParseIntPipe)
-            id: number,
+        @Args('id') id: string
     ): Promise<RolesDto> {
         return await this.rolesService.findOneById(id);
     }
@@ -33,9 +32,7 @@ export class RolesResolvers {
     async createRole(
         @Args('name') name: string
     ): Promise<RolesDto> {
-        const createdRole = await this.rolesService.createRole(name);
-        pubSub.publish('createdRole', { createdRole: createdRole });
-        return createdRole;
+        return await this.rolesService.createRole(name);
     }
 
     @Mutation('updateRole')
@@ -44,16 +41,12 @@ export class RolesResolvers {
         @Args('id') id: string,
         @Args('name') name: string
     ): Promise<RolesDto> {
-        const updatedRole = await this.rolesService.updateRole(id, name);
-        pubSub.publish('updatedRole', { updatedRole: updatedRole });
-        return updatedRole;
+        return await this.rolesService.updateRole(id, name);
     }
 
     @Mutation('deleteRole')
     @Roles('ADMIN')
-    async deleteRole(@Args('id') id: string): Promise<RolesDto> {
-        const deletedRole = await this.rolesService.deleteRole(id);
-        pubSub.publish('deletedRole', { deletedRole: deletedRole });
-        return deletedRole;
+    async deleteRole(@Args('id') id: string): Promise<boolean> {
+        return await this.rolesService.deleteRole(id);
     }
 }

@@ -45,7 +45,7 @@ export abstract class IMutation {
 
     abstract updateRole(id: string, name: string): Role | Promise<Role>;
 
-    abstract deleteRole(id: string): Role | Promise<Role>;
+    abstract deleteRole(id: string): boolean | Promise<boolean>;
 
     abstract signIn(login: string, password: string): Token | Promise<Token>;
 

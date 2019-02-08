@@ -15,11 +15,11 @@ export class RolesService {
         return roles.map(role => role.toResponseObject());
     }
 
-    async findOneById(id: number) {
+    async findOneById(id: string) {
         const role = await this.rolesRepository.findOne({
             where: { id },
-            relations: ['users'],
         });
+
         return role.toResponseObject();
     }
 
@@ -29,11 +29,15 @@ export class RolesService {
                 { name },
             ]
         });
+
         if (role) {
             throw new HttpException('Role already exists', HttpStatus.BAD_REQUEST);
         }
+
         role = await this.rolesRepository.create({ name });
+
         await this.rolesRepository.save(role);
+
         return role.toResponseObject();
     }
 
@@ -41,14 +45,17 @@ export class RolesService {
         let role = await this.rolesRepository.findOne({
             where: { id },
         });
+
         if (!role) {
             throw new HttpException('Role not found', HttpStatus.NOT_FOUND);
         }
+
         await this.rolesRepository.update({ id }, { name });
+
         role = await this.rolesRepository.findOne({
             where: { id },
-            relations: ['users'],
         });
+
         return role.toResponseObject();
     }
 
@@ -56,10 +63,13 @@ export class RolesService {
         const role = await this.rolesRepository.findOne({
             where: { id },
         });
+
         if (!role) {
             throw new HttpException('Role not found', HttpStatus.NOT_FOUND);
         }
+
         await this.rolesRepository.remove(role);
-        return role.toResponseObject();
+
+        return !role.id;
     }
 }

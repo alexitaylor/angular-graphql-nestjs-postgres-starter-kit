@@ -8,7 +8,7 @@ type Mutation {
 
     updateRole(id: ID!, name: String!): Role!
 
-    deleteRole(id: ID!): Role!
+    deleteRole(id: ID!): Boolean
 }
 
 type Role {

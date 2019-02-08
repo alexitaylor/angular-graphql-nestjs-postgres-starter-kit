@@ -31,7 +31,7 @@ export class MessagesService {
         };
     }
 
-    async findOneById(id: number) {
+    async findOneById(id: string) {
         const message = await this.messagesRepository.findOne({
             where: { id },
             relations: ['user'],

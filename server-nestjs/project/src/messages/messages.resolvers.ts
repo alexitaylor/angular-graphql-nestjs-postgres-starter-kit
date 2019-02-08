@@ -28,8 +28,7 @@ export class MessagesResolvers {
     @Query('message')
     @Roles('ADMIN', 'USER')
     async findOneById(
-        @Args('id', ParseIntPipe)
-            id: number,
+        @Args('id') id: string
     ): Promise<MessagesDto> {
         return await this.messagesService.findOneById(id);
     }
