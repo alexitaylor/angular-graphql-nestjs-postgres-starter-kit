@@ -59,10 +59,10 @@ export class MessagesResolvers {
 
     @Mutation('deleteMessage')
     @Roles('ADMIN', 'USER')
-    async deleteMessage(@Args('id') id: string, @Context('me') me): Promise<MessagesDto> {
+    async deleteMessage(@Args('id') id: string, @Context('me') me): Promise<boolean> {
         const deletedMessage = await this.messagesService.deleteMessage(id, me);
         pubSub.publish('messageCreated', { messageCreated: deletedMessage });
-        return deletedMessage;
+        return !deletedMessage.id;
     }
 
     @Subscription()

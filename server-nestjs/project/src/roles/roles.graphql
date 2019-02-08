@@ -14,4 +14,6 @@ type Mutation {
 type Role {
     id: ID!
     name: String!
+    createdAt: String!
+    updatedAt: String!
 }

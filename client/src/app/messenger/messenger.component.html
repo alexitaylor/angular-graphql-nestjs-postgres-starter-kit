@@ -3,7 +3,7 @@
   <div class="message-container">
     <div id="messages" class="messages" *ngIf="messages.length !== 0">
       <div class="message" *ngFor="let message of messages | reverse">
-        <span>{{message.user.username}}:</span> <span>{{message.text}}</span>
+        <span>{{message?.user.username}}:</span> <span>{{message?.text}}</span>
       </div>
     </div>
     <div class="input">

@@ -30,6 +30,7 @@ const queryUsers = gql`
       lastName
       username
       email
+      createdAt
       role {
       id
         name
@@ -46,6 +47,7 @@ const queryUser = gql`
       lastName
       username
       email
+      createdAt
       role {
         id
         name

@@ -41,8 +41,8 @@ declare interface SubscriptionMessage {
  * parts of your queries.
  * */
 const queryMessages = gql`
-query messages($limit: Int, $cursor: String) {
-  messages(cursor: $cursor, limit: $limit) @connection(key: "messages", filter: ["type"]) {
+query messages($page: Int, $limit: Int) {
+  messages(page: $page, limit: $limit) @connection(key: "messages", filter: ["type"]) {
     edges {
       id
       text
@@ -54,8 +54,8 @@ query messages($limit: Int, $cursor: String) {
       }
     }
     pageInfo {
-      endCursor,
-      hasNextPage
+      page,
+      limit
     }
   }
 }
@@ -107,15 +107,13 @@ const updateMessage = gql`
 const messageSubscription = gql`
   subscription messageCreated {
     messageCreated {
-      message {
+      id
+      text
+      createdAt
+      updatedAt
+      user {
         id
-        text
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-        }
+        username
       }
     }
   }
@@ -134,15 +132,15 @@ export class MessagesService {
 
   constructor(private apollo: Apollo) { }
 
-  query(limit?: number, cursor?: string): Observable<IQueryMessages> {
+  query(page?: number, limit?: number): Observable<IQueryMessages> {
     // Default limit to 20
     limit = limit ? limit : 20;
-    cursor = cursor ? cursor : "";
+    page = page ? page : 1;
     return this.apollo.watchQuery<MessagesDataQuery>({
       query: queryMessages,
       variables: {
         limit,
-        cursor
+        page
       }
     }).valueChanges.pipe(
       map(({ data }) => data.messages),

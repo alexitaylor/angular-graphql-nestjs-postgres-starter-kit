@@ -33,17 +33,16 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
   reset() {
     this.messagesSub = this.messages$.query().subscribe((res: any) => {
-      const messages: [] = res.edges.sort((a: IMessages, b: IMessages) => {
-        return a.id - b.id;
-      });
-      this.messages = messages;
+      this.messages = res.edges;
       this.initDataTable();
     })
   }
 
   private initDataTable() {
     $(document).ready(() => {
-      $('#messages-table').DataTable();
+      $('#messages-table').DataTable({
+        'order': [[ 2, 'asc' ]]
+      });
     })
   }
 

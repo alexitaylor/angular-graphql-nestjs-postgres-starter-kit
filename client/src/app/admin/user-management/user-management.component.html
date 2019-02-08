@@ -21,6 +21,7 @@
           <th scope="col">Username</th>
           <th scope="col">Email</th>
           <th scope="col">Role</th>
+          <th scope="col">Created At</th>
           <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -34,6 +35,7 @@
           <td>
             <span class="badge badge-info p-2">{{user.role.name}}</span>
           </td>
+          <td>{{user.createdAt | formatDate}}</td>
           <td class="text-right">
             <div class="btn-group flex-btn-group-container">
               <button type="submit"

@@ -33,6 +33,8 @@ type User {
     username: String
     email: String!
     role: Role!
+    createdAt: String!
+    updatedAt: String!
     messages: [Message!]
 }
 

@@ -21,6 +21,7 @@ export class UsersService {
             relations: ['role', 'messages'],
             take: limit,
             skip: limit * (page - 1),
+            order: newest && { updatedAt: 'DESC' },
         });
         return users.map(user => user.toResponseObject(false));
     }
@@ -142,7 +143,7 @@ export class UsersService {
             where: { id },
             relations: ['role', 'messages'],
         });
-        console.log('user: ', user);
+
         return user.toResponseObject();
     }
 

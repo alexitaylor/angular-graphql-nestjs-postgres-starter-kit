@@ -25,11 +25,11 @@
         </thead>
         <tbody>
         <tr *ngFor="let message of messages">
-          <th scope="row">{{message.id}}</th>
-          <td>{{message.text}}</td>
-          <td>{{message.createdAt | formatDate}}</td>
-          <td>{{message.updatedAt | formatDate}}</td>
-          <td>{{message.user.username}}</td>
+          <th scope="row">{{message?.id}}</th>
+          <td>{{message?.text}}</td>
+          <td>{{message?.createdAt | formatDate}}</td>
+          <td>{{message?.updatedAt | formatDate}}</td>
+          <td>{{message?.user.username}}</td>
           <td class="text-right">
             <div class="btn-group flex-btn-group-container">
               <button type="submit"

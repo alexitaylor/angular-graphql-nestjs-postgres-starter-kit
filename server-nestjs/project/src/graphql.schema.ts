@@ -39,7 +39,7 @@ export abstract class IMutation {
 
     abstract updateMessage(id: string, text: string): Message | Promise<Message>;
 
-    abstract deleteMessage(id: string): Message | Promise<Message>;
+    abstract deleteMessage(id: string): boolean | Promise<boolean>;
 
     abstract createRole(name: string): Role | Promise<Role>;
 
@@ -84,6 +84,8 @@ export abstract class IQuery {
 export class Role {
     id: string;
     name: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export abstract class ISubscription {
@@ -101,5 +103,7 @@ export class User {
     username?: string;
     email: string;
     role: Role;
+    createdAt: string;
+    updatedAt: string;
     messages: Message[];
 }

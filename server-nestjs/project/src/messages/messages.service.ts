@@ -21,6 +21,7 @@ export class MessagesService {
             relations: ['user'],
             take: limit,
             skip: limit * (page - 1),
+            order: newest && { updatedAt: 'DESC' },
         });
         return {
             edges: messages.map(message => message.toResponseObject()),
@@ -41,8 +42,16 @@ export class MessagesService {
 
     async createMessage(text: string, userId: string) {
         const user = await this.userRepository.findOne({ where: { id: userId } });
+
         let message = await this.messagesRepository.create({ text, user  });
+
         await this.messagesRepository.save(message);
+
+        message = await this.messagesRepository.findOne({
+            where: { id: message.id },
+            relations: ['user'],
+        });
+
         return message.toResponseObject();
     }
 
@@ -84,6 +93,7 @@ export class MessagesService {
         }
 
         await this.messagesRepository.remove(message);
+
         return message.toResponseObject();
     }
 }
