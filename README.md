@@ -6,11 +6,11 @@ A full-stack starter kit with Angular 7, GraphQL, Apollo, NestJS and Postgres
 
 - Angular (ngx-rocket)
 - GraphQL
-- Apollo
-- Bootstrap 4, ng-bootstrap and Font Awesome
 - NestJS server
 - TypeORM
-- Postgres database with Sequelize
+- Apollo
+- Bootstrap 4, ng-bootstrap and Font Awesome
+- Postgres
 - Authentication w/ JWT and local storage
 - Authorization
 - E2E testing
