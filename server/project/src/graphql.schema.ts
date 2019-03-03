@@ -1,5 +1,5 @@
 /* tslint:disable */
-export class CreateUserInput {
+export abstract class CreateUserInput {
   firstName: string;
   lastName: string;
   email: string;
@@ -7,7 +7,7 @@ export class CreateUserInput {
   roleName?: string;
 }
 
-export class UpdateUseInput {
+export abstract class UpdateUseInput {
   id: string;
   firstName: string;
   lastName: string;
@@ -16,7 +16,7 @@ export class UpdateUseInput {
   roleName: string;
 }
 
-export class Message {
+export abstract class Message {
   id: string;
   text: string;
   createdAt: string;
@@ -24,12 +24,12 @@ export class Message {
   user: User;
 }
 
-export class MessageConnection {
+export abstract class MessageConnection {
   edges: Message[];
   pageInfo: PageInfo;
 }
 
-export class MessageCreated {
+export abstract class MessageCreated {
   message: Message;
   messages: MessageConnection;
 }
@@ -64,7 +64,7 @@ export abstract class IMutation {
   abstract deleteUser(id: string): boolean | Promise<boolean>;
 }
 
-export class PageInfo {
+export abstract class PageInfo {
   page: number;
   limit: number;
 }
@@ -91,7 +91,7 @@ export abstract class IQuery {
   abstract temp__(): boolean | Promise<boolean>;
 }
 
-export class Role {
+export abstract class Role {
   id: string;
   name: string;
   createdAt: string;
@@ -102,11 +102,11 @@ export abstract class ISubscription {
   abstract messageCreated(): Message | Promise<Message>;
 }
 
-export class Token {
+export abstract class Token {
   token: string;
 }
 
-export class User {
+export abstract class User {
   id: string;
   firstName: string;
   lastName: string;

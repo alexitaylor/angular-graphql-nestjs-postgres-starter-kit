@@ -16,6 +16,13 @@ A full-stack starter kit with Angular 7, GraphQL, Apollo, NestJS and Postgres
 - E2E testing
 - Docker Compose
 
+## Requirements
+
+- Node
+- NPM
+- Postgres
+- Docker (not required)
+
 ## Installation
 
 - `git clone git@https://github.com/alexitaylor/angular-graphql-express-postgres-starter-kit.git`
@@ -40,9 +47,34 @@ A full-stack starter kit with Angular 7, GraphQL, Apollo, NestJS and Postgres
 
 # Server
 
-- `cd server`
-- `npm install`
-- `touch .env`
-- fill out _.env file_ with postgres env variables
-- `npm run start:dev`
-- optional visit `http://localhost:4000/graphql` for GraphQL playground
+## Installation
+
+```bash
+$ cd server
+$ npm install
+```
+
+### Required for Docker
+
+Fill out _.env file_ with postgres env variables
+
+`bash $ touch .env`
+
+### Find default Postgres Database Configs
+
+- Navigate to `server/project/ormconfig.json` file
+
+## Running the server
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+Visit `http://localhost:4000/graphql` for GraphQL playground
