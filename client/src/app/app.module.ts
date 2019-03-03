@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GraphQLModule } from '@app/graphql.module';
 import { EntityModule } from './entities/entity.module';
+import { AccessDeniedModule } from '@app/layouts/access-denied/access-denied.module';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { EntityModule } from './entities/entity.module';
     HomeModule,
     LoginModule,
     RegisterModule,
+    AccessDeniedModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     EntityModule,
     GraphQLModule,

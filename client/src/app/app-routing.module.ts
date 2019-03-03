@@ -30,7 +30,6 @@ const routes: Routes = [
   Shell.childRoutes([
     { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
     { path: 'user-management', loadChildren: 'app/admin/user-management/user-management.module#UserManagementModule' },
-    { path: 'access-denied', loadChildren: 'app/layouts/access-denied/access-denied.module#AccessDeniedModule' },
     { path: 'messenger', loadChildren: 'app/messenger/messenger.module#MessengerModule' },
     { path: 'entities', loadChildren: 'app/entities/entity.module#EntityModule' }
   ]),

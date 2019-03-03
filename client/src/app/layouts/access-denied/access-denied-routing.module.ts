@@ -6,7 +6,7 @@ import { AccessDeniedComponent } from '@app/layouts/access-denied/access-denied.
 
 const routes: Routes = [
   // Module is lazy loaded, see app-routing.module.ts
-  { path: '', component: AccessDeniedComponent, data: { title: extract('Access Denied') } }
+  { path: 'access-denied', component: AccessDeniedComponent, data: { title: extract('Access Denied') } }
 ];
 
 @NgModule({

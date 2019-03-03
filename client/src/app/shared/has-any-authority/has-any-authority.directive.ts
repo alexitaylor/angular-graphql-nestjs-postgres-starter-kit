@@ -36,8 +36,8 @@ export class HasAnyAuthorityDirective {
   }
 
   private updateView(): void {
-    this.viewContainerRef.clear();
     this.authentication$.identity().subscribe(res => {
+      this.viewContainerRef.clear();
       const role = res ? res.role.name : null;
       if (this.authentication$.hasAnyAuthority(this.authorities, role)) {
         this.viewContainerRef.createEmbeddedView(this.templateRef);
