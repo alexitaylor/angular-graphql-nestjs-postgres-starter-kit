@@ -10,8 +10,8 @@ I recommend reading through the [Docs](https://graphql.org/graphql-js/) to learn
 
 - Once your server is running visit [http://localhost:4000/graphql](http://localhost:4000/graphql) for GraphQL playground
   - Running the server: `$ npm run start:dev`
-- Run the sign in mutation to grab the JWT token
-- In order to run all other queries open the HTTP HEADERS tab on the bottom left corner of the GraphQL playground
+- Execute the sign in mutation to grab the JWT token
+- In order to Execute all other queries and mutations open the HTTP HEADERS tab on the bottom left corner of the GraphQL playground
 - Add your JWT token like so:
 
 ```bash

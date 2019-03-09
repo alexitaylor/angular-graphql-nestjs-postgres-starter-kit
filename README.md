@@ -39,11 +39,11 @@ Happy Coding :)
 
 <a name="gettingstarted"></a>
 
-# [⬆️](tableofcontents) Getting Started
+# [⬆️](#tableofcontents) Getting Started
 
 <a name="requirements"></a>
 
-## [⬆️](tableofcontents) Requirements
+## [⬆️](#tableofcontents) Requirements
 
 Follow [this guide](.github/MAC_DEV_ENV_SETUP.md) to setup your mac dev environment.
 
@@ -54,7 +54,7 @@ Follow [this guide](.github/MAC_DEV_ENV_SETUP.md) to setup your mac dev environm
 
 <a name="installation"></a>
 
-## [⬆️](tableofcontents) Installation
+## [⬆️](#tableofcontents) Installation
 
 - Fork the repo
 - `git clone git@https://github.com/<yourusername>/angular-graphql-express-postgres-starter-kit.git`
@@ -63,7 +63,7 @@ Follow [this guide](.github/MAC_DEV_ENV_SETUP.md) to setup your mac dev environm
 
 <a name="client"></a>
 
-# [⬆️](tableofcontents) Client
+# [⬆️](#tableofcontents) Client
 
 - `cd client`
 - `npm install`
@@ -82,7 +82,7 @@ Follow [this guide](.github/MAC_DEV_ENV_SETUP.md) to setup your mac dev environm
 
 <a name="server"></a>
 
-# [⬆️](tableofcontents) Server
+# [⬆️](#tableofcontents) Server
 
 ## Installation
 
