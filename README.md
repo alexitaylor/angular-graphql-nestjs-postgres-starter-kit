@@ -2,9 +2,9 @@
 
 A full-stack starter kit with Angular 7, GraphQL, Apollo, NestJS and Postgres.
 
-Starting a new web app can be hard. Choosing the right technologies, architecting the foundation and developing the core of an application can take a lot of time. Setting up a back-end and front-end requires a substantial amount of work. Furthermore, if you don't do things correctly, it can create technical debt, painless refactoring, and maintenance hell. We take care of all the tedious, mundane setup process for you.   
+Starting a new web app can be hard. Choosing the right technologies, architecting the foundation and developing the core of an application can take a lot of time. Setting up a back-end and front-end requires a substantial amount of work. Furthermore, if you don't do things correctly, it can create technical debt, painless refactoring, and maintenance hell. We take care of all the tedious, mundane setup process for you.
 
-This project provides you with a kick start to your project by providing a scalable, modular web app with features like sign up and log in, user management, easy database configuration and more. We carefully curated cutting-edge technologies for a full-stack application. View the full list of features below. 
+This project provides you with a kick start to your project by providing a scalable, modular web app with features like sign up and log in, user management, easy database configuration and more. We carefully curated cutting-edge technologies for a full-stack application. View the full list of features below.
 
 Happy Coding :)
 
@@ -67,7 +67,8 @@ $ npm install
 - Required only initial setup
 - Find default Postgres Database Configs by navigating to `server/project/ormconfig.json` file
 - Connect to Postgres shell: `psql postgres`
-- Create database: 
+- Create database:
+
 ```bash
 postgres=# create database nest_graphql_test;
 CREATE DATABASE
@@ -108,7 +109,18 @@ DATABASE_HOST=postgres
 DATABASE_PORT=5432
 ```
 
+## Contributing
+
+Hundreds of developers have helped to make the HTML5 Boilerplate. Anyone is welcome to [contribute](.github/CONTRIBUTING.md),
+however, if you decide to get involved, please take a moment to review
+the [guidelines](.github/CONTRIBUTING.md):
+
+- [Bug reports](.github/CONTRIBUTING.md#bugs)
+- [Feature requests](.github/CONTRIBUTING.md#features)
+- [Pull requests](.github/CONTRIBUTING.md#pull-requests)
+
 ### TODO:
-* [ ] Implement TypeORM migrations and default data on initial setup
-* [ ] Write Docker setup and configuration README
-* [ ] More tests
+
+- [ ] Implement TypeORM migrations and default data on initial setup
+- [ ] Write Docker setup and configuration README
+- [ ] More tests
