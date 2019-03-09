@@ -53,19 +53,25 @@ export class GraphQLModule {
     });
 
     const errorLink = onError(({ graphQLErrors, networkError }) => {
+      console.log('graphQLErrors: ', graphQLErrors);
       if (graphQLErrors) {
         graphQLErrors.forEach(({ message, locations, path }) => {
           console.log(`GRAPHQL ERROR: ${message}`);
-          if (message === 'NOT_AUTHENTICATED') {
-            this.auth$.logout();
-            this.auth$.redirectLogoutOnSessionExpired();
-          } else if (message === 'Token error: invalid signature') {
-            this.auth$.logout();
+          const messageError: any | string = message;
+          const error = messageError.error;
+          if (
+            message === 'NOT_AUTHENTICATED' ||
+            message === 'Token error: invalid signature' ||
+            message === 'Token error: jwt expired' ||
+            error === 'Forbidden'
+          ) {
+            // this.auth$.logout();
             this.auth$.redirectLogoutOnSessionExpired();
           }
         });
       }
 
+      console.log('networkError: ', networkError);
       if (networkError) {
         if (networkError['statusCode'] === 401) {
           this.auth$.logout();
