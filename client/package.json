@@ -4,7 +4,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexitaylor/angular-graphql-express-postgres-starter-kit"
+    "url": "https://github.com/alexitaylor/angular-graphql-nestjs-postgres-starter-kit"
   },
   "scripts": {
     "ng": "ng",

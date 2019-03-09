@@ -4,6 +4,10 @@
   "description": "Nestjs GraphQL Server",
   "author": "Alexi Taylor",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexitaylor/angular-nestjs-express-postgres-starter-kit"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
