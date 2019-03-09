@@ -10,31 +10,33 @@ Happy Coding :)
 
 ## Features
 
-- Angular (ngx-rocket)
-- GraphQL
-- NestJS server
-- TypeORM
-- Apollo
-- Bootstrap 4, ng-bootstrap and Font Awesome
-- Postgres
-- Authentication w/ JWT and local storage
+- [Angular 7.X](https://angular.io/) (w/ [TypScript](https://www.typescriptlang.org/))
+- [GraphQL](https://graphql.org/)
+- [NestJS](https://nestjs.com/) server
+- [TypeORM](https://typeorm.io/#/)
+- [Apollo](https://www.apollographql.com/)
+- [Bootstrap 4](https://getbootstrap.com/)
+- [Postgres](https://www.postgresql.org/)
+- Authentication w/ [JWT](https://jwt.io/) and [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
 - Authorization
 - User Management
 - Entity Management
 - E2E testing
-- Docker Compose
+- [Docker](https://www.docker.com/) Compose
 
 ## Requirements
 
-- Node
-- NPM
-- Postgres
-- Docker (optional)
+- [Node](https://nodejs.org/en/)
+- [NPM](https://www.npmjs.com/)
+- [Postgres](https://www.postgresql.org/)
+- [Docker](https://www.docker.com/) (optional)
 
 ## Installation
 
-- `git clone git@https://github.com/alexitaylor/angular-graphql-express-postgres-starter-kit.git`
+- Fork the repo
+- `git clone git@https://github.com/<yourusername>/angular-graphql-express-postgres-starter-kit.git`
 - `cd angular-graphql-express-postgres-starter-kit`
+- `git remote add upstream git@https://github.com/alexitaylor/angular-graphql-express-postgres-starter-kit.git`
 
 # Client
 
