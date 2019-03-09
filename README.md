@@ -1,4 +1,4 @@
-#  🚀Angular 7 + GraphQL + NestJS + Postgres Starter Kit
+# 🚀Angular 7 + GraphQL + NestJS + Postgres Starter Kit
 
 A full-stack starter kit with Angular 7, GraphQL, Apollo, NestJS and Postgres.
 
@@ -24,21 +24,46 @@ Happy Coding :)
 - E2E testing
 - [Docker](https://www.docker.com/) Compose
 
-## Requirements
+<a name="tableofcontents"></a>
+
+# Table of Contents
+
+- [Requirements](#requirements)
+- [Getting Started](#gettingstarted)
+- [Installation](#installation)
+- [Client](#client)
+- [Server](#server)
+- [Contributing](#contributing)
+- [Cheat Sheets](#cheatsheets)
+- [TODO](#todo)
+
+<a name="gettingstarted"></a>
+
+# [⬆️](tableofcontents) Getting Started
+
+<a name="requirements"></a>
+
+## [⬆️](tableofcontents) Requirements
+
+Follow [this guide](.github/MAC_DEV_ENV_SETUP.md) to setup your mac dev environment.
 
 - [Node](https://nodejs.org/en/)
 - [NPM](https://www.npmjs.com/)
 - [Postgres](https://www.postgresql.org/)
 - [Docker](https://www.docker.com/) (optional)
 
-## Installation
+<a name="installation"></a>
+
+## [⬆️](tableofcontents) Installation
 
 - Fork the repo
 - `git clone git@https://github.com/<yourusername>/angular-graphql-express-postgres-starter-kit.git`
 - `cd angular-graphql-express-postgres-starter-kit`
 - `git remote add upstream git@https://github.com/alexitaylor/angular-graphql-express-postgres-starter-kit.git`
 
-# Client
+<a name="client"></a>
+
+# [⬆️](tableofcontents) Client
 
 - `cd client`
 - `npm install`
@@ -55,7 +80,9 @@ Happy Coding :)
 - $ npm run docs: show docs and coding guides
 - $ npm run prettier: format your code automatically
 
-# Server
+<a name="server"></a>
+
+# [⬆️](tableofcontents) Server
 
 ## Installation
 
@@ -91,7 +118,8 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-Visit `http://localhost:4000/graphql` for GraphQL playground
+- Visit [http://localhost:4000/graphql](http://localhost:4000/graphql) for GraphQL playground
+- Getting Started with GraphQL visit [here](.github/GRAPHQL.md)
 
 ### Required for Docker
 
@@ -111,17 +139,30 @@ DATABASE_HOST=postgres
 DATABASE_PORT=5432
 ```
 
-## Contributing
+<a name="contributing"></a>
 
-Hundreds of developers have helped to make the HTML5 Boilerplate. Anyone is welcome to [contribute](.github/CONTRIBUTING.MD),
+# [⬆️](#tableofcontents) Contributing
+
+Hundreds of developers have helped to make the HTML5 Boilerplate. Anyone is welcome to [contribute](.github/CONTRIBUTING.md),
 however, if you decide to get involved, please take a moment to review
-the [guidelines](.github/CONTRIBUTING.MD):
+the [guidelines](.github/CONTRIBUTING.md):
 
-- [Bug reports](.github/CONTRIBUTING.MD#bugs)
-- [Feature requests](.github/CONTRIBUTING.MD#features)
-- [Pull requests](.github/CONTRIBUTING.MD#pull-requests)
+- [Bug reports](.github/CONTRIBUTING.md#bugs)
+- [Feature requests](.github/CONTRIBUTING.md#features)
+- [Pull requests](.github/CONTRIBUTING.md#pull-requests)
 
-### TODO:
+<a name="cheatsheets"></a>
+
+# [⬆️](#tableofcontents) Cheat Sheets
+
+- [Postgres](.github/POSTGRES_COMMANDS.md)
+- [Docker](.github/DOCKER_COMMANDS.md)
+- [GraphQL](.github/GRAPHQL.md)
+- [Mac Dev Env Setup](.github/MAC_DEV_ENV_SETUP.md)
+
+<a name="todo"></a>
+
+### [⬆️](#tableofcontents) TODO:
 
 - [ ] Implement TypeORM migrations and default data on initial setup
 - [ ] Write Docker setup and configuration README
