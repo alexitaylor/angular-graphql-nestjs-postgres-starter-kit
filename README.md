@@ -111,13 +111,13 @@ DATABASE_PORT=5432
 
 ## Contributing
 
-Hundreds of developers have helped to make the HTML5 Boilerplate. Anyone is welcome to [contribute](.github/CONTRIBUTING.md),
+Hundreds of developers have helped to make the HTML5 Boilerplate. Anyone is welcome to [contribute](.github/CONTRIBUTING.MD),
 however, if you decide to get involved, please take a moment to review
-the [guidelines](.github/CONTRIBUTING.md):
+the [guidelines](.github/CONTRIBUTING.MD):
 
-- [Bug reports](.github/CONTRIBUTING.md#bugs)
-- [Feature requests](.github/CONTRIBUTING.md#features)
-- [Pull requests](.github/CONTRIBUTING.md#pull-requests)
+- [Bug reports](.github/CONTRIBUTING.MD#bugs)
+- [Feature requests](.github/CONTRIBUTING.MD#features)
+- [Pull requests](.github/CONTRIBUTING.MD#pull-requests)
 
 ### TODO:
 
