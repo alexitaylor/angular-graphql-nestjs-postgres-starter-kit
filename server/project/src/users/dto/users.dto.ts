@@ -1,5 +1,4 @@
 import { IsNotEmpty, Length } from 'class-validator';
-// import { CreateUserInput } from '../../graphql.schema';
 import { RolesEntity } from '../../roles/roles.entity';
 import { MessagesEntity } from '../../messages/messages.entity';
 

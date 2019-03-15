@@ -1,119 +1,109 @@
 /* tslint:disable */
-export abstract class CreateUserInput {
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  roleName?: string;
+export class CreateUserInput {
+    firstName: string;
+    lastName: string;
+    email: string;
+    username: string;
+    roleName?: string;
 }
 
-export abstract class UpdateUseInput {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  roleName: string;
+export class UpdateUseInput {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    username: string;
+    roleName: string;
 }
 
-export abstract class Message {
-  id: string;
-  text: string;
-  createdAt: string;
-  updatedAt: string;
-  user: User;
+export class Message {
+    id: string;
+    text: string;
+    createdAt: string;
+    updatedAt: string;
+    user: User;
 }
 
-export abstract class MessageConnection {
-  edges: Message[];
-  pageInfo: PageInfo;
+export class MessageConnection {
+    edges: Message[];
+    pageInfo: PageInfo;
 }
 
-export abstract class MessageCreated {
-  message: Message;
-  messages: MessageConnection;
+export class MessageCreated {
+    message: Message;
+    messages: MessageConnection;
 }
 
 export abstract class IMutation {
-  abstract createMessage(text: string): Message | Promise<Message>;
+    abstract createMessage(text: string): Message | Promise<Message>;
 
-  abstract updateMessage(id: string, text: string): Message | Promise<Message>;
+    abstract updateMessage(id: string, text: string): Message | Promise<Message>;
 
-  abstract deleteMessage(id: string): boolean | Promise<boolean>;
+    abstract deleteMessage(id: string): boolean | Promise<boolean>;
 
-  abstract createRole(name: string): Role | Promise<Role>;
+    abstract createRole(name: string): Role | Promise<Role>;
 
-  abstract updateRole(id: string, name: string): Role | Promise<Role>;
+    abstract updateRole(id: string, name: string): Role | Promise<Role>;
 
-  abstract deleteRole(id: string): boolean | Promise<boolean>;
+    abstract deleteRole(id: string): boolean | Promise<boolean>;
 
-  abstract signIn(login: string, password: string): Token | Promise<Token>;
+    abstract signIn(login: string, password: string): Token | Promise<Token>;
 
-  abstract signUp(
-    firstName: string,
-    lastName: string,
-    email: string,
-    username: string,
-    password: string,
-  ): Token | Promise<Token>;
+    abstract signUp(firstName: string, lastName: string, email: string, username: string, password: string): Token | Promise<Token>;
 
-  abstract createUser(createUserInput?: CreateUserInput): User | Promise<User>;
+    abstract createUser(createUserInput?: CreateUserInput): User | Promise<User>;
 
-  abstract updateUser(updateUserInput?: UpdateUseInput): User | Promise<User>;
+    abstract updateUser(updateUserInput?: UpdateUseInput): User | Promise<User>;
 
-  abstract deleteUser(id: string): boolean | Promise<boolean>;
+    abstract deleteUser(id: string): boolean | Promise<boolean>;
 }
 
-export abstract class PageInfo {
-  page: number;
-  limit: number;
+export class PageInfo {
+    page: number;
+    limit: number;
 }
 
 export abstract class IQuery {
-  abstract messages(
-    page?: number,
-    limit?: number,
-    newest?: boolean,
-  ): MessageConnection | Promise<MessageConnection>;
+    abstract messages(page?: number, limit?: number, newest?: boolean): MessageConnection | Promise<MessageConnection>;
 
-  abstract message(id: string): Message | Promise<Message>;
+    abstract message(id: string): Message | Promise<Message>;
 
-  abstract roles(): Role[] | Promise<Role[]>;
+    abstract roles(): Role[] | Promise<Role[]>;
 
-  abstract role(id: string): Role | Promise<Role>;
+    abstract role(id: string): Role | Promise<Role>;
 
-  abstract users(): User[] | Promise<User[]>;
+    abstract users(): User[] | Promise<User[]>;
 
-  abstract user(id: string): User | Promise<User>;
+    abstract user(id: string): User | Promise<User>;
 
-  abstract me(): User | Promise<User>;
+    abstract me(): User | Promise<User>;
 
-  abstract temp__(): boolean | Promise<boolean>;
+    abstract temp__(): boolean | Promise<boolean>;
 }
 
-export abstract class Role {
-  id: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
+export class Role {
+    id: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export abstract class ISubscription {
-  abstract messageCreated(): Message | Promise<Message>;
+    abstract messageCreated(): Message | Promise<Message>;
 }
 
-export abstract class Token {
-  token: string;
+export class Token {
+    token: string;
 }
 
-export abstract class User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  username?: string;
-  email: string;
-  role: Role;
-  createdAt: string;
-  updatedAt: string;
-  messages: Message[];
+export class User {
+    id: string;
+    firstName: string;
+    lastName: string;
+    username?: string;
+    email: string;
+    role: Role;
+    createdAt: string;
+    updatedAt: string;
+    messages: Message[];
 }
