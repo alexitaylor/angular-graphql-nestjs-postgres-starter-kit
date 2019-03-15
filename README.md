@@ -105,6 +105,15 @@ CREATE DATABASE
 
 - If `postgres` user does not exist: 1. [Create a new user](https://www.postgresql.org/docs/8.0/sql-createuser.html) and 2. [Change user's role](https://chartio.com/resources/tutorials/how-to-change-a-user-to-superuser-in-postgresql/)
 
+### Seed Database
+
+- Run the following command to seed your database with default and random generated data:
+```bash
+$ npm run seedData
+```
+- ***WARNING:*** Running this file will ***DELETE ALL*** data in your database and re-generate and insert new, random.
+- ***BE CAREFUL*** running this command in ***production env***. It will delete all production data. The script will check if the environment you're running in is production or not by checking `server/project/src/environments/environment.ts` file configs. If environment.production config is set to true, then the seeding process will only generate default roles and 2 default users. This is useful when first setting up your production environment. 
+
 ## Running the server
 
 ```bash
