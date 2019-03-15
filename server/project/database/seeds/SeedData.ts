@@ -51,7 +51,7 @@ export class SeedData {
    */
   async seedData() {
     try {
-      this.log(chalk.green(`🌱 SEEDING ${!environment.production && 'PRODUCTION'} DATABASE...`));
+      this.log(chalk.green(`🌱 SEEDING ${environment.production ? 'PRODUCTION' : ''} DATABASE...`));
 
       const roles: RolesEntity[] = await createRoles(this.connection);
       // Only seed database with fake users if dev or testing environment
@@ -62,7 +62,7 @@ export class SeedData {
       // Only seed database with fake messages if dev or testing environment.
       !environment.production && await createMessages(this.connection, users);
 
-      this.log(chalk.green(`✅ SEEDED ${!environment.production && 'PRODUCTION'} DATABASE`));
+      this.log(chalk.green(`✅ SEEDED ${environment.production ? 'PRODUCTION' : ''} DATABASE`));
     } catch (error) {
       this.handleError(error);
     }
