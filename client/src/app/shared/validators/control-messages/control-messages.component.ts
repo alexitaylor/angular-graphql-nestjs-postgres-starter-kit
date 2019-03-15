@@ -4,7 +4,9 @@ import { ValidationService } from '@app/shared';
 
 @Component({
   selector: 'app-control-messages',
-  template: `<span *ngIf="errorMessage !== null" class="text-danger" translate>{{errorMessage}}</span>`,
+  template: `
+    <span *ngIf="errorMessage !== null" class="text-danger" translate>{{ errorMessage }}</span>
+  `,
   styleUrls: ['./control-messages.component.scss']
 })
 export class ControlMessagesComponent implements OnInit {

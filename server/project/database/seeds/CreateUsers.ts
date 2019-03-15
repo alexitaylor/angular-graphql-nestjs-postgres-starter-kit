@@ -3,7 +3,10 @@ import * as faker from 'faker';
 import { UsersEntity } from '../../src/users/users.entity';
 import { RolesEntity } from '../../src/roles/roles.entity';
 
-export const createUsers = async (connection: Connection, roles: RolesEntity[]): Promise<UsersEntity[]> => {
+export const createUsers = async (
+  connection: Connection,
+  roles: RolesEntity[],
+): Promise<UsersEntity[]> => {
   let users: UsersEntity[];
   let user: UsersEntity;
   let role: RolesEntity;
@@ -16,25 +19,43 @@ export const createUsers = async (connection: Connection, roles: RolesEntity[]):
     // Randomly assign role to user
     role = roles[faker.random.number(roles.length)];
     user = generateRandomUser(role);
-    await connection.createQueryBuilder().insert().into(UsersEntity).values(user).execute();
+    await connection
+      .createQueryBuilder()
+      .insert()
+      .into(UsersEntity)
+      .values(user)
+      .execute();
     users.push(user);
   }
 
   return users;
 };
 
-export const seedDefaultUsers = async (connection: Connection, roles: RolesEntity[]): Promise<UsersEntity[]> => {
+export const seedDefaultUsers = async (
+  connection: Connection,
+  roles: RolesEntity[],
+): Promise<UsersEntity[]> => {
   const users: UsersEntity[] = [];
 
-  const adminRole = roles.filter((role) => role.name === 'ADMIN')[0];
-  const userRole = roles.filter((role) => role.name === 'USER')[0];
+  const adminRole = roles.filter(role => role.name === 'ADMIN')[0];
+  const userRole = roles.filter(role => role.name === 'USER')[0];
 
   const defaultAdmin = generateDefaultAdmin(adminRole);
-  await connection.createQueryBuilder().insert().into(UsersEntity).values(defaultAdmin).execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(UsersEntity)
+    .values(defaultAdmin)
+    .execute();
   users.push(defaultAdmin);
 
   const defaultUser = generateDefaultUser(userRole);
-  await connection.createQueryBuilder().insert().into(UsersEntity).values(defaultUser).execute();
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(UsersEntity)
+    .values(defaultUser)
+    .execute();
   users.push(defaultUser);
 
   return users;
@@ -53,7 +74,7 @@ const generateRandomUser = (role: RolesEntity): UsersEntity => {
   user.username = username;
   user.email = email;
   user.role = role;
-  user.password = '123456789';
+  user.password = '12345678';
 
   return user;
 };
@@ -65,7 +86,7 @@ const generateDefaultAdmin = (role: RolesEntity): UsersEntity => {
   user.username = 'admin';
   user.email = 'admin@localhost.com';
   user.role = role;
-  user.password = '123456789';
+  user.password = '12345678';
 
   return user;
 };
@@ -77,7 +98,7 @@ const generateDefaultUser = (role: RolesEntity): UsersEntity => {
   user.username = 'user';
   user.email = 'user@localhost.com';
   user.role = role;
-  user.password = '123456789';
+  user.password = '12345678';
 
   return user;
 };
