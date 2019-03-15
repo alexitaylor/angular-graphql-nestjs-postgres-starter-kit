@@ -91,7 +91,7 @@ export class SeedData {
     try {
       for (const entity of entities) {
         const repository = await getRepository(entity.name);
-        await repository.query(`TRUNCATE TABLE public.${entity.tableName} CASCADE;`);
+        await repository.query(`TRUNCATE TABLE "public"."${entity.tableName}" CASCADE;`);
       }
     } catch (error) {
       this.handleError(error, 'Unable to clean database');
