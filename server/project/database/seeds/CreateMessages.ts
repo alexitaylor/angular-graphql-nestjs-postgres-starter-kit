@@ -3,7 +3,10 @@ import * as faker from 'faker';
 import { UsersEntity } from '../../src/users/users.entity';
 import { MessagesEntity } from '../../src/messages/messages.entity';
 
-export const createMessages = async (connection: Connection, users: UsersEntity[]): Promise<MessagesEntity[]> => {
+export const createMessages = async (
+  connection: Connection,
+  users: UsersEntity[],
+): Promise<MessagesEntity[]> => {
   const messages = [];
   let message: MessagesEntity;
   let user: UsersEntity;
@@ -11,9 +14,14 @@ export const createMessages = async (connection: Connection, users: UsersEntity[
   // Generate 100 random messages
   for (let i = 0; i < 100; i++) {
     // Randomly assign a user to message
-    user = users[faker.random.number(users.length)];
+    user = users[faker.random.number(users.length - 1)];
     message = generateRandomMessages(user);
-    await connection.createQueryBuilder().insert().into(MessagesEntity).values(message).execute();
+    await connection
+      .createQueryBuilder()
+      .insert()
+      .into(MessagesEntity)
+      .values(message)
+      .execute();
     messages.push(message);
   }
 

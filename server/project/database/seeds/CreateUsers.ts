@@ -17,7 +17,7 @@ export const createUsers = async (
   // Generate 20 random users
   for (let i = 0; i < 20; i++) {
     // Randomly assign role to user
-    role = roles[faker.random.number(roles.length)];
+    role = roles[faker.random.number(roles.length - 1)];
     user = generateRandomUser(role);
     await connection
       .createQueryBuilder()

@@ -35,6 +35,12 @@ export class MessageCreated {
 }
 
 export abstract class IMutation {
+  abstract createMessage(text: string): Message | Promise<Message>;
+
+  abstract updateMessage(id: string, text: string): Message | Promise<Message>;
+
+  abstract deleteMessage(id: string): boolean | Promise<boolean>;
+
   abstract createRole(name: string): Role | Promise<Role>;
 
   abstract updateRole(id: string, name: string): Role | Promise<Role>;
@@ -56,12 +62,6 @@ export abstract class IMutation {
   abstract updateUser(updateUserInput?: UpdateUseInput): User | Promise<User>;
 
   abstract deleteUser(id: string): boolean | Promise<boolean>;
-
-  abstract createMessage(text: string): Message | Promise<Message>;
-
-  abstract updateMessage(id: string, text: string): Message | Promise<Message>;
-
-  abstract deleteMessage(id: string): boolean | Promise<boolean>;
 }
 
 export class PageInfo {
@@ -70,6 +70,14 @@ export class PageInfo {
 }
 
 export abstract class IQuery {
+  abstract messages(
+    page?: number,
+    limit?: number,
+    newest?: boolean,
+  ): MessageConnection | Promise<MessageConnection>;
+
+  abstract message(id: string): Message | Promise<Message>;
+
   abstract roles(): Role[] | Promise<Role[]>;
 
   abstract role(id: string): Role | Promise<Role>;
@@ -79,14 +87,6 @@ export abstract class IQuery {
   abstract user(id: string): User | Promise<User>;
 
   abstract me(): User | Promise<User>;
-
-  abstract messages(
-    page?: number,
-    limit?: number,
-    newest?: boolean,
-  ): MessageConnection | Promise<MessageConnection>;
-
-  abstract message(id: string): Message | Promise<Message>;
 
   abstract temp__(): boolean | Promise<boolean>;
 }
