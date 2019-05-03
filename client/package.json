@@ -50,7 +50,7 @@
     "@angular/router": "7.0.2",
     "@angular/service-worker": "7.0.2",
     "@fortawesome/fontawesome-free-webfonts": "1.0.9",
-    "@ng-bootstrap/ng-bootstrap": "3.3.0",
+    "@ng-bootstrap/ng-bootstrap": "3.3.1",
     "@ngx-translate/core": "10.0.2",
     "@toverux/ngx-sweetalert2": "4.0.0",
     "@types/date-fns": "2.6.0",
