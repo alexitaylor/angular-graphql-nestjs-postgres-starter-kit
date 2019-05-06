@@ -173,6 +173,7 @@ the [guidelines](.github/CONTRIBUTING.md):
 
 ### [⬆️](#tableofcontents) TODO:
 
-- [ ] Implement TypeORM migrations and default data on initial setup
+- [x] Implement TypeORM migrations and default data on initial setup
 - [ ] Write Docker setup and configuration README
 - [ ] More tests
+- [ ] Entity Generator (able to create BE and FE models, GraphQL queries/mutations and some FE boilerplate code from an defined entity.  
