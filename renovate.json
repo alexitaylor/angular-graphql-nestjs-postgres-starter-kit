@@ -1,5 +1,14 @@
 {
-  "extends": [
-    "config:base"
+  "extends": ["config:base"],
+  "labels": ["Renovate"],
+  "packageRules": [
+    {
+      "paths": ["server/project/package.json"],
+      "labels": ["server"]
+    },
+    {
+      "paths": ["client/package.json"],
+      "labels": ["client"]
+    }
   ]
 }
