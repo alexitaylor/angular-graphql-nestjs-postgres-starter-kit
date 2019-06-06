@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { Shell } from '@app/shell/shell.service';
 import {
   UserManagementDeleteDialogComponent,
@@ -28,10 +28,13 @@ import {
 
 const routes: Routes = [
   Shell.childRoutes([
-    { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
-    { path: 'user-management', loadChildren: 'app/admin/user-management/user-management.module#UserManagementModule' },
-    { path: 'messenger', loadChildren: 'app/messenger/messenger.module#MessengerModule' },
-    { path: 'entities', loadChildren: 'app/entities/entity.module#EntityModule' }
+    { path: 'about', loadChildren: () => import('app/about/about.module').then(m => m.AboutModule) },
+    {
+      path: 'user-management',
+      loadChildren: () => import('app/admin/user-management/user-management.module').then(m => m.UserManagementModule)
+    },
+    { path: 'messenger', loadChildren: () => import('app/messenger/messenger.module').then(m => m.MessengerModule) },
+    { path: 'entities', loadChildren: () => import('app/entities/entity.module').then(m => m.EntityModule) }
   ]),
   // Fallback when no prior route is matched
   { path: '**', redirectTo: '', pathMatch: 'full' }
