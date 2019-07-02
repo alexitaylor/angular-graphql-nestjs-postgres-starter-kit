@@ -3,14 +3,10 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
-    "module": "es2015",
+    "module": "esNext",
     "types": []
   },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts",
-    "**/*.mock.ts"
-  ],
+  "exclude": ["test.ts", "**/*.spec.ts", "**/*.mock.ts"],
   "angularCompilerOptions": {
     "preserveWhitespaces": true
   }

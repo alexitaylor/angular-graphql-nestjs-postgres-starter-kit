@@ -26,7 +26,9 @@ export class AppComponent implements OnInit {
     // this injection initializes page tracking through the router
     private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private i18nService: I18nService
-  ) {}
+  ) {
+    angulartics2GoogleAnalytics.startTracking();
+  }
 
   ngOnInit() {
     // Setup logger

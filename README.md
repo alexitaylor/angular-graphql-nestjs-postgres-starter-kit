@@ -1,6 +1,6 @@
-# 🚀Angular 7 + GraphQL + NestJS + Postgres Starter Kit
+# 🚀Angular 8 + GraphQL + NestJS + Postgres Starter Kit
 
-A full-stack starter kit with Angular 7, GraphQL, Apollo, NestJS and Postgres.
+A full-stack starter kit with Angular 8, GraphQL, Apollo, NestJS and Postgres.
 
 Starting a new web app can be hard. Choosing the right technologies, architecting the foundation and developing the core of an application can take a lot of time. Setting up a back-end and front-end requires a substantial amount of work. Furthermore, if you don't do things correctly, it can create technical debt, painless refactoring, and maintenance hell. We take care of all the tedious, mundane setup process for you.
 
@@ -10,7 +10,7 @@ Happy Coding :)
 
 ## Features
 
-- [Angular 7.X](https://angular.io/) (w/ [TypScript](https://www.typescriptlang.org/))
+- [Angular 8.X](https://angular.io/) (w/ [TypScript](https://www.typescriptlang.org/))
 - [GraphQL](https://graphql.org/)
 - [NestJS](https://nestjs.com/) server
 - [TypeORM](https://typeorm.io/#/)
@@ -72,13 +72,13 @@ Follow [this guide](.github/MAC_DEV_ENV_SETUP.md) to setup your mac dev environm
 
 ### Get started with these tasks:
 
-- $ npm start: start dev server with live reload on [http://localhost:4200](http://localhost:4200)
-- $ npm run build: build web app for production
-- $ npm test: run unit tests in watch mode for TDD
-- $ npm run test:ci: lint code and run units tests with coverage
-- $ npm run e2e: launch e2e tests
-- $ npm run docs: show docs and coding guides
-- $ npm run prettier: format your code automatically
+- \$ npm start: start dev server with live reload on [http://localhost:4200](http://localhost:4200)
+- \$ npm run build: build web app for production
+- \$ npm test: run unit tests in watch mode for TDD
+- \$ npm run test:ci: lint code and run units tests with coverage
+- \$ npm run e2e: launch e2e tests
+- \$ npm run docs: show docs and coding guides
+- \$ npm run prettier: format your code automatically
 
 <a name="server"></a>
 
@@ -108,11 +108,13 @@ CREATE DATABASE
 ### Seed Database
 
 - Run the following command to seed your database with default and random generated data:
+
 ```bash
 $ npm run seedData
 ```
-- ***WARNING:*** Running this file will ***DELETE ALL*** data in your database and re-generate and insert new, random.
-- ***BE CAREFUL*** running this command in ***production env***. It will delete all production data. The script will check if the environment you're running in is production or not by checking `server/project/src/environments/environment.ts` file configs. If environment.production config is set to true, then the seeding process will only generate default roles and 2 default users. This is useful when first setting up your production environment. 
+
+- **_WARNING:_** Running this file will **_DELETE ALL_** data in your database and re-generate and insert new, random.
+- **_BE CAREFUL_** running this command in **_production env_**. It will delete all production data. The script will check if the environment you're running in is production or not by checking `server/project/src/environments/environment.ts` file configs. If environment.production config is set to true, then the seeding process will only generate default roles and 2 default users. This is useful when first setting up your production environment.
 
 ## Running the server
 
@@ -176,4 +178,4 @@ the [guidelines](.github/CONTRIBUTING.md):
 - [x] Implement TypeORM migrations and default data on initial setup
 - [ ] Write Docker setup and configuration README
 - [ ] More tests
-- [ ] Entity Generator (able to create BE and FE models, GraphQL queries/mutations and some FE boilerplate code from an defined entity.  
+- [ ] Entity Generator (able to create BE and FE models, GraphQL queries/mutations and some FE boilerplate code from an defined entity.

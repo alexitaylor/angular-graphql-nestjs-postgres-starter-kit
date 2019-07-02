@@ -1,6 +1,6 @@
-# Contributing to Angular 7 + GraphQL + NestJS + Postgres Starter Kit
+# Contributing to Angular 8 + GraphQL + NestJS + Postgres Starter Kit
 
-♥ [Angular 7 + GraphQL + NestJS + Postgres Starter Kit]() and want to get involved?
+♥ [Angular 8 + GraphQL + NestJS + Postgres Starter Kit]() and want to get involved?
 Thanks! We're actively looking for folks interested in helping out and there
 are plenty of ways you can help!
 
