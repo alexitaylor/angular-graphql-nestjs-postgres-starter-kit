@@ -37,7 +37,7 @@ import { AccessDeniedModule } from '@app/layouts/access-denied/access-denied.mod
     LoginModule,
     RegisterModule,
     AccessDeniedModule,
-    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+    Angulartics2Module.forRoot(),
     EntityModule,
     GraphQLModule,
     SweetAlert2Module.forRoot({

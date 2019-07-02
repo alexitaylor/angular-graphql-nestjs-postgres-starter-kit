@@ -38,7 +38,7 @@ export class GraphQLModule {
 
     const authLink = new ApolloLink((operation, forward) => {
       const vm = this;
-      operation.setContext(({ headers = {}, localToken = vm.auth$.getToken() }) => {
+      operation.setContext(({ headers = {}, localToken = vm.auth$.getToken() }: any) => {
         if (localToken) {
           // headers['x-token'] = localToken;
           headers['authorization'] = `Bearer ${localToken}`;

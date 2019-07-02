@@ -232,17 +232,19 @@ export class AuthenticationService {
 
   redirectLogoutOnSessionExpired() {
     this.router.navigate(['/access-denied']);
-    swal({
-      title: 'Your session has expired. You will be automatically signed out.',
-      timer: 3500,
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      onOpen: () => {
-        swal.showLoading();
-      }
-    }).then(() => {
-      this.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
-    });
+    swal
+      .fire({
+        title: 'Your session has expired. You will be automatically signed out.',
+        timer: 3500,
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        onOpen: () => {
+          swal.showLoading();
+        }
+      })
+      .then(() => {
+        this.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+      });
   }
 
   /**

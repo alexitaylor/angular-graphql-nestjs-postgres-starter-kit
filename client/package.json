@@ -78,10 +78,10 @@
     "zone.js": "0.9.1"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "0.800.1",
     "@angular/cli": "8.0.1",
     "@angular/compiler-cli": "8.0.0",
     "@angular/language-service": "8.0.0",
-    "@angular-devkit/build-angular": "0.800.1",
     "@biesbjerg/ngx-translate-extract": "2.3.4",
     "@ngx-rocket/scripts": "3.0.3",
     "@types/jasmine": "3.3.13",
@@ -92,6 +92,7 @@
     "hads": "1.7.3",
     "htmlhint": "0.11.0",
     "https-proxy-agent": "2.2.1",
+    "husky": "2.4.0",
     "jasmine-core": "3.4.0",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "4.1.0",
@@ -101,19 +102,18 @@
     "karma-jasmine": "2.0.1",
     "karma-junit-reporter": "1.2.0",
     "prettier": "1.17.1",
-    "tslint-config-prettier": "1.18.0",
-    "stylelint-config-prettier": "5.2.0",
     "pretty-quick": "1.11.0",
-    "husky": "2.4.0",
     "protractor": "5.4.2",
     "puppeteer": "1.17.0",
     "stylelint": "10.0.1",
+    "stylelint-config-prettier": "5.2.0",
     "stylelint-config-recommended-scss": "3.3.0",
     "stylelint-config-standard": "18.3.0",
     "stylelint-scss": "3.8.0",
     "ts-node": "8.2.0",
     "tslint": "5.17.0",
-    "typescript": "3.5.1"
+    "tslint-config-prettier": "1.18.0",
+    "typescript": "^3.4.5"
   },
   "prettier": {
     "singleQuote": true,
