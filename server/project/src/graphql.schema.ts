@@ -1,3 +1,8 @@
+/** ------------------------------------------------------
+ * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+ * -------------------------------------------------------
+ */
+
 /* tslint:disable */
 export class CreateUserInput {
   firstName: string;
@@ -35,17 +40,17 @@ export class MessageCreated {
 }
 
 export abstract class IMutation {
-  abstract createMessage(text: string): Message | Promise<Message>;
-
-  abstract updateMessage(id: string, text: string): Message | Promise<Message>;
-
-  abstract deleteMessage(id: string): boolean | Promise<boolean>;
-
   abstract createRole(name: string): Role | Promise<Role>;
 
   abstract updateRole(id: string, name: string): Role | Promise<Role>;
 
   abstract deleteRole(id: string): boolean | Promise<boolean>;
+
+  abstract createMessage(text: string): Message | Promise<Message>;
+
+  abstract updateMessage(id: string, text: string): Message | Promise<Message>;
+
+  abstract deleteMessage(id: string): boolean | Promise<boolean>;
 
   abstract signIn(login: string, password: string): Token | Promise<Token>;
 
@@ -70,6 +75,10 @@ export class PageInfo {
 }
 
 export abstract class IQuery {
+  abstract roles(): Role[] | Promise<Role[]>;
+
+  abstract role(id: string): Role | Promise<Role>;
+
   abstract messages(
     page?: number,
     limit?: number,
@@ -78,17 +87,11 @@ export abstract class IQuery {
 
   abstract message(id: string): Message | Promise<Message>;
 
-  abstract roles(): Role[] | Promise<Role[]>;
-
-  abstract role(id: string): Role | Promise<Role>;
-
   abstract users(): User[] | Promise<User[]>;
 
   abstract user(id: string): User | Promise<User>;
 
   abstract me(): User | Promise<User>;
-
-  abstract temp__(): boolean | Promise<boolean>;
 }
 
 export class Role {
@@ -115,5 +118,5 @@ export class User {
   role: Role;
   createdAt: string;
   updatedAt: string;
-  messages: Message[];
+  messages?: Message[];
 }
