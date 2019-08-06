@@ -40,17 +40,17 @@ export class MessageCreated {
 }
 
 export abstract class IMutation {
-  abstract createRole(name: string): Role | Promise<Role>;
-
-  abstract updateRole(id: string, name: string): Role | Promise<Role>;
-
-  abstract deleteRole(id: string): boolean | Promise<boolean>;
-
   abstract createMessage(text: string): Message | Promise<Message>;
 
   abstract updateMessage(id: string, text: string): Message | Promise<Message>;
 
   abstract deleteMessage(id: string): boolean | Promise<boolean>;
+
+  abstract createRole(name: string): Role | Promise<Role>;
+
+  abstract updateRole(id: string, name: string): Role | Promise<Role>;
+
+  abstract deleteRole(id: string): boolean | Promise<boolean>;
 
   abstract signIn(login: string, password: string): Token | Promise<Token>;
 
@@ -75,10 +75,6 @@ export class PageInfo {
 }
 
 export abstract class IQuery {
-  abstract roles(): Role[] | Promise<Role[]>;
-
-  abstract role(id: string): Role | Promise<Role>;
-
   abstract messages(
     page?: number,
     limit?: number,
@@ -86,6 +82,10 @@ export abstract class IQuery {
   ): MessageConnection | Promise<MessageConnection>;
 
   abstract message(id: string): Message | Promise<Message>;
+
+  abstract roles(): Role[] | Promise<Role[]>;
+
+  abstract role(id: string): Role | Promise<Role>;
 
   abstract users(): User[] | Promise<User[]>;
 
