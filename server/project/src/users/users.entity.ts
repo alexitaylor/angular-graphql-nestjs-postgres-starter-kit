@@ -16,12 +16,10 @@ import { IsEmail, Length } from 'class-validator';
 import { RolesEntity } from '../roles/roles.entity';
 import { MessagesEntity } from '../messages/messages.entity';
 import { environment } from '../environments/environment';
+import { Base } from '../common/entities/base.entity';
 
 @Entity('user')
-export class UsersEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class UsersEntity extends Base {
   @Column({ type: 'text' })
   firstName: string;
 
@@ -44,12 +42,6 @@ export class UsersEntity {
   @Column('text')
   @Length(7, 100)
   password: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @ManyToOne(type => RolesEntity, role => role.users)
   role: RolesEntity;

@@ -8,20 +8,12 @@ import {
 } from 'typeorm';
 import { UsersEntity } from '../users/users.entity';
 import { MessagesDto } from './dto/messages.dto';
+import { Base } from '../common/entities/base.entity';
 
 @Entity('message')
-export class MessagesEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class MessagesEntity extends Base {
   @Column({ type: 'text' })
   text: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @ManyToOne(type => UsersEntity, user => user.messages)
   user: UsersEntity;

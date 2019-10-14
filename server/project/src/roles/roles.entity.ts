@@ -8,20 +8,12 @@ import {
 } from 'typeorm';
 import { UsersEntity } from '../users/users.entity';
 import { RolesDto } from './dto/roles.dto';
+import { Base } from '../common/entities/base.entity';
 
 @Entity('role')
-export class RolesEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class RolesEntity extends Base {
   @Column({ type: 'text' })
   name: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 
   @OneToMany(type => UsersEntity, user => user.role)
   users: UsersEntity[];
