@@ -8,7 +8,7 @@ This stater kit provides you with a kick start to your project by providing a sc
 
 Happy Coding :)
 
-<a href="https://www.buymeacoffee.com/dyMHPEW" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png)](https://www.buymeacoffee.com/dyMHPEW)
 
 ## Features
 
