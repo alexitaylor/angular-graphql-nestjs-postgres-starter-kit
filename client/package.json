@@ -71,7 +71,7 @@
     "google-libphonenumber": "3.2.3",
     "graphql": "14.4.2",
     "graphql-tag": "2.10.1",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "rxjs": "6.5.2",
     "subscriptions-transport-ws": "0.9.16",
     "sweetalert2": "8.15.2",
