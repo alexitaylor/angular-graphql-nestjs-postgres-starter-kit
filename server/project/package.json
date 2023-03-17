@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@nestjs/common": "6.5.3",
-    "@nestjs/core": "6.5.3",
+    "@nestjs/core": "9.0.5",
     "@nestjs/graphql": "6.4.2",
     "@nestjs/platform-express": "^6.5.3",
     "@nestjs/typeorm": "6.1.3",
